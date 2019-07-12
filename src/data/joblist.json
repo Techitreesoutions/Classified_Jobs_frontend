@@ -1,0 +1,19 @@
+[
+  {
+    "copmanyName": "Company Name",
+    "experienceMin": "0",
+    "experienceMax": "4",
+    "hideExperience": true,
+    "salaryOfferMin": "0K",
+    "salaryOfferMax": "15K",
+    "hideSalary": true,
+    "title": "Job Title",
+    "id": "0000",
+    "phone": "0000000000",
+    "email": "email@email.com",
+    "description": "Looking for Job",
+    "skills": ["UI", "UX"],
+    "location": ["Jaipur", "Ahmedabad"],
+    "hidePersonalInfo": true
+  }
+]

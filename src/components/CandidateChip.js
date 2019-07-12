@@ -1,0 +1,231 @@
+import React, { Component } from "react";
+import { PropTypes } from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import MoreVertIcon from "@material-ui/icons/Info";
+import red from "@material-ui/core/colors/red";
+
+import {
+  FaSuitcase,
+  FaRupeeSign,
+  FaEnvelopeOpen,
+  FaMobile,
+  FaMapMarkerAlt
+} from "react-icons/fa";
+import { Chip, CardActions, Tooltip } from "@material-ui/core";
+
+const HtmlTooltip = withStyles(theme => ({
+  tooltip: {
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 220,
+    fontSize: 12,
+    border: "1px solid #dadde9"
+  }
+}))(Tooltip);
+
+class CandidateChip extends Component {
+  renderskillsChips = () => {
+    const { candidateItem, classes } = this.props;
+    return candidateItem.skills.map(key => {
+      return (
+        <Chip
+          key={key}
+          label={key}
+          className={classes.skillsChip}
+          color="primary"
+        />
+      );
+    });
+  };
+
+  render() {
+    const { candidateItem, classes } = this.props;
+    let location;
+    if (candidateItem.location) {
+      location = candidateItem.location.join(", ");
+    }
+    return (
+      <Card className={classes.card}>
+        <CardHeader
+          className={classes.cardHeader}
+          avatar={
+            <Avatar aria-label="profilePic" className={classes.avatar}>
+              {candidateItem.firstName.charAt(0)}
+            </Avatar>
+          }
+          action={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={`${candidateItem.firstName} ${candidateItem.lastName}`}
+          subheader={candidateItem.title}
+        />
+
+        <CardContent className={classes.cardContent}>
+          <Typography>{candidateItem.description}</Typography>
+          <div className={classes.skillsArea}>{this.renderskillsChips()}</div>
+        </CardContent>
+        <CardActions className={classes.actions}>
+          <div className={classes.candidateElements}>
+            <span className={classes.candidateElementsSpan}>
+              <HtmlTooltip title="Years of Experience">
+                <Chip
+                  avatar={
+                    <Avatar>
+                      <FaSuitcase />
+                    </Avatar>
+                  }
+                  label={`${candidateItem.experienceYears}.${
+                    candidateItem.experienceMonths
+                  }`}
+                  className={classes.chip}
+                  variant="outlined"
+                  color="primary"
+                />
+              </HtmlTooltip>
+            </span>
+
+            {candidateItem.expectedSalary && (
+              <span className={classes.candidateElementsSpan}>
+                <HtmlTooltip title="Expected Salary" placement="bottom-start">
+                  <Chip
+                    avatar={
+                      <Avatar>
+                        <FaRupeeSign />
+                      </Avatar>
+                    }
+                    label={`${candidateItem.expectedSalary} PM`}
+                    className={classes.chip}
+                    variant="outlined"
+                    color="primary"
+                  />
+                </HtmlTooltip>
+              </span>
+            )}
+
+            {location && (
+              <span className={classes.candidateElementsSpan}>
+                <HtmlTooltip title="Preferred Location">
+                  <Chip
+                    avatar={
+                      <Avatar>
+                        <FaMapMarkerAlt />
+                      </Avatar>
+                    }
+                    label={location}
+                    className={classes.chip}
+                    variant="outlined"
+                    color="primary"
+                  />
+                </HtmlTooltip>
+              </span>
+            )}
+            {candidateItem.hidePersonalInfo !== true && (
+              <span>
+                {candidateItem.phone && (
+                  <span className={classes.candidateElementsSpan}>
+                    <HtmlTooltip title="Contact Number">
+                      <Chip
+                        avatar={
+                          <Avatar>
+                            <FaMobile />
+                          </Avatar>
+                        }
+                        label={candidateItem.phone}
+                        className={classes.chip}
+                        variant="outlined"
+                        color="primary"
+                      />
+                    </HtmlTooltip>
+                  </span>
+                )}
+                {candidateItem.email && (
+                  <span className={classes.candidateElementsSpan}>
+                    <HtmlTooltip
+                      title="Email"
+                      className={`${classes.tooltip} ${classes.expand}`}
+                    >
+                      <Chip
+                        avatar={
+                          <Avatar>
+                            <FaEnvelopeOpen />
+                          </Avatar>
+                        }
+                        color="primary"
+                        label={candidateItem.email}
+                        className={classes.chip}
+                        variant="outlined"
+                      />
+                    </HtmlTooltip>
+                  </span>
+                )}
+              </span>
+            )}
+          </div>
+        </CardActions>
+      </Card>
+    );
+  }
+}
+
+const styles = theme => ({
+  card: {
+    maxWidth: 400,
+    minHeight: 100,
+    margin: 10,
+    boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.5)",
+    height: "fit-content"
+  },
+  cardHeader: {
+    paddingBottom: 0
+  },
+  cardContent: {
+    padding: "10px 20px 0px 20px"
+  },
+  skillsArea: {
+    margin: "10px 0 0 0",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  skillsChip: {
+    marginRight: 5
+  },
+
+  avatar: {
+    backgroundColor: red[500]
+  },
+  candidateElements: {
+    padding: "10px 0px 0px 0px",
+    borderTop: "1px solid #ddd",
+    margin: "10px 0 0 0",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  },
+  candidateElementsSpan: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    display: "inline-block",
+    paddingRight: 5,
+    paddingBottom: 10
+  },
+
+  chip: {
+    minWidth: 80,
+    justifyContent: "left"
+  }
+});
+
+export default withStyles(styles)(CandidateChip);
+
+CandidateChip.propTypes = {
+  candidateItem: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
+};
