@@ -48,7 +48,6 @@ class DiologueForJobPost extends Component {
 
   render() {
     const { isOpenDialogue, handleClose } = this.props;
-
     return (
       <Dialog
         open={isOpenDialogue}

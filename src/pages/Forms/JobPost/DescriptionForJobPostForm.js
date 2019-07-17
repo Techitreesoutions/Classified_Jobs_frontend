@@ -17,12 +17,18 @@ import {
 // Icons
 import Description from "@material-ui/icons/Description";
 import { getSkillsArray } from "../../../util/utilityFunctions";
+import { getAllSkillsArray } from "../../../util/utilityFunctions";
 
 class DescriptionForJobPostForm extends Component {
-  state = {
-    description: "We are looking for Fullstack Developer",
-    skills: []
+  
+  componentWillMount = () => {
+    const { dataObject } = this.props;
+    this.setState({
+      description: dataObject.description,
+      skills:dataObject.skills
+    });
   };
+
 
   handleNext = event => {
     const { handleNext } = this.props;
@@ -46,7 +52,7 @@ class DescriptionForJobPostForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleBack, steps, jobList } = this.props;
+    const { classes, activeStep, handleJobBack, steps, jobList,skillList } = this.props;
 
     return (
       <div>
@@ -57,7 +63,7 @@ class DescriptionForJobPostForm extends Component {
             onChange={this.handleChange}
             onInputChange={this.handleInputChange}
             placeholder={"Select/Add your skills"}
-            options={getSkillsArray(jobList)}
+            options={getAllSkillsArray(skillList)}
           />
         </div>
         <div className={classes.margin}>
@@ -90,8 +96,7 @@ class DescriptionForJobPostForm extends Component {
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
               <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
+                onClick={handleJobBack}
                 className={classes.backButton}
               >
                 Back
@@ -134,7 +139,8 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
-  return { jobList };
+  const skillList = state.skillList.skillList;
+  return { jobList,skillList };
 };
 
 export default connect(
@@ -145,8 +151,10 @@ export default connect(
 DescriptionForJobPostForm.propTypes = {
   classes: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
-  handleBack: PropTypes.func.isRequired,
+  handleJobBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
   steps: PropTypes.array.isRequired,
-  jobList: PropTypes.array.isRequired
+  jobList: PropTypes.array.isRequired,
+  skillList: PropTypes.array.isRequired,
+  dataObject: PropTypes.object.isRequired
 };

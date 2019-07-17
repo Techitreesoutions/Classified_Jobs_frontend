@@ -32,6 +32,10 @@ const HtmlTooltip = withStyles(theme => ({
 class JobPostingChip extends Component {
   renderskillsChips = () => {
     const { jobItem, classes } = this.props;
+    if(jobItem.skills === undefined)
+    {
+      jobItem.skills = [];
+    }
     return jobItem.skills.map(key => {
       return (
         <Chip
@@ -46,6 +50,7 @@ class JobPostingChip extends Component {
 
   getSalaryLabel = () => {
     const { jobItem } = this.props;
+    debugger;
     if (jobItem.hideSalary === true) {
       return "Best as per industry standard";
     } else {
@@ -54,6 +59,7 @@ class JobPostingChip extends Component {
   };
   getExperienceLabel = () => {
     const { jobItem } = this.props;
+    debugger;
     if (jobItem.hideExperience === true) {
       return "No preference";
     } else {

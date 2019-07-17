@@ -16,7 +16,8 @@ import DialogueForJobPost from "./Forms/JobPost/DiologueForJobPost";
 
 class Header extends Component {
   state = {
-    profileSubmitDialogOpen: false
+    profileSubmitDialogOpen: false,
+    jobSubmitDialogOpen:false
   };
 
   handleSerachInput = event => {
@@ -25,7 +26,12 @@ class Header extends Component {
 
   handleOpenSubmitProfile = event => {
     // Open Profile Submit Dialog
-    this.setState({ profileSubmitDialogOpen: true});
+    this.setState({ profileSubmitDialogOpen: true });
+  };
+
+  handleOpenJobPost = event => {
+    // Open Job submit Dialog
+    this.setState({ jobSubmitDialogOpen: true});
   };
 
   handleCloseSubmitProfile = () => {
@@ -90,6 +96,10 @@ class Header extends Component {
         <DialogueForForms
           isOpenDialogue={this.state.profileSubmitDialogOpen}
           handleClose={this.handleCloseSubmitProfile}
+        />
+        <DialogueForJobPost 
+        isOpenDialogue={this.state.jobSubmitDialogOpen}
+        handleClose={this.handleCloseSubmitProfile}
         />
       </div>
     );

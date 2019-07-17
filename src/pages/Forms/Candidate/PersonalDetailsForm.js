@@ -50,14 +50,14 @@ class PersonalDetailsForm extends Component {
       return;
     }
 
-    if (this.state.gender === "") {
+    if (this.state.gender === "" && this.state.gender === undefined) {
       this.setState({
         errorMessage: "Gender - Required"
       });
       return;
     }
 
-    if (this.state.phone === "" && this.state.email === "") {
+    if (this.state.phone === "" && this.state.email === "" ||  (this.state.phone === undefined && this.state.email === undefined)) {
       this.setState({
         errorMessage: "Email or Contact Number, one of them is required"
       });
@@ -160,7 +160,7 @@ class PersonalDetailsForm extends Component {
           </FormControl>
         </div>
         <span className={classes.radioGroup}>
-          <span className={classes.radioLabel}>{"Gender"}</span>
+          <span className={classes.radioLabel}>{"Gender*"}</span>
           <div className="input">
             <Radio
               id="Male"
@@ -274,15 +274,6 @@ class PersonalDetailsForm extends Component {
               <span className={classes.errorMessage}>
                 {this.state.errorMessage}
               </span>
-            </Grid>
-            <Grid item xs={2} className={classes.lblArea}>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
               <Button

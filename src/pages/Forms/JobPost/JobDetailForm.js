@@ -56,15 +56,18 @@ const customStyles = {
   })
 };
 class JobDetailForm extends Component {
-  state = {
-    title: "Frontend Developer",
-    experience: [0, 4],
-    location: ["Ajmer", "Jaipur"],
-    salaryOffer: [0, 20],
-    showExperience: true,
-    showSalary: true
-  };
 
+  componentWillMount = () => {
+    const { dataObject } = this.props;
+    this.setState({
+      title: dataObject.title,
+      experience: dataObject.experience,
+      location:dataObject.location,
+      salaryOffer: dataObject.salaryOffer,
+      showExperience: dataObject.showExperience,
+      showSalary: dataObject.showSalary
+    });
+  };
   validateUserInput = () => {
     console.log(this.state.title);
     console.log(this.state.experienceYears);
@@ -123,7 +126,7 @@ class JobDetailForm extends Component {
   };
 
   handleNext = event => {
-    const { classes, activeStep, handleBack, steps, handleNext } = this.props;
+    const { classes, activeStep, handleJobBack, steps, handleNext } = this.props;
     const formValidated = this.validateUserInput();
     console.log(this.state.location);
 
@@ -146,7 +149,7 @@ class JobDetailForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleBack, steps } = this.props;
+    const { classes, activeStep, handleJobBack, steps } = this.props;
     const cityList = this.getCityList();
     return (
       <form>
@@ -266,15 +269,6 @@ class JobDetailForm extends Component {
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
               <Button
-                showd={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-            </Grid>
-            <Grid item xs={2} className={classes.lblArea}>
-              <Button
                 variant="contained"
                 color="primary"
                 onClick={this.handleNext}
@@ -368,7 +362,8 @@ export default withStyles(styles)(JobDetailForm);
 JobDetailForm.propTypes = {
   classes: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
-  handleBack: PropTypes.func.isRequired,
+  handleJobBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
-  steps: PropTypes.array.isRequired
+  steps: PropTypes.array.isRequired,
+  dataObject: PropTypes.object.isRequired
 };

@@ -30,13 +30,17 @@ import InputField from "../../../components/Forms/InputField";
 import { red } from "@material-ui/core/colors";
 
 class CompanyDetailForm extends Component {
-  state = {
-    companyName: "TechiTree",
-    email: "hello@techitree.com",
-    phone: "7878459393",
-    hidePersonalInfo: false,
-    showInfoPopup: false,
+ 
+  componentWillMount = () => {
+    const { dataObject } = this.props;
+    this.setState({
+      companyName: dataObject.companyName,
+    email: dataObject.email,
+    phone: dataObject.phone,
+    hidePersonalInfo: dataObject.hidePersonalInfo,
+    showInfoPopup: dataObject.showInfoPopup,
     setAnchorEl: ""
+    });
   };
 
   validateUserInput = () => {
@@ -51,7 +55,7 @@ class CompanyDetailForm extends Component {
       return;
     }
 
-    if (this.state.phone === "" && this.state.email === "") {
+    if (this.state.phone === "" && this.state.email === "" || (this.state.phone === undefined && this.state.email === undefined)) {
       this.setState({
         errorMessage: "Email or Contact Number, one of them is required"
       });
@@ -59,7 +63,7 @@ class CompanyDetailForm extends Component {
     }
 
     if (
-      this.state.email !== "" &&
+      this.state.email !== "" && this.state.email !== undefined &&
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)
     ) {
       this.setState({
@@ -72,7 +76,7 @@ class CompanyDetailForm extends Component {
   };
 
   handleNext = event => {
-    const { classes, activeStep, handleBack, steps, handleNext } = this.props;
+    const { classes, activeStep, handleJobBack, steps, handleNext } = this.props;
     const formValidated = this.validateUserInput();
 
     if (formValidated === true) {
@@ -103,14 +107,14 @@ class CompanyDetailForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleBack, steps } = this.props;
+    const { classes, activeStep, handleJobBack, steps } = this.props;
 
     return (
       <form onSubmit={this.handleSubmit}>
         <div className={classes.margin} />
         <div className={classes.margin}>
           <FormControl fullWidth className={classes.textField}>
-            <InputLabel>Company Name</InputLabel>
+            <InputLabel>Company Name*</InputLabel>
             <Input
               name="companyName"
               value={this.state.companyName}
@@ -207,8 +211,7 @@ class CompanyDetailForm extends Component {
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
               <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
+                onClick={handleJobBack}
                 className={classes.backButton}
               >
                 Back
@@ -298,7 +301,8 @@ export default withStyles(styles)(CompanyDetailForm);
 CompanyDetailForm.propTypes = {
   classes: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
-  handleBack: PropTypes.func.isRequired,
+  handleJobBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
-  steps: PropTypes.array.isRequired
+  steps: PropTypes.array.isRequired,
+  dataObject: PropTypes.object.isRequired
 };

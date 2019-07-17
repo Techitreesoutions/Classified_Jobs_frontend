@@ -28,16 +28,17 @@ function getSteps() {
   return ["Job Details", "Company details", "Summary", "Preview"];
 }
 
-function getStepContent(stepIndex, handleNext, handleBack) {
+function getStepContent(stepIndex, handleNext, handleJobBack) {
   const steps = getSteps();
-  stepIndex = 3;
+
   switch (stepIndex) {
     case 0:
       return (
         <JobDetailForm
           activeStep={0}
+          dataObject={formObj}
           handleNext={handleNext}
-          handleBack={handleBack}
+          handleJobBack={handleJobBack}
           steps={steps}
         />
       );
@@ -45,8 +46,9 @@ function getStepContent(stepIndex, handleNext, handleBack) {
       return (
         <CompoanyDetailForm
           activeStep={0}
+          dataObject={formObj}
           handleNext={handleNext}
-          handleBack={handleBack}
+          handleJobBack={handleJobBack}
           steps={steps}
         />
       );
@@ -54,8 +56,9 @@ function getStepContent(stepIndex, handleNext, handleBack) {
       return (
         <DescriptionForJobPostForm
           activeStep={0}
+          dataObject={formObj}
           handleNext={handleNext}
-          handleBack={handleBack}
+          handleJobBack={handleJobBack}
           steps={steps}
         />
       );
@@ -63,8 +66,9 @@ function getStepContent(stepIndex, handleNext, handleBack) {
       return (
         <JobPostPreview
           activeStep={0}
+          dataObject={formObj}
           handleNext={handleNext}
-          handleBack={handleBack}
+          handleJobBack={handleJobBack}
           steps={steps}
         />
       );
@@ -84,7 +88,7 @@ export default function HorizontalLabelPositionBelowStepper() {
     console.log(formObj);
   }
 
-  function handleBack() {
+  function handleJobBack() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   }
 
@@ -111,7 +115,7 @@ export default function HorizontalLabelPositionBelowStepper() {
           </div>
         ) : (
           <div>
-            {getStepContent(activeStep, handleNext, handleBack)}
+            {getStepContent(activeStep, handleNext, handleJobBack)}
             <div />
           </div>
         )}

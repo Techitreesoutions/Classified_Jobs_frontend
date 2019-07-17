@@ -56,7 +56,7 @@ function getStepContent(stepIndex, handleNext, handleBack) {
       return (
         <DescriptionForm
         dataObject={formObj}
-          activeStep={1}
+          activeStep={2}
           handleNext={handleNext}
           handleBack={handleBack}
           steps={steps}
@@ -66,7 +66,7 @@ function getStepContent(stepIndex, handleNext, handleBack) {
       return (
         <Preview
           dataObject={formObj}
-          activeStep={1}
+          activeStep={3}
           handleNext={handleNext}
           handleBack={handleBack}
           steps={steps}

@@ -157,5 +157,6 @@ DescriptionForm.propTypes = {
   handleNext: PropTypes.func.isRequired,
   steps: PropTypes.array.isRequired,
   jobList: PropTypes.array.isRequired,
-  skillList: PropTypes.array.isRequired
+  skillList: PropTypes.array.isRequired,
+  dataObject: PropTypes.object.isRequired
 };
