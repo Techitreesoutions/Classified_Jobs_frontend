@@ -75,14 +75,15 @@ export const handleSecureAjaxError = (
 
 export const getAccessKeysFromStorage = () => {
   let n = 0;
-  let localStorageData = {};
-  while (n < localStorage.length) {
-    localStorageData[localStorage.key(n)] = localStorage.getItem(
-      localStorage.key(n)
-    );
-    n++;
-  }
+  let localStorageData = {'x-key-api':'k1ehKBylc3khYkBIw93D8fnN01Z10Mq4m9lbkUx0'};
 
+  // while (n < localStorage.length) {
+  //   localStorageData[localStorage.key(n)] = localStorage.getItem(
+  //     localStorage.key(n)
+  //   );
+  //   n++;
+  // }
+alert('Hi');
   return localStorageData;
 };
 
@@ -92,7 +93,8 @@ export const getAccessKeysFromStorage = () => {
  * @param {string} api
  */
 export const createPlatformURL = api => {
-  let publicUrl = `${"https://sf52c0lym7.execute-api.ap-south-1.amazonaws.com/dev/"}${api}`; //`${process.env.REACT_APP_BASE_PLATFORM_URL}${process.env.REACT_APP_STAGE}/${api}`;
+  //debugger;
+  let publicUrl = `${"https://3rf80nfa20.execute-api.ap-south-1.amazonaws.com/dev/"}${api}`; //`${process.env.REACT_APP_BASE_PLATFORM_URL}${process.env.REACT_APP_STAGE}/${api}`;
   console.log("HC createPlatformURL " + publicUrl);
 
   return encodeURI(publicUrl);

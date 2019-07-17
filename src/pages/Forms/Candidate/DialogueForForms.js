@@ -15,6 +15,25 @@ class DialogueForForms extends Component {
   state = {
     spacing: "16"
   };
+  componentWillMount = () => {
+    this.setState({
+      description: "",
+      skills: [],
+      firstName:"",
+      lastName:"",
+      gender:"",
+      email: "",
+      phone: "",
+      hidePersonalInfo: "",
+      showInfoPopup: "",
+      setAnchorEl: "",
+      title: "",
+      experienceYears:"",
+      experienceMonths:"",
+      location: "",
+      expectedSalary: ""
+    });
+  };
 
   DialogTitle = withStyles(theme => ({
     root: {

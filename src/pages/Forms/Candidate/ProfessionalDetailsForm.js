@@ -54,12 +54,15 @@ const customStyles = {
   })
 };
 class PersonalDetailsForm extends Component {
-  state = {
-    title: "Frontend Developer",
-    experienceYears: "0",
-    experienceMonths: "0",
-    location: "Anywhere",
-    expectedSalary: "50K"
+  componentWillMount = () => {
+    const { dataObject } = this.props;
+    this.setState({
+      title: dataObject.title,
+      experienceYears:dataObject.experienceYears,
+      experienceMonths:dataObject.experienceMonths,
+      location: dataObject.location,
+      expectedSalary: dataObject.expectedSalary
+    });
   };
 
   validateUserInput = () => {
@@ -68,7 +71,6 @@ class PersonalDetailsForm extends Component {
     console.log(this.state.experienceMonths);
     console.log(this.state.location);
     console.log(this.state.expectedSalary);
-
     return true;
   };
 
@@ -135,7 +137,7 @@ class PersonalDetailsForm extends Component {
     this.setState({ [name]: value });
   }
   render() {
-    const { classes, activeStep, handleBack, steps } = this.props;
+    const { classes, activeStep, handleBack, steps, dataObject } = this.props;
     const cityList = this.getCityList();
     return (
       <form>
@@ -349,5 +351,6 @@ PersonalDetailsForm.propTypes = {
   activeStep: PropTypes.number.isRequired,
   handleBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
-  steps: PropTypes.array.isRequired
+  steps: PropTypes.array.isRequired,
+  dataObject: PropTypes.object.isRequired
 };

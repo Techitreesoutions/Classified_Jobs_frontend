@@ -35,6 +35,7 @@ function getStepContent(stepIndex, handleNext, handleBack) {
     case 0:
       return (
         <PersonalDetailsForm
+        dataObject={formObj}
           activeStep={0}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -44,6 +45,7 @@ function getStepContent(stepIndex, handleNext, handleBack) {
     case 1:
       return (
         <ProfessionalDetailsForm
+        dataObject={formObj}
           activeStep={1}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -53,6 +55,7 @@ function getStepContent(stepIndex, handleNext, handleBack) {
     case 2:
       return (
         <DescriptionForm
+        dataObject={formObj}
           activeStep={1}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -82,7 +85,6 @@ export default function HorizontalLabelPositionBelowStepper() {
   function handleNext(objParam) {
     formObj = Object.assign(formObj, objParam);
     setActiveStep(prevActiveStep => prevActiveStep + 1);
-    console.log(formObj);
   }
 
   function handleBack() {

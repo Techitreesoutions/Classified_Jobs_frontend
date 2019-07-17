@@ -18,6 +18,17 @@ export const getSkillsArray = jobList => {
   return getUniqueValues(skillsArr);
 };
 
+export const getAllSkillsArray = skillList => {
+  let skillsArr = [];
+  skillList.map(skillsItem => {
+      skillsArr.push({
+        label: skillsItem,
+        value: skillsItem
+      });
+  });
+  return getUniqueValues(skillsArr);
+};
+
 export const getLocationArray = jobList => {
   let localArr = [];
   jobList.map(jobItem => {

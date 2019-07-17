@@ -32,6 +32,10 @@ const HtmlTooltip = withStyles(theme => ({
 class CandidateChip extends Component {
   renderskillsChips = () => {
     const { candidateItem, classes } = this.props;
+    if(candidateItem.skills == undefined)
+    {
+      candidateItem.skills = [];
+    }
     return candidateItem.skills.map(key => {
       return (
         <Chip
@@ -42,6 +46,19 @@ class CandidateChip extends Component {
         />
       );
     });
+  };
+
+  getCandidateNameLabel = () => {
+    const { candidateItem, classes } = this.props;
+    if (candidateItem.hidePersonalInfo === true) {
+      return "Candidate Name - Confidencial";
+    } else if(!candidateItem.lastName) {
+      return `${candidateItem.firstName}`;
+    }
+    else
+    {
+      return `${candidateItem.firstName} ${candidateItem.lastName}`;
+    }
   };
 
   render() {
@@ -64,7 +81,7 @@ class CandidateChip extends Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title={`${candidateItem.firstName} ${candidateItem.lastName}`}
+          title={this.getCandidateNameLabel()}
           subheader={candidateItem.title}
         />
 
@@ -74,6 +91,7 @@ class CandidateChip extends Component {
         </CardContent>
         <CardActions className={classes.actions}>
           <div className={classes.candidateElements}>
+          {candidateItem.experienceYears &&
             <span className={classes.candidateElementsSpan}>
               <HtmlTooltip title="Years of Experience">
                 <Chip
@@ -91,7 +109,7 @@ class CandidateChip extends Component {
                 />
               </HtmlTooltip>
             </span>
-
+          }
             {candidateItem.expectedSalary && (
               <span className={classes.candidateElementsSpan}>
                 <HtmlTooltip title="Expected Salary" placement="bottom-start">

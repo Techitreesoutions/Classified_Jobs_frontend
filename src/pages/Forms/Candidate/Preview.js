@@ -4,6 +4,7 @@ import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import JobPostingChip from "../../../components/JobPostingChip";
 import { Button, Grid } from "@material-ui/core";
+import CandidateChip from "../../../components/CandidateChip";
 
 let dataObj = {
   firstName: "First Name",
@@ -33,7 +34,7 @@ class Preview extends Component {
     return (
       <div>
         <div className={classes.margin}>Your Post will look like below</div>
-        <JobPostingChip jobItem={dataObj} />
+        <CandidateChip key={dataObj.id} candidateItem={dataObj} />
         <div className={classes.margin}>
           <Grid container spacing={2}>
             <Grid item xs={8} className={classes.lblArea}>

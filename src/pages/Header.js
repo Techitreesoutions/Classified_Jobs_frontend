@@ -25,7 +25,7 @@ class Header extends Component {
 
   handleOpenSubmitProfile = event => {
     // Open Profile Submit Dialog
-    this.setState({ profileSubmitDialogOpen: true });
+    this.setState({ profileSubmitDialogOpen: true});
   };
 
   handleCloseSubmitProfile = () => {
@@ -87,7 +87,6 @@ class Header extends Component {
         </AppBar>
         {this.renderMenu}
         {this.renderMobileMenu}
-
         <DialogueForForms
           isOpenDialogue={this.state.profileSubmitDialogOpen}
           handleClose={this.handleCloseSubmitProfile}

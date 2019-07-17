@@ -72,19 +72,23 @@ class JobPostingChip extends Component {
 
   render() {
     const { jobItem, classes } = this.props;
-    let location;
+    let location,companyName;
     if (jobItem.location) {
       location = jobItem.location.join(", ");
+    }
+    if (jobItem.copmanyName) {
+      companyName = jobItem.location.join(", ");
     }
     return (
       <Card className={classes.card}>
         <CardHeader
           className={classes.cardHeader}
-          avatar={
-            <Avatar aria-label="profilePic" className={classes.avatar}>
-              {jobItem.copmanyName.charAt(0)}
-            </Avatar>
-          }
+          avatar=
+             {companyName && (
+              <Avatar aria-label="profilePic" className={classes.avatar}>
+              companyName.charAt(0)
+               </Avatar>
+            )}
           action={
             <IconButton>
               <MoreVertIcon />

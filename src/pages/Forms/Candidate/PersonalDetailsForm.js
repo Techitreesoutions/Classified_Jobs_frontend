@@ -30,16 +30,6 @@ import InputField from "../../../components/Forms/InputField";
 import { red } from "@material-ui/core/colors";
 
 class PersonalDetailsForm extends Component {
-  state = {
-    firstName: "Ritesh",
-    lastName: "Newal",
-    gender: "Male",
-    email: "riteshnewal@gmail.com",
-    phone: "7878459393",
-    hidePersonalInfo: false,
-    showInfoPopup: false,
-    setAnchorEl: ""
-  };
 
   validateUserInput = () => {
     if (!this.state.firstName) {
@@ -75,7 +65,7 @@ class PersonalDetailsForm extends Component {
     }
 
     if (
-      this.state.email !== "" &&
+      this.state.email !== "" && this.state.email !== undefined &&
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)
     ) {
       this.setState({
@@ -85,6 +75,20 @@ class PersonalDetailsForm extends Component {
     }
 
     return true;
+  };
+
+  componentWillMount = () => {
+    const { dataObject } = this.props;
+    this.setState({
+      firstName:dataObject.firstName,
+      lastName:dataObject.lastName,
+      gender:dataObject.gender,
+      email: dataObject.email,
+      phone: dataObject.phone,
+      hidePersonalInfo: dataObject.hidePersonalInfo,
+      showInfoPopup: dataObject.showInfoPopup,
+      setAnchorEl: ""
+    });
   };
 
   handleNext = event => {
@@ -119,13 +123,13 @@ class PersonalDetailsForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleBack, steps } = this.props;
+    const { classes, activeStep, handleBack, steps, dataObject } = this.props;
 
     return (
       <form onSubmit={this.handleSubmit}>
         <div className={classes.margin}>
           <FormControl fullWidth className={classes.textField}>
-            <InputLabel>First Name</InputLabel>
+            <InputLabel>First Name*</InputLabel>
             <Input
               name="firstName"
               value={this.state.firstName}
@@ -199,7 +203,7 @@ class PersonalDetailsForm extends Component {
             <InputLabel>Email</InputLabel>
             <Input
               name="email"
-              value={this.state.email}
+             value={this.state.email}
               endAdornment={
                 <InputAdornment position="end">
                   <Email />
@@ -218,7 +222,7 @@ class PersonalDetailsForm extends Component {
             <InputLabel>Contact Number</InputLabel>
             <Input
               name="phone"
-              value={this.state.phone}
+             value={this.state.phone}
               endAdornment={
                 <InputAdornment position="end">
                   <Phone />
@@ -233,7 +237,7 @@ class PersonalDetailsForm extends Component {
           <Switch
             name="hidePersonalInfo"
             value={this.state.hidePersonalInfo}
-            checekd={this.state.hidePersonalInfo}
+           checekd={this.state.hidePersonalInfo}
             onChange={this.handleSwitch}
             inputProps={{ "aria-label": "secondary checkbox" }}
           />
@@ -366,5 +370,6 @@ PersonalDetailsForm.propTypes = {
   activeStep: PropTypes.number.isRequired,
   handleBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
-  steps: PropTypes.array.isRequired
+  steps: PropTypes.array.isRequired,
+  dataObject: PropTypes.object.isRequired
 };

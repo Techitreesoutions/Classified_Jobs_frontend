@@ -15,5 +15,22 @@
     "skills": ["UI", "UX"],
     "location": ["Jaipur", "Ahmedabad"],
     "hidePersonalInfo": true
+  },
+  {
+    "copmanyName": "Opportunities Unlimited",
+    "experienceMin": "0",
+    "experienceMax": "2",
+    "hideExperience": false,
+    "salaryOfferMin": "0K",
+    "salaryOfferMax": "15K",
+    "hideSalary": true,
+    "title": "Analyst Programmer",
+    "id": "0001",
+    "phone": "9898985656",
+    "email": "op@email.com",
+    "description": "Looking for Job",
+    "skills": ["React js", "Angular js"],
+    "location": ["Banglore", "Ahmedabad"],
+    "hidePersonalInfo": false
   }
 ]

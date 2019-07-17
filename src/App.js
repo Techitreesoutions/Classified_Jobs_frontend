@@ -9,19 +9,23 @@ import Footer from "./pages/Footer";
 import LoadingScreen from "./pages/LoadingScreen";
 import { loadJobList } from "./actions/JobListAction";
 import { loadCandidateList } from "./actions/CandidateListAction";
+import { loadSkillList } from "./actions/SkillListAction.js";
 
 class App extends Component {
   state = {
     loading: true
   };
   componentWillMount = () => {
-    const { loadJobList, loadCandidateList } = this.props;
+    const { loadJobList, loadCandidateList, loadSkillList } = this.props;
     console.log("HC componentWillMount");
     this.setState({ loading: true });
     loadJobList(() => {
       this.setState({ loading: false });
     });
     loadCandidateList(() => {
+      this.setState({ loading: false });
+    });
+    loadSkillList(() => {
       this.setState({ loading: false });
     });
   };
@@ -66,11 +70,12 @@ const mapStateToProps = () => {
 
 export default connect(
   mapStateToProps,
-  { loadJobList, loadCandidateList }
+  { loadJobList, loadCandidateList,loadSkillList }
 )(withStyles(styles)(App));
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   loadJobList: PropTypes.func.isRequired,
+  loadSkillList: PropTypes.func.isRequired,
   loadCandidateList: PropTypes.func.isRequired
 };

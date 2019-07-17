@@ -16,12 +16,15 @@ import {
 } from "@material-ui/core";
 // Icons
 import Description from "@material-ui/icons/Description";
-import { getSkillsArray } from "../../../util/utilityFunctions";
+import { getAllSkillsArray } from "../../../util/utilityFunctions";
 
 class DescriptionForm extends Component {
-  state = {
-    description: "I am frontend developer with 3 years of experience.",
-    skills: []
+  componentWillMount = () => {
+    const { dataObject } = this.props;
+    this.setState({
+      description: dataObject.description,
+      skills: dataObject.skills
+    });
   };
 
   handleNext = event => {
@@ -46,7 +49,7 @@ class DescriptionForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleBack, steps, jobList } = this.props;
+    const { classes, activeStep, handleBack, steps, jobList, skillList } = this.props;
 
     return (
       <form>
@@ -57,7 +60,7 @@ class DescriptionForm extends Component {
             onChange={this.handleChange}
             onInputChange={this.handleInputChange}
             placeholder={"Select/Add your skills"}
-            options={getSkillsArray(jobList)}
+            options={getAllSkillsArray(skillList)}
           />
         </div>
         <div className={classes.margin}>
@@ -138,7 +141,8 @@ DescriptionForm = reduxForm({
 
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
-  return { jobList };
+  const skillList = state.skillList.skillList;
+  return { jobList,skillList };
 };
 
 export default connect(
@@ -152,5 +156,6 @@ DescriptionForm.propTypes = {
   handleBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
   steps: PropTypes.array.isRequired,
-  jobList: PropTypes.array.isRequired
+  jobList: PropTypes.array.isRequired,
+  skillList: PropTypes.array.isRequired
 };
