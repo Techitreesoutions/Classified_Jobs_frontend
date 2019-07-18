@@ -59,21 +59,29 @@ class JobDetailForm extends Component {
 
   componentWillMount = () => {
     const { dataObject } = this.props;
+    
+    if(Object.entries(dataObject).length === 0 && dataObject.constructor === Object){
+      dataObject.experienceMin= 0;
+      dataObject.experienceMax = 2;
+      dataObject.salaryOfferMin = 0;
+      dataObject.salaryOfferMax = 10;
+    }
+    
+
     this.setState({
       title: dataObject.title,
-      experience: dataObject.experience,
+      experience: [dataObject.experienceMin,dataObject.experienceMax],
       location:dataObject.location,
-      salaryOffer: dataObject.salaryOffer,
+      salaryOffer: [dataObject.salaryOfferMin,dataObject.salaryOfferMax],
       showExperience: dataObject.showExperience,
       showSalary: dataObject.showSalary
     });
   };
   validateUserInput = () => {
     console.log(this.state.title);
-    console.log(this.state.experienceYears);
-    console.log(this.state.experienceMonths);
+    console.log(this.state.experience);
     console.log(this.state.location);
-    console.log(this.state.expectedSalary);
+    console.log(this.state.salaryOffer);
 
     return true;
   };
@@ -146,6 +154,24 @@ class JobDetailForm extends Component {
     console.log(name, checekd);
 
     this.setState({ [name]: checekd });
+  };
+
+  handleSalaryRangeChange = (event, value) => {
+    this.setState({
+      salaryOffer: value,
+      salaryOfferMax:value[1],
+      salaryOfferMin:value[0]
+    });
+    console.log("Salary", value[0], value[1]);
+    
+  };
+  handleExperienceRangeChange = (event, value) => {
+    this.setState({
+      experience: value,
+      experienceMax:value[1],
+      experienceMin:value[0]
+    });
+    console.log("Experience", value[0], value[1]);
   };
 
   render() {
