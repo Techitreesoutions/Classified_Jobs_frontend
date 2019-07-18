@@ -66,15 +66,20 @@ class JobDetailForm extends Component {
       dataObject.salaryOfferMin = 0;
       dataObject.salaryOfferMax = 10;
     }
-    
 
+    if(dataObject.location != undefined){
+      dataObject.defaultLocation = dataObject.location.map(item => {
+        return {value:item,label:this.getCityList().find(o=>o.value == item).label};
+      });
+    }
     this.setState({
       title: dataObject.title,
       experience: [dataObject.experienceMin,dataObject.experienceMax],
       location:dataObject.location,
       salaryOffer: [dataObject.salaryOfferMin,dataObject.salaryOfferMax],
       showExperience: dataObject.showExperience,
-      showSalary: dataObject.showSalary
+      showSalary: dataObject.showSalary,
+      defaultLocation:dataObject.defaultLocation
     });
   };
   validateUserInput = () => {
@@ -82,7 +87,6 @@ class JobDetailForm extends Component {
     console.log(this.state.experience);
     console.log(this.state.location);
     console.log(this.state.salaryOffer);
-
     return true;
   };
 
@@ -207,6 +211,7 @@ class JobDetailForm extends Component {
                 closeMenuOnSelect={true}
                 options={cityList}
                 selectedValue={this.state.location}
+                defaultValue={this.state.defaultLocation}
                 onChange={this.handleSelectChange}
                 placeholder={"Select Job Location"}
                 maxMenuHeight={100}
