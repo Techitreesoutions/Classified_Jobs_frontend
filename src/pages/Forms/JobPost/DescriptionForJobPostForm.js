@@ -22,7 +22,12 @@ import { getAllSkillsArray } from "../../../util/utilityFunctions";
 class DescriptionForJobPostForm extends Component {
   
   componentWillMount = () => {
-    const { dataObject } = this.props;
+    const { dataObject,skillList } = this.props;
+    if(dataObject.skills != undefined){
+      dataObject.defaultSkills = dataObject.defaultSkills.map(item => {
+        return {value:item,label:this.getAllSkillsArray(skillList).find(o=>o.value == item).label};
+      });
+    }
     this.setState({
       description: dataObject.description,
       skills:dataObject.skills
@@ -53,13 +58,13 @@ class DescriptionForJobPostForm extends Component {
 
   render() {
     const { classes, activeStep, handleJobBack, steps, jobList,skillList } = this.props;
-
     return (
       <div>
         <div className={classes.margin}>
           <CreatableSelect
             isMulti
             isClearable
+            defaultValue={this.state.defaultSkills}
             onChange={this.handleChange}
             onInputChange={this.handleInputChange}
             placeholder={"Select/Add your skills"}

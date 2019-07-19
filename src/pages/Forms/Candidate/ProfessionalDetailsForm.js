@@ -56,12 +56,18 @@ const customStyles = {
 class PersonalDetailsForm extends Component {
   componentWillMount = () => {
     const { dataObject } = this.props;
+    if(dataObject.location != undefined){
+      dataObject.defaultLocation = dataObject.location.map(item => {
+        return {value:item,label:this.getCityList().find(o=>o.value == item).label};
+      });
+    }
     this.setState({
       title: dataObject.title,
       experienceYears:dataObject.experienceYears,
       experienceMonths:dataObject.experienceMonths,
       location: dataObject.location,
-      expectedSalary: dataObject.expectedSalary
+      expectedSalary: dataObject.expectedSalary,
+      defaultLocation:dataObject.defaultLocation
     });
   };
 
@@ -197,6 +203,7 @@ class PersonalDetailsForm extends Component {
             <Grid item xs={12}>
               <Select
                 name="location"
+                defaultValue = {this.state.defaultLocation}
                 closeMenuOnSelect={true}
                 options={cityList}
                 selectedValue={this.state.location}
