@@ -4,10 +4,11 @@ import joblist from "../data/joblist.json";
 import {
   createPlatformURL,
   handleSecureAjaxError,
-  createMutationHeaders
+  createMutationHeaders,
+  getAccessKeysFromStorage
 } from "../util/SecurePlatformAPIUtils";
 //import { startLoading, stopLoading } from "./LoadingActions";
-
+axios.defaults.headers.common['x-api-key'] = getAccessKeysFromStorage();
 /** Action Types */
 export const GET_JOB_LIST = "get-job-list";
 
@@ -15,7 +16,7 @@ export const GET_JOB_LIST = "get-job-list";
  * Load Service List
  */
 export const loadJobList = callback => {
-  const url = createPlatformURL("joblist");
+  const url = createPlatformURL("job");
   return dispatch => {
     //dispatch(startLoading());
     axios
@@ -25,7 +26,7 @@ export const loadJobList = callback => {
         callback && callback();
 
         //dispatch(getServiceList(res.data));
-        dispatch(getJobList(joblist));
+        dispatch(getJobList(res.data.jobs));
       })
       .catch(error => {
         console.log("HC Fail");

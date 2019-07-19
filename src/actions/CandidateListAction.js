@@ -4,22 +4,14 @@ import candidatelist from "../data/candidatelist.json";
 import {
   createPlatformURL,
   handleSecureAjaxError,
-  createMutationHeaders
+  createMutationHeaders,
+  getAccessKeysFromStorage
 } from "../util/SecurePlatformAPIUtils";
 //import { startLoading, stopLoading } from "./LoadingActions";
 
+axios.defaults.headers.common['x-api-key'] = getAccessKeysFromStorage();
 /** Action Types */
 export const GET_CANDIDATE_LIST = "get-candidate-list";
-
-// // Add a request interceptor
-// axios.interceptors.request.use(function (config) {
-//   debugger;
-//   //const token = store.getState().session.token;
-//   config.headers = {'x-key-api':'k1ehKBylc3khYkBIw93D8fnN01Z10Mq4m9lbkUx0'} ;
-
-//   return config;
-// });
-
 /**
  * Load Service List
  */
@@ -32,9 +24,8 @@ export const loadCandidateList = callback => {
       .then(res => {
         console.log("HC Sucess");
         callback && callback();
-
         //dispatch(getServiceList(res.data));
-        dispatch(getCandidateList(candidatelist));
+        dispatch(getCandidateList(res.data.candidates));
       })
       .catch(error => {
         console.log("HC Fail");
