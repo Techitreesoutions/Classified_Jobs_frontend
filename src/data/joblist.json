@@ -1,6 +1,6 @@
 [
   {
-    "copmanyName": "Company Name",
+    "companyName": "Company Name",
     "experienceMin": "0",
     "experienceMax": "4",
     "hideExperience": true,
@@ -17,7 +17,7 @@
     "hidePersonalInfo": true
   },
   {
-    "copmanyName": "Opportunities Unlimited",
+    "companyName": "Opportunities Unlimited",
     "experienceMin": "0",
     "experienceMax": "2",
     "hideExperience": false,

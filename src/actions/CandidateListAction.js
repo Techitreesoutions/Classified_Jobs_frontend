@@ -16,6 +16,7 @@ export const GET_CANDIDATE_LIST = "get-candidate-list";
  * Load Service List
  */
 export const loadCandidateList = callback => {
+  debugger;
   const url = createPlatformURL("candidate");
   return dispatch => {
     //dispatch(startLoading());
@@ -36,6 +37,29 @@ export const loadCandidateList = callback => {
         //dispatch(stopLoading());
       });
   };
+};
+
+export const createCandidate = (data,callback) => {
+  debugger;
+  const url = createPlatformURL("candidate");
+  //const url = "https://3rf80nfa20.execute-api.ap-south-1.amazonaws.com/dev/candidate";
+  
+    axios.post(url,data)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      callback && callback();
+    })
+      .catch(error => {
+        debugger;
+        console.log("HC Fail");
+        callback && callback();
+        //dispatch(stopLoading())
+      })
+      .finally(function () {
+        // always executed
+        callback && callback();
+      });
 };
 
 export const getCandidateList = candidatelist => {

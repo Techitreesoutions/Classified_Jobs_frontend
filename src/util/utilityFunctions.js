@@ -32,12 +32,14 @@ export const getAllSkillsArray = skillList => {
 export const getLocationArray = jobList => {
   let localArr = [];
   jobList.map(jobItem => {
-    jobItem.location.map(locationItem => {
-      localArr.push({
-        label: locationItem,
-        value: locationItem
+    if(jobItem.location !=undefined){
+      jobItem.location.map(locationItem => {
+        localArr.push({
+          label: locationItem,
+          value: locationItem
+        });
       });
-    });
+    }
   });
 
   console.log("getLocationArray", getUniqueValues(localArr));

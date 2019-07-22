@@ -9,6 +9,8 @@ import PersonalDetailsForm from "./PersonalDetailsForm";
 import ProfessionalDetailsForm from "./ProfessionalDetailsForm";
 import DescriptionForm from "./DescriptionForm";
 import Preview from "./Preview";
+import CreateThePost from "./CreateThePost";
+import { createCandidate, loadCandidateList } from "../../../actions/CandidateListAction";
 
 let formObj = {};
 const useStyles = makeStyles(theme => ({
@@ -25,10 +27,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ["Personal details", "Professional details", "Summary", "Preview"];
+  return ["Personal details", "Professional details", "Summary", "Preview","Create the post"];
 }
 
-function getStepContent(stepIndex, handleNext, handleBack) {
+function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
   const steps = getSteps();
   //stepIndex = 2;
   switch (stepIndex) {
@@ -72,6 +74,16 @@ function getStepContent(stepIndex, handleNext, handleBack) {
           steps={steps}
         />
       );
+      case 4:
+        return (
+          <CreateThePost
+            dataObject={formObj}
+            activeStep={4}
+            handleNext={handleComplete}
+            handleBack={handleBack}
+            steps={steps}
+          />
+        );
     default:
       return "Preview";
   }
@@ -80,11 +92,62 @@ function getStepContent(stepIndex, handleNext, handleBack) {
 export default function HorizontalLabelPositionBelowStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [completed, setCompleted] = React.useState({});
   const steps = getSteps();
 
+  function totalSteps() {
+    return steps.length;
+  }
+
+  function completedSteps() {
+    return Object.keys(completed).length;
+  }
+
+  function isLastStep() {
+    return activeStep === totalSteps() - 1;
+  }
+
+  function allStepsCompleted() {
+    return completedSteps() === totalSteps();
+  }
+
+  function handleComplete() {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    console.log("old form object",formObj);
+    
+      delete formObj.skillsOptionList;
+       var valueArray = Object.values(formObj);
+       var keyAaray = Object.keys(formObj);
+       console.log("form object",formObj);
+      valueArray.map((item,index) => {
+        let temp = keyAaray[index]
+        if(item == undefined || item == "" || item == null)
+        {
+          delete formObj[temp];
+        }
+      });
+      console.log("new form object",formObj);
+      debugger;
+      createCandidate(formObj,()=>{
+        loadCandidateList(() => {
+          //we need to close the pop up
+          this.setState({ showInfoPopup: false, setAnchorEl: null });
+        });
+      }); 
+  }
+
   function handleNext(objParam) {
+    const newActiveStep =
+      isLastStep() && !allStepsCompleted()
+        ? // It's the last step, but not all steps have been completed,
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1;
+    setActiveStep(newActiveStep);
     formObj = Object.assign(formObj, objParam);
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    //setActiveStep(prevActiveStep => prevActiveStep + 1);
   }
 
   function handleBack() {
@@ -105,16 +168,20 @@ export default function HorizontalLabelPositionBelowStepper() {
         ))}
       </Stepper>
       <div>
-        {activeStep === steps.length ? (
+        {activeStep+1 === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
-              All steps completed
+              All steps completed.
+              Note:
+              The post you previewed will not be allowed to delete or update by you.
+              If you want to delete or update the post; please mail us the details at hello@techitree.com.
             </Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            {getStepContent(activeStep, handleNext, handleBack,handleComplete)}
+            <Button onClick={handleReset}>Reset</Button>            
           </div>
         ) : (
           <div>
-            {getStepContent(activeStep, handleNext, handleBack)}
+            {getStepContent(activeStep, handleNext, handleBack,handleComplete)}
             <div />
           </div>
         )}

@@ -39,6 +39,28 @@ export const loadJobList = callback => {
   };
 };
 
+export const createJob = (data,callback) => {
+
+  const url = createPlatformURL("job");
+    axios.post(url,data)
+    .then(res => {
+     
+      console.log(res);
+      console.log(res.data);
+      callback && callback();
+    })
+      .catch(error => {
+        console.log("HC Fail");
+        callback && callback();
+       
+        //dispatch(stopLoading())
+      })
+      .finally(function () {
+        // always executed
+        callback && callback();
+      });
+};
+
 export const getJobList = joblist => {
   return {
     type: GET_JOB_LIST,
