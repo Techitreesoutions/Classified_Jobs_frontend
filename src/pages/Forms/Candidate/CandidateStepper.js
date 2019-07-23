@@ -89,7 +89,7 @@ function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper() {
+export default function HorizontalLabelPositionBelowStepper({handleClose}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -129,11 +129,10 @@ export default function HorizontalLabelPositionBelowStepper() {
         }
       });
       console.log("new form object",formObj);
-      debugger;
       createCandidate(formObj,()=>{
+        //we need to close the pop up
+        handleClose();
         loadCandidateList(() => {
-          //we need to close the pop up
-          this.setState({ showInfoPopup: false, setAnchorEl: null });
         });
       }); 
   }

@@ -16,7 +16,6 @@ export const GET_CANDIDATE_LIST = "get-candidate-list";
  * Load Service List
  */
 export const loadCandidateList = callback => {
-  debugger;
   const url = createPlatformURL("candidate");
   return dispatch => {
     //dispatch(startLoading());
@@ -40,7 +39,6 @@ export const loadCandidateList = callback => {
 };
 
 export const createCandidate = (data,callback) => {
-  debugger;
   const url = createPlatformURL("candidate");
   //const url = "https://3rf80nfa20.execute-api.ap-south-1.amazonaws.com/dev/candidate";
   
@@ -51,7 +49,6 @@ export const createCandidate = (data,callback) => {
       callback && callback();
     })
       .catch(error => {
-        debugger;
         console.log("HC Fail");
         callback && callback();
         //dispatch(stopLoading())

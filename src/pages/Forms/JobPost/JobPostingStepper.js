@@ -90,7 +90,7 @@ function getStepContent(stepIndex, handleNext, handleJobBack,handleComplete) {
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper() {
+export default function HorizontalLabelPositionBelowStepper({handleClose}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -130,11 +130,14 @@ export default function HorizontalLabelPositionBelowStepper() {
           delete formObj[temp];
         }
       });
+      
       console.log("new form object",formObj);
       createJob(formObj,()=>{
+      //we need to close the pop up
+      handleClose();
+      //reset the form
+      handleReset();
         loadJobList(() => {
-          //we need to close the pop up
-          this.setState({ showInfoPopup: false, setAnchorEl: null });
         });
       }); 
   }
@@ -156,6 +159,7 @@ export default function HorizontalLabelPositionBelowStepper() {
   }
 
   function handleReset() {
+    //need to clear the old states stored
     setActiveStep(0);
   }
 
@@ -174,8 +178,11 @@ export default function HorizontalLabelPositionBelowStepper() {
             <Typography className={classes.instructions}>
               All steps completed.
               Note:
+              <br />
               The post you previewed will not be allowed to delete or update by you.
+              <br />
               If you want to delete or update the post; 
+              <br />
               please mail us the details at hello@techitree.com.
             </Typography>
             {getStepContent(activeStep, handleNext, handleJobBack,handleComplete)}
@@ -184,6 +191,7 @@ export default function HorizontalLabelPositionBelowStepper() {
         ) : (
           <div>
             {getStepContent(activeStep, handleNext, handleJobBack,handleComplete)}
+            <Button onClick={handleReset}>Reset</Button>
             <div />
           </div>
         )}

@@ -16,6 +16,11 @@ class JobPostPreview extends Component {
 
     handleNext(this.state);
   };
+
+  handleComplete = event => {
+    const { handleComplete } = this.props;
+    handleComplete(this.state);
+  };
   
   render() {
     const { classes, activeStep, handleJobBack, steps, dataObject } = this.props;

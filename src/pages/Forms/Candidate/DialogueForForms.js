@@ -80,7 +80,7 @@ class DialogueForForms extends Component {
           I am looking for a change.
         </DialogTitle>
         <DialogContent>
-          <CandidateStepper />
+          <CandidateStepper  handleClose={handleClose}/>
         </DialogContent>
       </Dialog>
     );
