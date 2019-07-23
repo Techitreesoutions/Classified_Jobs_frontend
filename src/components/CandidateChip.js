@@ -73,6 +73,7 @@ class CandidateChip extends Component {
           className={classes.cardHeader}
           avatar={
             <Avatar aria-label="profilePic" className={classes.avatar}>
+              {/* {candidateItem.firstName} */}
               {candidateItem.firstName.charAt(0)}
             </Avatar>
           }

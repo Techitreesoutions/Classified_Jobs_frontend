@@ -56,21 +56,37 @@ const customStyles = {
 class PersonalDetailsForm extends Component {
   componentWillMount = () => {
     const { dataObject } = this.props;
+    if(dataObject.location != undefined){
+      dataObject.defaultLocation = dataObject.location.map(item => {
+        return {value:item,label:this.getCityList().find(o=>o.value == item).label};
+      });
+    }
+
+if(dataObject.experienceYears != undefined){
+  var item = dataObject.experienceYears;
+      dataObject.defaultExperienceYears =  {value:item,label:this.getNumberList(20).find(o=>o.value == item).label};
+    } 
+
+    if(dataObject.experienceMonths != undefined){
+      var item = dataObject.experienceMonths;
+          dataObject.defaultExperienceMonths =  {value:item,label:this.getNumberList(12).find(o=>o.value == item).label};
+        } 
+    
+    
     this.setState({
       title: dataObject.title,
       experienceYears:dataObject.experienceYears,
       experienceMonths:dataObject.experienceMonths,
       location: dataObject.location,
-      expectedSalary: dataObject.expectedSalary
+      expectedSalary: dataObject.expectedSalary,
+      defaultLocation:dataObject.defaultLocation,
+      defaultExperienceYears:dataObject.defaultExperienceYears,
+      defaultExperienceMonths:dataObject.defaultExperienceMonths
+      
     });
   };
 
   validateUserInput = () => {
-    console.log(this.state.title);
-    console.log(this.state.experienceYears);
-    console.log(this.state.experienceMonths);
-    console.log(this.state.location);
-    console.log(this.state.expectedSalary);
     return true;
   };
 
@@ -168,6 +184,7 @@ class PersonalDetailsForm extends Component {
             <Grid item xs={4}>
               <Select
                 name="experienceYears"
+                defaultValue = {this.state.defaultExperienceYears}
                 closeMenuOnSelect={true}
                 options={this.getNumberList(20)}
                 selectedValue={this.state.experienceYears}
@@ -181,6 +198,7 @@ class PersonalDetailsForm extends Component {
               <Select
                 name="experienceMonths"
                 closeMenuOnSelect={true}
+                defaultValue = {this.state.defaultExperienceMonths}
                 options={this.getNumberList(12)}
                 selectedValue={this.state.experienceMonths}
                 onChange={this.handleSelectChange}
@@ -197,6 +215,7 @@ class PersonalDetailsForm extends Component {
             <Grid item xs={12}>
               <Select
                 name="location"
+                defaultValue = {this.state.defaultLocation}
                 closeMenuOnSelect={true}
                 options={cityList}
                 selectedValue={this.state.location}

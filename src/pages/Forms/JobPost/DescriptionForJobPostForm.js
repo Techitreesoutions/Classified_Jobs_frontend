@@ -22,10 +22,23 @@ import { getAllSkillsArray } from "../../../util/utilityFunctions";
 class DescriptionForJobPostForm extends Component {
   
   componentWillMount = () => {
-    const { dataObject } = this.props;
+    const { dataObject,skillList } = this.props;
+   
+    if(dataObject.skillsOptionList == undefined)
+    {
+      dataObject.skillsOptionList = getAllSkillsArray(skillList);
+    }
+   
+    if(dataObject.skills != undefined){
+      dataObject.defaultSkills = dataObject.skills.map(item => {
+        return {value:item,label:dataObject.skillsOptionList.find(o=>o.value == item).label};
+      });
+    }
     this.setState({
       description: dataObject.description,
-      skills:dataObject.skills
+      skills:dataObject.skills,
+      skillsOptionList:dataObject.skillsOptionList,
+      defaultSkills:dataObject.defaultSkills
     });
   };
 
@@ -44,6 +57,14 @@ class DescriptionForJobPostForm extends Component {
     console.log(value);
     let list = "";
     list = value.map(item => {
+      if(item.__isNew__){
+        this.setState({         
+          skillsOptionList: [...this.state.skillsOptionList, {
+              value:item.value,
+              label:item.label          
+          }]
+        });
+      }
       return item.value;
     });
     this.setState({
@@ -53,17 +74,17 @@ class DescriptionForJobPostForm extends Component {
 
   render() {
     const { classes, activeStep, handleJobBack, steps, jobList,skillList } = this.props;
-
     return (
       <div>
         <div className={classes.margin}>
           <CreatableSelect
             isMulti
             isClearable
+            defaultValue={this.state.defaultSkills}
             onChange={this.handleChange}
             onInputChange={this.handleInputChange}
             placeholder={"Select/Add your skills"}
-            options={getAllSkillsArray(skillList)}
+            options={this.state.skillsOptionList}
           />
         </div>
         <div className={classes.margin}>

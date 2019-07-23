@@ -60,7 +60,7 @@ class DiologueForJobPost extends Component {
           We are Hiring
         </DialogTitle>
         <DialogContent>
-          <JobPostingStepper />
+          <JobPostingStepper handleClose={handleClose} />
         </DialogContent>
       </Dialog>
     );

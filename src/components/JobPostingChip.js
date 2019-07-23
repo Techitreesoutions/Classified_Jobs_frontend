@@ -50,7 +50,7 @@ class JobPostingChip extends Component {
 
   getSalaryLabel = () => {
     const { jobItem } = this.props;
-    if (jobItem.hideSalary === true) {
+    if (jobItem.hideSalary === true || !jobItem.salaryOfferMax || !jobItem.salaryOfferMin) {
       return "Best as per industry standard";
     } else {
       return `${jobItem.salaryOfferMin} - ${jobItem.salaryOfferMax} PM`;
@@ -58,19 +58,20 @@ class JobPostingChip extends Component {
   };
   getExperienceLabel = () => {
     const { jobItem } = this.props;
-    if (jobItem.hideExperience === true) {
+    if (jobItem.hideExperience === true || !jobItem.experienceMin || !jobItem.experienceMax) {
       return "No preference";
     } else {
       return `${jobItem.experienceMin} - ${jobItem.experienceMax} Years`;
     }
   };
 
+
   getCompanyNameLabel = () => {
     const { jobItem } = this.props;
-    if (jobItem.hidePersonalInfo === true) {
+    if (jobItem.hidePersonalInfo === true || !jobItem.companyName) {
       return "Company Name - Confidencial";
     } else {
-      return jobItem.copmanyName;
+      return jobItem.companyName;
     }
   };
 
@@ -80,9 +81,7 @@ class JobPostingChip extends Component {
     if (jobItem.location) {
       location = jobItem.location.join(", ");
     }
-    if (jobItem.copmanyName) {
-      companyName = jobItem.location.join(", ");
-    }
+    
     return (
       <Card className={classes.card}>
         <CardHeader

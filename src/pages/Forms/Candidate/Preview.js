@@ -6,26 +6,16 @@ import JobPostingChip from "../../../components/JobPostingChip";
 import { Button, Grid } from "@material-ui/core";
 import CandidateChip from "../../../components/CandidateChip";
 
-let dataObj = {
-  firstName: "First Name",
-  lastName: "Last Name",
-  experienceYears: "0",
-  experienceMonths: "0",
-  expectedSalary: "0K",
-  expectedPeriod: "PM",
-  title: "Job Title",
-  id: "0000",
-  phone: "0000000000",
-  email: "email@email.com",
-  description: "Looking for Job",
-  skills: ["UI", "UX"],
-  location: ["Jaipur", "Ahmedabad"],
-  hidePersonalInfo: true
-};
+let dataObj = {};
 
 class Preview extends Component {
   state = {
     errorMessage: ""
+  };
+  handleNext = event => {
+    const { handleNext } = this.props;
+
+    handleNext(this.state);
   };
   render() {
     const { classes, activeStep, handleBack, steps, dataObject } = this.props;
