@@ -39,7 +39,7 @@ let defaultTheme = {
   },
 
   typography: {
-    fontFamily: '"Nunito Sans", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Roboto","Nunito Sans", "Helvetica", "Arial", sans-serif',
     fontSize: 12,
     fontWeightLight: 300,
     fontWeightRegular: 400,

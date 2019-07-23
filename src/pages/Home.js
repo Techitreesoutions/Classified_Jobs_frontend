@@ -6,6 +6,7 @@ import JobListingArea from "./JobPost/JobListingArea";
 import SwipeableViews from "react-swipeable-views";
 import { Tabs, Tab, AppBar, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import CandidateListingArea from "./Candidate/CandidateListingArea";
@@ -32,7 +33,12 @@ class Home extends Component {
     return (
       <div>
         <Grid container>
-          <Grid item xs={6}>
+        <Grid item xs={4} sm={4}>
+          <Link to="https://www.google.com">
+          <img className="img-responsive" src={"../public/src/assets/images/logo.png"} alt="logo"/>
+          </Link>
+          </Grid>
+          <Grid item xs={4} sm={4}>
             <AppBar position="static" color="default">
               <Tabs
                 value={this.state.value}
@@ -46,7 +52,7 @@ class Home extends Component {
               </Tabs>
             </AppBar>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4} sm={4}>
             <Header className={classes.appBar} currentTab={this.state.value} />
           </Grid>
         </Grid>

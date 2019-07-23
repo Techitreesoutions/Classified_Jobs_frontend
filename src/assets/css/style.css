@@ -1,0 +1,41 @@
+
+/* #Basic Styles
+================================================== */
+/**/
+html {
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+* {
+    -webkit-overflow-scrolling: touch;
+}
+body {
+	font-size: 14px;
+	color: #222;
+	font-family: 'Roboto', sans-serif!important;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	/*-webkit-overflow-scrolling: touch;*/
+}
+
+@media screen and (max-width: 767px) {
+    html, body { overflow-x:hidden;}
+	.container { width:100% !important;}
+	
+	.canvas { margin:0!important; padding:0!important;}
+
+	
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1023px) { 
+	html, body { overflow-x:hidden;}
+	.container { width:100% !important;}
+	
+	.canvas { margin:0!important; padding:0!important;}
+
+}
+
