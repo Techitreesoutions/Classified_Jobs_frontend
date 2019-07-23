@@ -7,6 +7,7 @@ import SwipeableViews from "react-swipeable-views";
 import { Tabs, Tab, AppBar, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import Logo from "../../src/assets/images/logo.png"
 
 import Header from "./Header";
 import CandidateListingArea from "./Candidate/CandidateListingArea";
@@ -35,7 +36,7 @@ class Home extends Component {
         <Grid container>
         <Grid item xs={4} sm={4}>
           <Link to="https://www.google.com">
-          <img className="img-responsive" src={"../public/src/assets/images/logo.png"} alt="logo"/>
+          <img className="img-responsive" src={Logo} alt="logo"/>
           </Link>
           </Grid>
           <Grid item xs={4} sm={4}>
