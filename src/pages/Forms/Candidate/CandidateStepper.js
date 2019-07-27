@@ -10,7 +10,6 @@ import ProfessionalDetailsForm from "./ProfessionalDetailsForm";
 import DescriptionForm from "./DescriptionForm";
 import Preview from "./Preview";
 import CreateThePost from "./CreateThePost";
-import { createCandidate, loadCandidateList } from "../../../actions/CandidateListAction";
 
 let formObj = {};
 const useStyles = makeStyles(theme => ({
@@ -89,7 +88,7 @@ function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper({handleClose}) {
+export default function HorizontalLabelPositionBelowStepper({handleClose,handleSave}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -129,12 +128,9 @@ export default function HorizontalLabelPositionBelowStepper({handleClose}) {
         }
       });
       console.log("new form object",formObj);
-      createCandidate(formObj,()=>{
-        //we need to close the pop up
-        handleClose();
-        loadCandidateList(() => {
-        });
-      }); 
+      handleSave(formObj);
+      handleClose();
+      
   }
 
   function handleNext(objParam) {

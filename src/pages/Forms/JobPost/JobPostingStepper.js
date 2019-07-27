@@ -10,8 +10,8 @@ import CompoanyDetailForm from "./CompanyDetailForm";
 import DescriptionForJobPostForm from "./DescriptionForJobPostForm";
 import JobPostPreview from "./JobPostPreview";
 
-import { createJob, loadJobList } from "../../../actions/JobListAction";
 import CreateThePost from "../Candidate/CreateThePost";
+import { handleSecureAjaxError } from "../../../util/SecurePlatformAPIUtils";
 
 let formObj = {};
 const useStyles = makeStyles(theme => ({
@@ -90,7 +90,7 @@ function getStepContent(stepIndex, handleNext, handleJobBack,handleComplete) {
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper({handleClose}) {
+export default function HorizontalLabelPositionBelowStepper({handleClose,handleSave}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -132,14 +132,11 @@ export default function HorizontalLabelPositionBelowStepper({handleClose}) {
       });
       
       console.log("new form object",formObj);
-      createJob(formObj,()=>{
-      //we need to close the pop up
-      handleClose();
-      //reset the form
-      handleReset();
-        loadJobList(() => {
-        });
-      }); 
+      handleSave(formObj)
+     //we need to close the pop up
+     handleClose();
+     //reset the form
+     handleReset();
   }
 
   function handleNext(objParam) {
