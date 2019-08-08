@@ -16,7 +16,8 @@ import CreateThePost from "../Candidate/CreateThePost";
 let formObj = {};
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    margin:"10px 0 0 0"
   },
   backButton: {
     marginRight: theme.spacing.unit
@@ -24,7 +25,9 @@ const useStyles = makeStyles(theme => ({
   instructions: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit
-  }
+  },
+  StepLbl:{},
+  StepperBottom:{ border:"1px solid red"}
 }));
 
 function getSteps() {
@@ -167,14 +170,14 @@ export default function HorizontalLabelPositionBelowStepper({handleClose}) {
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+          <Step key={label} className={classes.step} classes={{ completed: classes.completed }}>
+            <StepLabel className={classes.StepLbl}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       <div>
         {activeStep+1 === steps.length ? (
-          <div>
+          <div className={classes.StepperBottom}>
             <Typography className={classes.instructions}>
               All steps completed.
               Note:

@@ -29,7 +29,7 @@ class DiologueForJobPost extends Component {
       color: theme.palette.grey[500]
     }
   }))(props => {
-    const { children, classes, onClose } = props;
+    const { children, classes, onClose } = this.props;
     return (
       <MuiDialogTitle disableTypography className={classes.root}>
         <Typography variant="h6">{children}</Typography>
@@ -47,7 +47,7 @@ class DiologueForJobPost extends Component {
   });
 
   render() {
-    const { isOpenDialogue, handleClose } = this.props;
+    const { isOpenDialogue, handleClose, classes } = this.props;
     return (
       <Dialog
         open={isOpenDialogue}
@@ -56,7 +56,7 @@ class DiologueForJobPost extends Component {
         maxWidth={"sm"}
         handleClose={handleClose}
       >
-        <DialogTitle id="simple-dialog-title" onClose={handleClose}>
+        <DialogTitle id="simple-dialog-title" onClose={handleClose} className={classes.PopTitle}>
           We are Hiring
         </DialogTitle>
         <DialogContent>
@@ -67,7 +67,9 @@ class DiologueForJobPost extends Component {
   }
 }
 
-const styles = theme => ({});
+const styles = theme => ({
+  PopTitle:{ backgroundColor:"#6E389B", color:"#fff", textTransform:"uppercase"},
+});
 
 export default withStyles(styles)(DiologueForJobPost);
 

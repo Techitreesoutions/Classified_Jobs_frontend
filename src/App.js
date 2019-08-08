@@ -10,6 +10,7 @@ import LoadingScreen from "./pages/LoadingScreen";
 import { loadJobList } from "./actions/JobListAction";
 import { loadCandidateList } from "./actions/CandidateListAction";
 import { loadSkillList } from "./actions/SkillListAction.js";
+import './assets/scss/index.scss';
 
 class App extends Component {
   state = {
@@ -60,7 +61,8 @@ class App extends Component {
 
 const styles = theme => ({
   appRoot: {
-    width: "100%"
+    width: "100%",
+    backgroundColor:"#f2f2f2",
   }
 });
 

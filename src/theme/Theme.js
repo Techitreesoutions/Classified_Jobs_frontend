@@ -10,10 +10,16 @@ import { createMuiTheme } from "@material-ui/core/styles";
  *  contrastText
  */
 let defaultTheme = {
+  body:{ 
+    backgroundColor:"#f2f2f2",
+  },
   palette: {
+    body:{ 
+      backgroundColor:"#f2f2f2",
+    },
     primary: {
-      light: "#F4E3B2",
-      main: "#EFC88B",
+      light: "#fff",
+      main: "#75479C",
       dark: "#EA8969",
       contrastText: "#ffffff"
     },
@@ -46,6 +52,9 @@ let defaultTheme = {
     fontWeightMedium: 500
   },
   overrides: {
+    body:{ 
+      backgroundColor:"#f2f2f2",
+    },
     MuiButton: {
       root: {
         textTransform: "none",

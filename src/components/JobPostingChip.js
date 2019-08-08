@@ -21,11 +21,11 @@ import { Chip, CardActions, Tooltip } from "@material-ui/core";
 
 const HtmlTooltip = withStyles(theme => ({
   tooltip: {
-    backgroundColor: "#f5f5f9",
-    color: "rgba(0, 0, 0, 0.87)",
+    backgroundColor: "#fff", 
+    fontSize:"9px",
+    color: "#666",
     maxWidth: 220,
-    fontSize: 12,
-    border: "1px solid #dadde9"
+    border: "1px solid #ddd"
   }
 }))(Tooltip);
 
@@ -42,7 +42,6 @@ class JobPostingChip extends Component {
           key={key}
           label={key}
           className={classes.skillsChip}
-          color="primary"
         />
       );
     });
@@ -102,16 +101,16 @@ class JobPostingChip extends Component {
         />
 
         <CardContent className={classes.cardContent}>
-          <Typography>{jobItem.description}</Typography>
+          <Typography className={classes.cardDesc}>{jobItem.description}</Typography>
           <div className={classes.skillsArea}>{this.renderskillsChips()}</div>
         </CardContent>
         <CardActions className={classes.actions}>
-          <div className={classes.jobElements}>
-            <span className={classes.jobElementsSpan}>
+          <div className={classes.candidateElements}>
+            <span className={classes.candidateElementsSpan}>
               <HtmlTooltip title="Years of Experience">
                 <Chip
                   avatar={
-                    <Avatar>
+                    <Avatar className={classes.chipAvatar}>
                       <FaSuitcase />
                     </Avatar>
                   }
@@ -123,35 +122,33 @@ class JobPostingChip extends Component {
               </HtmlTooltip>
             </span>
 
-            <span className={classes.jobElementsSpan}>
+            <span className={classes.candidateElementsSpan}>
               <HtmlTooltip title="Offered Salary" placement="bottom-start">
                 <Chip
                   avatar={
-                    <Avatar>
+                    <Avatar className={classes.chipAvatar}>
                       <FaRupeeSign />
                     </Avatar>
                   }
                   label={this.getSalaryLabel()}
                   className={classes.chip}
                   variant="outlined"
-                  color="primary"
                 />
               </HtmlTooltip>
             </span>
 
             {location && (
-              <span className={classes.jobElementsSpan}>
+              <span className={classes.candidateElementsSpan}>
                 <HtmlTooltip title="Preferred Location">
                   <Chip
                     avatar={
-                      <Avatar>
+                      <Avatar className={classes.chipAvatar}>
                         <FaMapMarkerAlt />
                       </Avatar>
                     }
                     label={location}
                     className={classes.chip}
                     variant="outlined"
-                    color="primary"
                   />
                 </HtmlTooltip>
               </span>
@@ -159,31 +156,30 @@ class JobPostingChip extends Component {
             {jobItem.hidePersonalInfo !== true && (
               <span>
                 {jobItem.phone && (
-                  <span className={classes.jobElementsSpan}>
+                  <span className={classes.candidateElementsSpan}>
                     <HtmlTooltip title="Contact Number">
                       <Chip
                         avatar={
-                          <Avatar>
+                          <Avatar className={classes.chipAvatar}>
                             <FaMobile />
                           </Avatar>
                         }
                         label={jobItem.phone}
                         className={classes.chip}
                         variant="outlined"
-                        color="primary"
                       />
                     </HtmlTooltip>
                   </span>
                 )}
                 {jobItem.email && (
-                  <span className={classes.jobElementsSpan}>
+                  <span className={classes.candidateElementsSpan}>
                     <HtmlTooltip
                       title="Email"
                       className={`${classes.tooltip} ${classes.expand}`}
                     >
                       <Chip
                         avatar={
-                          <Avatar>
+                          <Avatar className={classes.chipAvatar}>
                             <FaEnvelopeOpen />
                           </Avatar>
                         }
@@ -206,17 +202,27 @@ class JobPostingChip extends Component {
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+   maxWidth: 400,
     minHeight: 100,
     margin: 10,
-    boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.5)",
-    height: "fit-content"
+    padding:0,
+    boxShadow: "none",
+    height: "fit-content",
+    border:"1px solid #efefef",
+    "&:hover": {
+      boxShadow:"0px 4px 5px -1px rgba(158,158,158,0.8)"
+    },
+  },
+  
+  actions:{
+    margin:0,
+    padding:0
   },
   cardHeader: {
-    paddingBottom: 0
+    padding: "10px"
   },
   cardContent: {
-    padding: "10px 20px 0px 20px"
+    padding: "10px"
   },
   skillsArea: {
     margin: "10px 0 0 0",
@@ -224,31 +230,46 @@ const styles = theme => ({
     flexWrap: "wrap"
   },
   skillsChip: {
-    marginRight: 5
+    marginRight: 5,
+    backgroundColor:"#f5f5f5",
+    color:"#c7c7c7", height:"auto",
+    padding:"2px"
   },
 
   avatar: {
-    backgroundColor: red[500]
+    backgroundColor: "#EE3672",
+    
   },
-  jobElements: {
-    padding: "10px 0px 0px 0px",
-    borderTop: "1px solid #ddd",
-    margin: "10px 0 0 0",
-    flexDirection: "row",
-    flexWrap: "wrap"
+  chipAvatar:{
+    backgroundColor: "transparent",
+    width:"auto",
+    height:"auto",
+    margin:"0",
+    color:"#c7c7c7"
   },
-  jobElementsSpan: {
+  candidateElements: {
+    padding: "0 10px",
+    margin: "5px 0 0 0",
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexWrap: "wrap",
+    backgroundColor:"#fafafa",
+    width:"100%"
+  },
+  candidateElementsSpan: {
+    flexDirection: "row",
+    justifyContent: "left",
+    alignItems: "left",
     display: "inline-block",
     paddingRight: 5,
-    paddingBottom: 10
+    
   },
 
   chip: {
-    minWidth: 80,
-    justifyContent: "left"
+    justifyContent: "left", border:"0", margin:0, padding:0
+  },
+  cardDesc:{
+    color:"#666",
+    fontSize:"11px"
   }
 });
 

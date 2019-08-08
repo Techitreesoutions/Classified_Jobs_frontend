@@ -384,7 +384,7 @@ const styles = theme => ({
   },
   lblArea: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "right"
   }
 });
 

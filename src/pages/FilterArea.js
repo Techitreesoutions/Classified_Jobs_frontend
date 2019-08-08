@@ -14,11 +14,14 @@ const customStyles = {
     ...base,
     border: 0,
     borderRadius: 0,
-    borderBottom: "1px solid",
+    borderBottom: "1px solid #fff",
+    backgroundColor:"transparent",
+    color:"#fff",
+    padding:"0  ",
     boxShadow: state.isFocused ? 0 : 0,
     "&:hover": {
       border: state.isFocused ? 0 : 0,
-      borderBottom: "1px solid",
+      borderBottom: "1px solid #fff",
       borderRadius: 0
     }
   }),
@@ -30,9 +33,42 @@ const customStyles = {
   },
   valueContainer: (provided, state) => ({
     ...provided,
-    padding: "2px 0px"
+    padding: "2px 0px",
+    color:"#fff"
   })
 };
+
+
+const RangeSlider = withStyles({
+  root: {
+    color: '#fff',
+    height: 4,
+    
+  },
+  thumb: {
+    height: 12,
+    width: 12,
+    backgroundColor: '#fff',
+    marginTop: -4,
+    marginLeft: -8,
+    '&:focus,&:hover,&$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: 'calc(-50% + 0px)',
+    color:"#EE3672",
+  },
+  track: {
+    height: 4,
+    borderRadius: 2,
+  },
+  rail: {
+    height: 4,
+    borderRadius: 2,
+  },
+})(Slider);
 
 class FilterArea extends Component {
   componentDidMount = () => {
@@ -113,6 +149,8 @@ class FilterArea extends Component {
     });
   };
 
+  
+
   updateRangeValues(name, value) {}
 
   render() {
@@ -129,8 +167,7 @@ class FilterArea extends Component {
                 selectedValue={this.state.location}
                 onChange={this.handleSelectChange}
                 placeholder={"Select Location"}
-                maxMenuHeight={200}
-                styles={customStyles}
+                className={classes.Slt}
               />
             </Grid>
             <Grid item xs={2}>
@@ -141,15 +178,16 @@ class FilterArea extends Component {
                 selectedValue={this.state.skills}
                 onChange={this.handleSelectChange}
                 placeholder={"Select Skills"}
-                maxMenuHeight={200}
-                styles={customStyles}
+                className={classes.Slt}
+               // maxMenuHeight={200}
+               // styles={customStyles}
               />
             </Grid>
             <Grid item xs={2}>
-              <Typography id="range-slider" gutterBottom>
+              <Typography id="range-slider" gutterBottom className={classes.rangSlidertxt}>
                 Expected Salary
               </Typography>
-              <Slider
+              <RangeSlider
                 aria-label="range-slider"
                 name="expectedSalary"
                 value={this.state.expectedSalary}
@@ -163,10 +201,10 @@ class FilterArea extends Component {
               />
             </Grid>
             <Grid item xs={2}>
-              <Typography id="range-slider" gutterBottom>
+              <Typography id="range-slider" gutterBottom className={classes.rangSlidertxt}>
                 Experience (Years)
               </Typography>
-              <Slider
+              <RangeSlider
                 aria-label="range-slider"
                 name="experience"
                 value={this.state.experience}
@@ -192,14 +230,14 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#DDFFCC"
+    backgroundColor: "#75479C"
   },
   container: {
     width: "85%",
     zIndex: 99
   },
   gridSelect: {
-    padding: 10,
+    padding: "0",
     alignItems: "center",
     justifyContent: "center"
   },
@@ -230,12 +268,12 @@ const styles = theme => ({
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
   },
   singleValue: {
-    fontSize: 16
+    fontSize: 13
   },
   placeholder: {
     position: "absolute",
     left: 2,
-    fontSize: 16
+    fontSize: 13
   },
   paper: {
     position: "absolute",
@@ -246,8 +284,16 @@ const styles = theme => ({
   },
   divider: {
     height: theme.spacing.unit * 2
+  },
+  Slt:{
+    fontSize:"12px",   
+  },
+  rangSlidertxt:{
+    color:"#fff",
+    padding:"5px 0 0 0", fontSize:"11px"
   }
 });
+
 
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;

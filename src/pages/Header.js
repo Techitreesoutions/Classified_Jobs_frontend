@@ -46,10 +46,8 @@ class Header extends Component {
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.appbar}>
-          <Toolbar>
-            <Typography className={classes.title} variant="h6" noWrap>
-              Classified Jobs
-            </Typography>
+          <Toolbar className={classes.toolBar}>
+           
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -70,8 +68,8 @@ class Header extends Component {
                 <Button
                   variant="contained"
                   component="span"
-                  className={classes.orangeButton}
-                  color="primary"
+                  className={classes.SbtnPro}
+                  color="SbtnPro"
                   onClick={this.handleOpenSubmitProfile}
                 >
                   SUBMIT YOUR PROFILE
@@ -81,8 +79,8 @@ class Header extends Component {
                 <Button
                   variant="contained"
                   component="span"
-                  className={classes.blueButton}
-                  color="primary"
+                  className={classes.SbtnJob}
+                  color="SbtnJob"
                   onClick={this.handleOpenJobPost}
                 >
                   SUBMIT A JOB
@@ -108,19 +106,23 @@ class Header extends Component {
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%", boxShadow:"none", minHeight:"32px", padding:"10px 0 0 0", backgroundColor:"#fff",
   },
   grow: {
     flexGrow: 1
+  },
+  toolBar:{
+    minHeight:"32px",
   },
   search: {
     position: "relative",
     borderRadius: 25,
     color: theme.palette.primary.dark,
-    backgroundColor: fade(theme.palette.primary.main, 0.15),
+    backgroundColor: fade("#f6f6f6", 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.primary.main, 0.25)
+      backgroundColor: fade("#f2f2f2", 0.25)
     },
+    border:"1px solid #ddd",
     marginRight: theme.spacing.unit * 2,
     marginLeft: 0,
     width: "100%",
@@ -130,13 +132,14 @@ const styles = theme => ({
     }
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing.unit * 4,
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    color:"#666"
   },
   inputRoot: {
     color: "inherit",
@@ -147,24 +150,22 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingLeft: theme.spacing.unit * 4,
     transition: theme.transitions.create("width"),
+    color:"#666",
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: 200
     }
   },
-  appbar: {
-    backgroundColor: theme.palette.primary.contrastText,
-    boxShadow: "0px 1px 2px 0px rgba(0,0,0,0.1)"
+  appbar: { backgroundColor:"#fff", boxShadow:"none"},
+  SbtnPro:{
+    backgroundColor: "#EE3672",
+    borderRadius:4, color:"#fff"
   },
-  orangeButton: {
-    margin: theme.spacing.unit,
-    backgroundColor: "#FFC300"
-  },
-  blueButton: {
-    margin: theme.spacing.unit,
-    backgroundColor: "#9B83FB"
+  SbtnJob:{
+    backgroundColor: "#6E389B",
+    borderRadius:4, color:"#fff"
   }
 });
 

@@ -7,9 +7,11 @@ import SwipeableViews from "react-swipeable-views";
 import { Tabs, Tab, AppBar, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import Logo from "../assets/images/logo.svg"
 
 import Header from "./Header";
 import CandidateListingArea from "./Candidate/CandidateListingArea";
+import shadows from "@material-ui/core/styles/shadows";
 
 function TabContainer({ children, dir }) {
   return <div>{children} </div>;
@@ -31,31 +33,35 @@ class Home extends Component {
     const { reducerObj, classes } = this.props;
 
     return (
-      <div>
-        <Grid container>
-        <Grid item xs={4} sm={4}>
-          <Link to="https://www.google.com">
-          <img className="img-responsive" src={"../public/src/assets/images/logo.png"} alt="logo"/>
+      <div >
+        <div className={classes.HeaderDiv}>
+        <Grid container >
+        <Grid item xs={2} sm={2}>
+          <Link to="#">
+          <img className={classes.LogoImg} src={Logo} alt="logo"/>
           </Link>
           </Grid>
           <Grid item xs={4} sm={4}>
-            <AppBar position="static" color="default">
+            <div className={classes.TopTabBar}>
+            <AppBar position="static" className={classes.TopTabAppBar}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
-                indicatorColor="primary"
-                textColor="primary"
                 variant="fullWidth"
+                indicatorColor="light"
+                textColor="primary"
               >
-                <Tab label="Candidate List" />
-                <Tab label="Job List" />
+                <Tab label="Candidate List" className={classes.TopTabLab} />
+                <Tab label="Job List" className={classes.TopTabLab} />
               </Tabs>
             </AppBar>
+            </div>
           </Grid>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={6} sm={6}>
             <Header className={classes.appBar} currentTab={this.state.value} />
           </Grid>
         </Grid>
+        </div>
 
         <SwipeableViews
           axis={"x"}
@@ -81,7 +87,27 @@ class Home extends Component {
 }
 
 const styles = theme => ({
-  appBar: { width: "50%" }
+  HeaderDiv: { padding:"0", backgroundColor:"#fff" },
+  TopTabBar: { padding:"10px 0 0 0"},
+  LogoImg: { 
+    width:"150px",
+    padding:"10px 10px 10px 10px"
+},
+TopTabAppBar: {
+  backgroundColor: "#fff",
+  fontSize:"14px", boxShadow:"none"
+},
+TopTabLab:{
+  color:"#666",
+  fontSize:"14px", 
+  minHeight:"32px",
+  borderBottom:"0",
+  "&:focus": {
+    outline:"0"
+  }
+}
+  
+
 });
 
 const mapStateToProps = reducerObj => {
