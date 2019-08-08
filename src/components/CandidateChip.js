@@ -76,11 +76,7 @@ class CandidateChip extends Component {
               {candidateItem.firstName.charAt(0)}
             </Avatar>
           }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+          
           title={this.getCandidateNameLabel()}
           subheader={candidateItem.title}
         />

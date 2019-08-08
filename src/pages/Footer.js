@@ -10,6 +10,7 @@ class Footer extends Component {
     const { classes } = this.props;
 
     return (
+      <div className={classes.footercontainer}>
       <Grid container spacing={24}>
         <Grid item xs>
           <div className={classes.footerbtm}>
@@ -34,6 +35,7 @@ class Footer extends Component {
         </Grid>
         <Grid item xs />
       </Grid>
+      </div>
     );
   }
 }

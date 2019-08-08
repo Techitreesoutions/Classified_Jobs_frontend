@@ -33,20 +33,12 @@ class Home extends Component {
     const { reducerObj, classes } = this.props;
 
     return (
-<<<<<<< HEAD
       <div >
         <div className={classes.HeaderDiv}>
         <Grid container >
         <Grid item xs={2} sm={2}>
           <Link to="#">
           <img className={classes.LogoImg} src={Logo} alt="logo"/>
-=======
-      <div>
-        <Grid container>
-        <Grid item xs={4} sm={4}>
-          <Link to="https://www.google.com">
-          <img className="img-responsive" src={Logo} alt="logo"/>
->>>>>>> bfcaa741d639ed2d1a3d60e2c3ca6f16db86e425
           </Link>
           </Grid>
           <Grid item xs={4} sm={4}>
