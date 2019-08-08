@@ -1,4 +1,4 @@
-import { GET_CANDIDATE_LIST } from "../actions/CandidateListAction";
+import { GET_CANDIDATE_LIST,GET_SAVED_CANDIDATE } from "../actions/CandidateListAction";
 
 //import { START_LOADING, STOP_LOADING } from "../actions/LoadingActions";
 
@@ -14,7 +14,11 @@ export default (state = CATAGORY_INITIAL_STATE, action) => {
         ...state,
         candidateList: action.payload
       };
-
+      case GET_SAVED_CANDIDATE:
+      return {
+        ...state,
+        candidateList: state.candidateList.concat(action.payload)
+      };
     default:
       return state;
   }

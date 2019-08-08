@@ -13,7 +13,8 @@ import Button from "@material-ui/core/Button";
 
 import DialogueForForms from "./Forms/Candidate/DialogueForForms";
 import DialogueForJobPost from "./Forms/JobPost/DiologueForJobPost";
-
+import { createCandidate } from "../actions/CandidateListAction";
+import { createJob } from "../actions/JobListAction";
 class Header extends Component {
   state = {
     profileSubmitDialogOpen: false,
@@ -39,6 +40,16 @@ class Header extends Component {
       profileSubmitDialogOpen: false,
       jobSubmitDialogOpen: false
     });
+  };
+
+  handleSave = (formObj) => {
+    this.props.createCandidate(formObj,()=>{
+      }); 
+  };
+
+  handleJobSave = (formObj) => {
+    this.props.createJob(formObj,()=>{
+      }); 
   };
 
   render() {
@@ -94,10 +105,12 @@ class Header extends Component {
         <DialogueForForms
           isOpenDialogue={this.state.profileSubmitDialogOpen}
           handleClose={this.handleCloseSubmitProfile}
+          handleSave = {this.handleSave}
         />
         <DialogueForJobPost 
         isOpenDialogue={this.state.jobSubmitDialogOpen}
         handleClose={this.handleCloseSubmitProfile}
+        handleSave={this.handleJobSave}
         />
       </div>
     );
@@ -175,11 +188,13 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { updateFilter }
+  { updateFilter,createCandidate, createJob}
 )(withStyles(styles)(Header));
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   updateFilter: PropTypes.func.isRequired,
-  currentTab: PropTypes.number.isRequired
+  currentTab: PropTypes.number.isRequired,
+  createCandidate:PropTypes.func.isRequired,
+  createJob:PropTypes.func.isRequired
 };

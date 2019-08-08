@@ -47,7 +47,7 @@ class DiologueForJobPost extends Component {
   });
 
   render() {
-    const { isOpenDialogue, handleClose, classes } = this.props;
+    const { isOpenDialogue, handleClose,handleSave,classes } = this.props;
     return (
       <Dialog
         open={isOpenDialogue}
@@ -60,7 +60,7 @@ class DiologueForJobPost extends Component {
           We are Hiring
         </DialogTitle>
         <DialogContent>
-          <JobPostingStepper handleClose={handleClose} />
+          <JobPostingStepper handleClose={handleClose} handleSave={handleSave} />
         </DialogContent>
       </Dialog>
     );
@@ -76,5 +76,6 @@ export default withStyles(styles)(DiologueForJobPost);
 DiologueForJobPost.propTypes = {
   classes: PropTypes.object.isRequired,
   isOpenDialogue: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  handleSave: PropTypes.func.isRequired
 };

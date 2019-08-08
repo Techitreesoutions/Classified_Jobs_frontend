@@ -66,7 +66,7 @@ class DialogueForForms extends Component {
   });
 
   render() {
-    const { isOpenDialogue, handleClose } = this.props;
+    const { isOpenDialogue, handleClose,handleSave } = this.props;
 
     return (
       <Dialog
@@ -80,7 +80,7 @@ class DialogueForForms extends Component {
           I am looking for a change.
         </DialogTitle>
         <DialogContent>
-          <CandidateStepper  handleClose={handleClose}/>
+          <CandidateStepper  handleClose={handleClose} handleSave={handleSave}/>
         </DialogContent>
       </Dialog>
     );
@@ -94,5 +94,6 @@ export default withStyles(styles)(DialogueForForms);
 DialogueForForms.propTypes = {
   classes: PropTypes.object.isRequired,
   isOpenDialogue: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  handleSave: PropTypes.func.isRequired
 };

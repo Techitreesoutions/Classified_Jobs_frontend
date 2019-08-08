@@ -1,4 +1,4 @@
-import { GET_JOB_LIST } from "../actions/JobListAction";
+import { GET_JOB_LIST,GET_SAVED_JOB } from "../actions/JobListAction";
 
 //import { START_LOADING, STOP_LOADING } from "../actions/LoadingActions";
 
@@ -13,6 +13,12 @@ export default (state = CATAGORY_INITIAL_STATE, action) => {
       return {
         ...state,
         jobList: action.payload
+      };
+
+      case GET_SAVED_JOB:
+      return {
+        ...state,
+        jobList: state.jobList.concat(action.payload)
       };
 
     default:
