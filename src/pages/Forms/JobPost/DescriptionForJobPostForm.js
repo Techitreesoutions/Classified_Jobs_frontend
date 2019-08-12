@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import CreatableSelect from "react-select/creatable";
 
 import {
@@ -16,22 +14,21 @@ import {
 } from "@material-ui/core";
 // Icons
 import Description from "@material-ui/icons/Description";
-import { getSkillsArray } from "../../../util/utilityFunctions";
 import { getAllSkillsArray } from "../../../util/utilityFunctions";
 
 class DescriptionForJobPostForm extends Component {
   
   componentWillMount = () => {
-    const { dataObject,skillList } = this.props;
+    const { dataObject,skillList,jobList,candidateList } = this.props;
    
-    if(dataObject.skillsOptionList == undefined)
+    if(dataObject.skillsOptionList === undefined)
     {
-      dataObject.skillsOptionList = getAllSkillsArray(skillList);
+      dataObject.skillsOptionList = getAllSkillsArray(skillList,jobList,candidateList);
     }
    
-    if(dataObject.skills != undefined){
+    if(dataObject.skills !== undefined){
       dataObject.defaultSkills = dataObject.skills.map(item => {
-        return {value:item,label:dataObject.skillsOptionList.find(o=>o.value == item).label};
+        return {value:item,label:dataObject.skillsOptionList.find(o=>o.value === item).label};
       });
     }
     this.setState({
@@ -73,7 +70,7 @@ class DescriptionForJobPostForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleJobBack, steps, jobList,skillList } = this.props;
+    const { classes, activeStep, handleJobBack, steps } = this.props;
     return (
       <div>
         <div className={classes.margin}>
@@ -176,6 +173,7 @@ DescriptionForJobPostForm.propTypes = {
   handleNext: PropTypes.func.isRequired,
   steps: PropTypes.array.isRequired,
   jobList: PropTypes.array.isRequired,
+  candidateList: PropTypes.array.isRequired,
   skillList: PropTypes.array.isRequired,
   dataObject: PropTypes.object.isRequired
 };

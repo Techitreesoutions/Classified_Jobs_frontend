@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import CreatableSelect from "react-select/creatable";
 
 import {
@@ -20,15 +19,16 @@ import { getAllSkillsArray } from "../../../util/utilityFunctions";
 
 class DescriptionForm extends Component {
   componentWillMount = () => {
-    const { dataObject,skillList } = this.props;
-    if(dataObject.skillsOptionList == undefined)
+    const { dataObject,skillList,jobList,candidateList } = this.props;
+    
+    if(dataObject.skillsOptionList === undefined)
     {
-      dataObject.skillsOptionList = getAllSkillsArray(skillList);
+      dataObject.skillsOptionList = getAllSkillsArray(skillList,jobList,candidateList);
     }
 
-    if(dataObject.skills != undefined){
+    if(dataObject.skills !== undefined){
       dataObject.defaultSkills = dataObject.skills.map(item => {
-        return {value:item,label:dataObject.skillsOptionList.find(o=>o.value == item).label};
+        return {value:item,label:dataObject.skillsOptionList.find(o=>o.value === item).label};
       });
     }
     
@@ -51,6 +51,7 @@ class DescriptionForm extends Component {
     this.setState({ [name]: value });
   }
   handleChange = (value, actionMeta) => {
+    debugger;
     console.log(value);
     let list = "";
     list = value.map(item => {
@@ -180,6 +181,7 @@ DescriptionForm.propTypes = {
   handleNext: PropTypes.func.isRequired,
   steps: PropTypes.array.isRequired,
   jobList: PropTypes.array.isRequired,
+  candidateList: PropTypes.array.isRequired,
   skillList: PropTypes.array.isRequired,
   dataObject: PropTypes.object.isRequired
 };

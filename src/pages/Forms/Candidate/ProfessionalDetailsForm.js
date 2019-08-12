@@ -1,33 +1,21 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Select from "react-select";
 
 import {
   FormControl,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
   Button,
   InputLabel,
   InputAdornment,
   Input,
-  FormHelperText,
   Grid,
-  GridList
 } from "@material-ui/core";
 // Icons
 import Title from "@material-ui/icons/Title";
-import Description from "@material-ui/icons/Description";
 import Slider from "@material-ui/lab/Slider";
 
-import InputField from "../../../components/Forms/InputField";
-import SelectOptions from "../../../components/SelectOptions";
 import CityList from "../../../data/cityList.json";
-import { borderBottom } from "@material-ui/system";
 
 const customStyles = {
   control: (base, state) => ({
@@ -56,20 +44,20 @@ const customStyles = {
 class PersonalDetailsForm extends Component {
   componentWillMount = () => {
     const { dataObject } = this.props;
-    if(dataObject.location != undefined){
+    if(dataObject.location !== undefined){
       dataObject.defaultLocation = dataObject.location.map(item => {
-        return {value:item,label:this.getCityList().find(o=>o.value == item).label};
+        return {value:item,label:this.getCityList().find(o=>o.value === item).label};
       });
     }
 
-if(dataObject.experienceYears != undefined){
+if(dataObject.experienceYears !== undefined){
   var item = dataObject.experienceYears;
-      dataObject.defaultExperienceYears =  {value:item,label:this.getNumberList(20).find(o=>o.value == item).label};
+      dataObject.defaultExperienceYears =  {value:item,label:this.getNumberList(20).find(o=>o.value === item).label};
     } 
 
-    if(dataObject.experienceMonths != undefined){
-      var item = dataObject.experienceMonths;
-          dataObject.defaultExperienceMonths =  {value:item,label:this.getNumberList(12).find(o=>o.value == item).label};
+    if(dataObject.experienceMonths !== undefined){
+      var monthItem = dataObject.experienceMonths;
+          dataObject.defaultExperienceMonths =  {value:monthItem,label:this.getNumberList(12).find(o=>o.value === monthItem).label};
         } 
     
     
@@ -138,7 +126,7 @@ if(dataObject.experienceYears != undefined){
   };
 
   handleNext = event => {
-    const { classes, activeStep, handleBack, steps, handleNext } = this.props;
+    const { handleNext } = this.props;
     const formValidated = this.validateUserInput();
     console.log(this.state.location);
 
@@ -153,7 +141,7 @@ if(dataObject.experienceYears != undefined){
     this.setState({ [name]: value });
   }
   render() {
-    const { classes, activeStep, handleBack, steps, dataObject } = this.props;
+    const { classes, activeStep, handleBack, steps} = this.props;
     const cityList = this.getCityList();
     return (
       <form>

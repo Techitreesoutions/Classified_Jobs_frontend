@@ -1,23 +1,15 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 
 import {
   FormControl,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
   Button,
   InputLabel,
   InputAdornment,
   Input,
-  FormHelperText,
   Grid,
-  Checkbox,
-  Fab,
   Switch,
   Popover
 } from "@material-ui/core";
@@ -26,8 +18,6 @@ import Person from "@material-ui/icons/Person";
 import SpeakerNotes from "@material-ui/icons/SpeakerNotes";
 import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
-import InputField from "../../../components/Forms/InputField";
-import { red } from "@material-ui/core/colors";
 
 class CompanyDetailForm extends Component {
  
@@ -55,7 +45,7 @@ class CompanyDetailForm extends Component {
       return;
     }
 
-    if (this.state.phone === "" && this.state.email === "" || (this.state.phone === undefined && this.state.email === undefined)) {
+    if ((this.state.phone === "" && this.state.email === "") || (this.state.phone === undefined && this.state.email === undefined)) {
       this.setState({
         errorMessage: "Email or Contact Number, one of them is required"
       });
@@ -76,7 +66,7 @@ class CompanyDetailForm extends Component {
   };
 
   handleNext = event => {
-    const { classes, activeStep, handleJobBack, steps, handleNext } = this.props;
+    const { handleNext } = this.props;
     const formValidated = this.validateUserInput();
 
     if (formValidated === true) {

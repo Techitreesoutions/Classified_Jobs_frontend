@@ -1,35 +1,22 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Select from "react-select";
 
 import {
   FormControl,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
   Button,
   InputLabel,
   InputAdornment,
   Input,
-  FormHelperText,
   Grid,
-  GridList,
-  Switch,
-  Checkbox
+  Switch
 } from "@material-ui/core";
 // Icons
 import Title from "@material-ui/icons/Title";
-import Description from "@material-ui/icons/Description";
 import Slider from "@material-ui/lab/Slider";
 
-import InputField from "../../../components/Forms/InputField";
-import SelectOptions from "../../../components/SelectOptions";
 import CityList from "../../../data/cityList.json";
-import { borderBottom } from "@material-ui/system";
 
 const customStyles = {
   control: (base, state) => ({
@@ -67,9 +54,9 @@ class JobDetailForm extends Component {
       dataObject.salaryOfferMax = 10;
     }
 
-    if(dataObject.location != undefined){
+    if(dataObject.location !== undefined){
       dataObject.defaultLocation = dataObject.location.map(item => {
-        return {value:item,label:this.getCityList().find(o=>o.value == item).label};
+        return {value:item,label:this.getCityList().find(o=>o.value === item).label};
       });
     }
     this.setState({
@@ -138,7 +125,7 @@ class JobDetailForm extends Component {
   };
 
   handleNext = event => {
-    const { classes, activeStep, handleJobBack, steps, handleNext } = this.props;
+    const {handleNext } = this.props;
     const formValidated = this.validateUserInput();
     console.log(this.state.location);
 
@@ -179,7 +166,7 @@ class JobDetailForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleJobBack, steps } = this.props;
+    const { classes, activeStep,  steps } = this.props;
     const cityList = this.getCityList();
     return (
       <form>
@@ -313,50 +300,6 @@ class JobDetailForm extends Component {
     );
   }
 }
-
-const iOSBoxShadow =
-  "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
-const IOSSlider = withStyles({
-  root: {
-    color: "#3880ff",
-    height: 2,
-    padding: "15px 0"
-  },
-  thumb: {
-    height: 16,
-    width: 16,
-    backgroundColor: "#bfbfbf",
-    boxShadow: iOSBoxShadow,
-    marginTop: -8,
-    marginLeft: -8,
-    "&:focus,&:hover,&$active": {
-      boxShadow:
-        "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)",
-      // Reset on touch devices, it doesn't add specificity
-      "@media (hover: none)": {
-        boxShadow: iOSBoxShadow
-      }
-    }
-  },
-  active: {},
-  valueLabel: {
-    left: "calc(-50%)",
-    top: -16,
-    fontSize: 12,
-    "& *": {
-      background: "transparent",
-      color: "#000"
-    }
-  },
-  track: {
-    height: 2
-  },
-  rail: {
-    height: 2,
-    opacity: 0.5,
-    backgroundColor: "#bfbfbf"
-  }
-})(Slider);
 
 const styles = theme => ({
   margin: {

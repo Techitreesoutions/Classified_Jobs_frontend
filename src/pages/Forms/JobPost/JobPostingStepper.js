@@ -11,7 +11,6 @@ import DescriptionForJobPostForm from "./DescriptionForJobPostForm";
 import JobPostPreview from "./JobPostPreview";
 
 import CreateThePost from "../Candidate/CreateThePost";
-import { handleSecureAjaxError } from "../../../util/SecurePlatformAPIUtils";
 
 let formObj = {};
 const useStyles = makeStyles(theme => ({
@@ -131,7 +130,7 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
        console.log("form object",formObj);
       valueArray.map((item,index) => {
         let temp = keyAaray[index]
-        if(item == undefined || item == "" || item == null)
+        if(item === undefined || item === "" || item === null)
         {
           delete formObj[temp];
         }

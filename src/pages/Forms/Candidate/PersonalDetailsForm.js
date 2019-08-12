@@ -1,23 +1,16 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import {reduxForm } from "redux-form";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 
 import {
   FormControl,
-  FormLabel,
-  FormControlLabel,
-  RadioGroup,
   Radio,
   Button,
   InputLabel,
   InputAdornment,
   Input,
-  FormHelperText,
   Grid,
-  Checkbox,
-  Fab,
   Switch,
   Popover
 } from "@material-ui/core";
@@ -26,8 +19,6 @@ import Person from "@material-ui/icons/Person";
 import SpeakerNotes from "@material-ui/icons/SpeakerNotes";
 import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
-import InputField from "../../../components/Forms/InputField";
-import { red } from "@material-ui/core/colors";
 
 class PersonalDetailsForm extends Component {
 
@@ -57,7 +48,7 @@ class PersonalDetailsForm extends Component {
       return;
     }
 
-    if (this.state.phone === "" && this.state.email === "" ||  (this.state.phone === undefined && this.state.email === undefined)) {
+    if ((this.state.phone === "" && this.state.email === "") ||  (this.state.phone === undefined && this.state.email === undefined)) {
       this.setState({
         errorMessage: "Email or Contact Number, one of them is required"
       });
@@ -92,7 +83,7 @@ class PersonalDetailsForm extends Component {
   };
 
   handleNext = event => {
-    const { classes, activeStep, handleBack, steps, handleNext } = this.props;
+    const { handleNext } = this.props;
     const formValidated = this.validateUserInput();
 
     if (formValidated === true) {
@@ -123,7 +114,7 @@ class PersonalDetailsForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, handleBack, steps, dataObject } = this.props;
+    const { classes, activeStep, steps } = this.props;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -167,7 +158,7 @@ class PersonalDetailsForm extends Component {
               type="radio"
               value={"Male"}
               name="gender"
-              checked={this.state.gender == "Male"}
+              checked={this.state.gender === "Male"}
               onChange={event => this.handleUserInput(event)}
             />
             {"Male"}

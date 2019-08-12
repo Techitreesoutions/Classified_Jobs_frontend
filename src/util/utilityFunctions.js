@@ -6,6 +6,31 @@ function getIndiaCityList() {
 
 export const getSkillsArray = jobList => {
   let skillsArr = [];
+  if(jobList !== undefined)
+  {
+    jobList.map(jobItem => {
+      if(jobItem !== undefined && jobItem.skills !== undefined){
+        jobItem.skills.map(skillsItem => {
+          skillsArr.push({
+            label: skillsItem,
+            value: skillsItem
+          });
+        });
+      }
+    });
+  }
+  console.log("getSkillsArray", skillsArr);
+  return getUniqueValues(skillsArr);
+};
+
+export const getAllSkillsArray = (skillList,jobList,candidateList) => {
+  let skillsArr = [];
+  skillList.map(skillsItem => {
+      skillsArr.push({
+        label: skillsItem,
+        value: skillsItem
+      });
+  });
   jobList.map(jobItem => {
     jobItem.skills.map(skillsItem => {
       skillsArr.push({
@@ -14,34 +39,32 @@ export const getSkillsArray = jobList => {
       });
     });
   });
-  console.log("getSkillsArray", skillsArr);
-  return getUniqueValues(skillsArr);
-};
 
-export const getAllSkillsArray = skillList => {
-  let skillsArr = [];
-  skillList.map(skillsItem => {
+  candidateList.map(jobItem => {
+    jobItem.skills.map(skillsItem => {
       skillsArr.push({
         label: skillsItem,
         value: skillsItem
       });
+    });
   });
   return getUniqueValues(skillsArr);
 };
 
 export const getLocationArray = jobList => {
   let localArr = [];
-  jobList.map(jobItem => {
-    if(jobItem.location !=undefined){
-      jobItem.location.map(locationItem => {
-        localArr.push({
-          label: locationItem,
-          value: locationItem
+  if(jobList !== undefined){
+    jobList.map(jobItem => {
+      if(jobItem.location !== undefined){
+        jobItem.location.map(locationItem => {
+          localArr.push({
+            label: locationItem,
+            value: locationItem
+          });
         });
-      });
-    }
-  });
-
+      }
+    });
+  }
   console.log("getLocationArray", getUniqueValues(localArr));
   return getUniqueValues(localArr);
 };

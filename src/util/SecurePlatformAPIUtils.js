@@ -74,7 +74,6 @@ export const handleSecureAjaxError = (
 };
 
 export const getAccessKeysFromStorage = () => {
-  let n = 0;
   let localStorageData = {'x-key-api':'2sj1dmP5seacSG4hvAXzp8xdBGCDEtU8kV6DIkX1'};
 
   // while (n < localStorage.length) {
@@ -106,9 +105,7 @@ export const createPlatformURL = api => {
  */
 export const createMutationHeaders = (additionalParams, additionalHeaders) => {
   const storage = getAccessKeysFromStorage();
-  let token = "";
-
-  token =
+  let token =
     storage[
       `CognitoIdentityServiceProvider.${process.env.REACT_APP_CLIENT_ID}.${
         storage[
@@ -120,7 +117,7 @@ export const createMutationHeaders = (additionalParams, additionalHeaders) => {
     ];
 
   return {
-    //headers: Object.assign({ Authorization: token }, additionalHeaders),
+    headers: Object.assign({ Authorization: token }, additionalHeaders),
     //timeout: parseInt(process.env.REACT_APP_HTTP_POST_TIMEOUT),
     params: Object.assign({}, additionalParams)
   };

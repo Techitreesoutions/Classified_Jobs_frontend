@@ -3,8 +3,7 @@ import skillList from "../data/skills.json";
 //HC imports
 import {
   createPlatformURL,
-  handleSecureAjaxError,
-  createMutationHeaders
+  handleSecureAjaxError
 } from "../util/SecurePlatformAPIUtils";
 
 /** Action Types */

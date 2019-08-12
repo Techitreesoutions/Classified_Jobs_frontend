@@ -4,7 +4,6 @@ import candidatelist from "../data/candidatelist.json";
 import {
   createPlatformURL,
   handleSecureAjaxError,
-  createMutationHeaders,
   getAccessKeysFromStorage
 } from "../util/SecurePlatformAPIUtils";
 //import { startLoading, stopLoading } from "./LoadingActions";

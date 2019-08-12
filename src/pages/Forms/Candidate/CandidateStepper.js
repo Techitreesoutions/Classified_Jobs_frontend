@@ -122,7 +122,7 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
        console.log("form object",formObj);
       valueArray.map((item,index) => {
         let temp = keyAaray[index]
-        if(item == undefined || item == "" || item == null)
+        if(item === undefined || item === "" || item === null)
         {
           delete formObj[temp];
         }

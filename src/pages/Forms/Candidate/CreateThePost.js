@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import JobPostingChip from "../../../components/JobPostingChip";
 import { Button, Grid } from "@material-ui/core";
-import CandidateChip from "../../../components/CandidateChip";
 
 let dataObj = {};
 
