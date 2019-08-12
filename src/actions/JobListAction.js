@@ -4,7 +4,6 @@ import joblist from "../data/joblist.json";
 import {
   createPlatformURL,
   handleSecureAjaxError,
-  createMutationHeaders,
   getAccessKeysFromStorage
 } from "../util/SecurePlatformAPIUtils";
 //import { startLoading, stopLoading } from "./LoadingActions";

@@ -4,7 +4,6 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import { Slider } from '@material-ui/core';
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import { createTheme } from "./theme/Theme";
 

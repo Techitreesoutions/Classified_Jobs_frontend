@@ -11,7 +11,6 @@ import Logo from "../assets/images/logo.svg"
 
 import Header from "./Header";
 import CandidateListingArea from "./Candidate/CandidateListingArea";
-import shadows from "@material-ui/core/styles/shadows";
 
 function TabContainer({ children, dir }) {
   return <div>{children} </div>;
@@ -30,7 +29,7 @@ class Home extends Component {
   };
 
   render() {
-    const { reducerObj, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <div >

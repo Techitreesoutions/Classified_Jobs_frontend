@@ -7,37 +7,7 @@ import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import { Grid, Typography } from "@material-ui/core";
 import Slider from "@material-ui/lab/Slider";
 import Select from "react-select";
-import { getSkillsArray, getLocationArray } from "../util/utilityFunctions";
-
-const customStyles = {
-  control: (base, state) => ({
-    ...base,
-    border: 0,
-    borderRadius: 0,
-    borderBottom: "1px solid #fff",
-    backgroundColor:"transparent",
-    color:"#fff",
-    padding:"0  ",
-    boxShadow: state.isFocused ? 0 : 0,
-    "&:hover": {
-      border: state.isFocused ? 0 : 0,
-      borderBottom: "1px solid #fff",
-      borderRadius: 0
-    }
-  }),
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = "opacity 300ms";
-
-    return { ...provided, opacity, transition };
-  },
-  valueContainer: (provided, state) => ({
-    ...provided,
-    padding: "2px 0px",
-    color:"#fff"
-  })
-};
-
+import {getSkillsArray, getLocationArray } from "../util/utilityFunctions";
 
 const RangeSlider = withStyles({
   root: {
@@ -154,7 +124,7 @@ class FilterArea extends Component {
   updateRangeValues(name, value) {}
 
   render() {
-    const { classes, theme, jobList } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -297,7 +267,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
-  return { jobList };
+  return jobList ;
 };
 
 export default connect(
