@@ -91,11 +91,7 @@ class JobPostingChip extends Component {
               companyName.charAt(0)
                </Avatar>
             )}
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
+         
           title={this.getCompanyNameLabel()}
           subheader={jobItem.title}
         />
@@ -117,7 +113,6 @@ class JobPostingChip extends Component {
                   label={this.getExperienceLabel()}
                   className={classes.chip}
                   variant="outlined"
-                  color="primary"
                 />
               </HtmlTooltip>
             </span>
@@ -183,7 +178,6 @@ class JobPostingChip extends Component {
                             <FaEnvelopeOpen />
                           </Avatar>
                         }
-                        color="primary"
                         label={jobItem.email}
                         className={classes.chip}
                         variant="outlined"
@@ -253,7 +247,8 @@ const styles = theme => ({
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor:"#fafafa",
-    width:"100%"
+    width:"100%",
+    borderTop:"1px solid #ececec",
   },
   candidateElementsSpan: {
     flexDirection: "row",
@@ -263,13 +258,12 @@ const styles = theme => ({
     paddingRight: 5,
     
   },
-
   chip: {
-    justifyContent: "left", border:"0", margin:0, padding:0
+    justifyContent: "left", border:"0", margin:0, padding:0,
   },
   cardDesc:{
     color:"#666",
-    fontSize:"11px"
+    fontSize:"11px",
   }
 });
 

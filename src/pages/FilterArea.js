@@ -230,7 +230,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#75479C"
+    backgroundColor: "#898a98"
   },
   container: {
     width: "85%",

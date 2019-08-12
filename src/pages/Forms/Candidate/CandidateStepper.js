@@ -14,7 +14,7 @@ import CreateThePost from "./CreateThePost";
 let formObj = {};
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
+    width: "100%",fontSize:"14px",
   },
   backButton: {
     marginRight: theme.spacing.unit

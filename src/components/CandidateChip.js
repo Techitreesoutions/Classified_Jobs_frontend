@@ -236,6 +236,7 @@ const styles = theme => ({
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor:"#fafafa",
+    borderTop:"1px solid #ececec",
     width:"100%"
   },
   candidateElementsSpan: {
@@ -253,7 +254,7 @@ const styles = theme => ({
   cardDesc:{
     color:"#666",
     fontSize:"11px"
-  }
+  },
 });
 
 export default withStyles(styles)(CandidateChip);

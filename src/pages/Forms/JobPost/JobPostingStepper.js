@@ -17,17 +17,20 @@ let formObj = {};
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    margin:"10px 0 0 0"
+    margin:"10px 0 0 0",
+    fontSize:"14px"
   },
   backButton: {
     marginRight: theme.spacing.unit
   },
   instructions: {
     marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing.unit,
+    textAlign:"center"
   },
   StepLbl:{},
-  StepperBottom:{ border:"1px solid red"}
+  ResetBtn: { backgroundColor:"#f2f2f2"},
+  ResetBtnBdr :{ borderTop:"1px solid #ddd", padding:"10px 0"}
 }));
 
 function getSteps() {
@@ -176,7 +179,7 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
         {activeStep+1 === steps.length ? (
           <div className={classes.StepperBottom}>
             <Typography className={classes.instructions}>
-              All steps completed.
+              All steps completed.<br/>
               Note:
               <br />
               The post you previewed will not be allowed to delete or update by you.
@@ -186,12 +189,16 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
               please mail us the details at hello@techitree.com.
             </Typography>
             {getStepContent(activeStep, handleNext, handleJobBack,handleComplete)}
-            <Button onClick={handleReset}>Reset</Button>
+            <div className={classes.ResetBtnBdr}>
+            <Button onClick={handleReset} className={classes.ResetBtn}>Reset</Button>
+            </div>
           </div>
         ) : (
           <div>
             {getStepContent(activeStep, handleNext, handleJobBack,handleComplete)}
-            <Button onClick={handleReset}>Reset</Button>
+            <div className={classes.ResetBtnBdr}>
+            <Button onClick={handleReset} className={classes.ResetBtn}>Reset</Button>
+            </div>
             <div />
           </div>
         )}
