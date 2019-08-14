@@ -17,7 +17,7 @@ import { createJob } from "../actions/JobListAction";
 class Header extends Component {
   state = {
     profileSubmitDialogOpen: false,
-    jobSubmitDialogOpen:false
+    jobSubmitDialogOpen: false
   };
 
   handleSerachInput = event => {
@@ -31,7 +31,7 @@ class Header extends Component {
 
   handleOpenJobPost = event => {
     // Open Job submit Dialog
-    this.setState({ jobSubmitDialogOpen: true});
+    this.setState({ jobSubmitDialogOpen: true });
   };
 
   handleCloseSubmitProfile = () => {
@@ -41,14 +41,12 @@ class Header extends Component {
     });
   };
 
-  handleSave = (formObj) => {
-    this.props.createCandidate(formObj,()=>{
-      }); 
+  handleSave = formObj => {
+    this.props.createCandidate(formObj, () => {});
   };
 
-  handleJobSave = (formObj) => {
-    this.props.createJob(formObj,()=>{
-      }); 
+  handleJobSave = formObj => {
+    this.props.createJob(formObj, () => {});
   };
 
   render() {
@@ -57,7 +55,6 @@ class Header extends Component {
       <div className={classes.root}>
         <AppBar position="static" className={classes.appbar}>
           <Toolbar className={classes.toolBar}>
-           
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -104,12 +101,12 @@ class Header extends Component {
         <DialogueForForms
           isOpenDialogue={this.state.profileSubmitDialogOpen}
           handleClose={this.handleCloseSubmitProfile}
-          handleSave = {this.handleSave}
+          handleSave={this.handleSave}
         />
-        <DialogueForJobPost 
-        isOpenDialogue={this.state.jobSubmitDialogOpen}
-        handleClose={this.handleCloseSubmitProfile}
-        handleSave={this.handleJobSave}
+        <DialogueForJobPost
+          isOpenDialogue={this.state.jobSubmitDialogOpen}
+          handleClose={this.handleCloseSubmitProfile}
+          handleSave={this.handleJobSave}
         />
       </div>
     );
@@ -118,13 +115,17 @@ class Header extends Component {
 
 const styles = theme => ({
   root: {
-    width: "100%", boxShadow:"none", minHeight:"32px", padding:"10px 0 0 0", backgroundColor:"#fff",
+    width: "100%",
+    boxShadow: "none",
+    minHeight: "32px",
+    padding: "10px 0 0 0",
+    backgroundColor: "#fff"
   },
   grow: {
     flexGrow: 1
   },
-  toolBar:{
-    minHeight:"32px",
+  toolBar: {
+    minHeight: "32px"
   },
   search: {
     position: "relative",
@@ -134,7 +135,7 @@ const styles = theme => ({
     "&:hover": {
       backgroundColor: fade("#f2f2f2", 0.25)
     },
-    border:"1px solid #ddd",
+    border: "1px solid #ddd",
     marginRight: theme.spacing.unit * 2,
     marginLeft: 0,
     width: "100%",
@@ -151,7 +152,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color:"#666"
+    color: "#666"
   },
   inputRoot: {
     color: "inherit",
@@ -164,20 +165,24 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 4,
     transition: theme.transitions.create("width"),
-    color:"#666",
+    color: "#666",
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: 200
     }
   },
-  appbar: { backgroundColor:"#fff", boxShadow:"none"},
-  SbtnPro:{
+  appbar: { backgroundColor: "#fff", boxShadow: "none" },
+  SbtnPro: {
     backgroundColor: "#EE3672",
-    borderRadius:4, color:"#fff"
+    borderRadius: 4,
+    color: "#fff",
+    background: "linear-gradient(40deg,#c53364,#622774)!important"
   },
-  SbtnJob:{
+  SbtnJob: {
     backgroundColor: "#6E389B",
-    borderRadius:4, color:"#fff"
+    borderRadius: 4,
+    color: "#fff",
+    background: "linear-gradient(40deg,#c53364,#622774)!important"
   }
 });
 
@@ -187,13 +192,13 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { updateFilter,createCandidate, createJob}
+  { updateFilter, createCandidate, createJob }
 )(withStyles(styles)(Header));
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   updateFilter: PropTypes.func.isRequired,
   currentTab: PropTypes.number.isRequired,
-  createCandidate:PropTypes.func.isRequired,
-  createJob:PropTypes.func.isRequired
+  createCandidate: PropTypes.func.isRequired,
+  createJob: PropTypes.func.isRequired
 };

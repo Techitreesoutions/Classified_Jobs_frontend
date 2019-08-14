@@ -83,6 +83,7 @@ const styles = theme => ({
     width: "100%"
   },
   candidateItemArea: {
+    marginTop: 20,
     position: "relative",
     transition: "height 480ms ease-out 0s"
   }
