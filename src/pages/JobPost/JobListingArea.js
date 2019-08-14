@@ -80,7 +80,8 @@ const styles = theme => ({
   },
   jobItemArea: {
     position: "relative",
-    transition: "height 480ms ease-out 0s"
+    transition: "height 480ms ease-out 0s",
+    top:"120px"
   }
 });
 

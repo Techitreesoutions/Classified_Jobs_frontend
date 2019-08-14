@@ -118,7 +118,7 @@ class Header extends Component {
 
 const styles = theme => ({
   root: {
-    width: "100%", boxShadow:"none", minHeight:"32px", padding:"10px 0 0 0", backgroundColor:"#fff",
+    width: "100%", boxShadow:"none", minHeight:"32px", padding:"10px 0 0 0", backgroundColor:"#fff",    
   },
   grow: {
     flexGrow: 1

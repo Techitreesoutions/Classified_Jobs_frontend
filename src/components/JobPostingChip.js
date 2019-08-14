@@ -224,8 +224,8 @@ const styles = theme => ({
   },
   skillsChip: {
     marginRight: 5,
-    backgroundColor:"#f5f5f5",
-    color:"#c7c7c7", height:"auto",
+    backgroundColor:"#898a98",
+    color:"#fff", height:"auto",
     padding:"2px"
   },
 
@@ -238,7 +238,7 @@ const styles = theme => ({
     width:"auto",
     height:"auto",
     margin:"0",
-    color:"#c7c7c7"
+    color:"#666"
   },
   candidateElements: {
     padding: "0 10px",

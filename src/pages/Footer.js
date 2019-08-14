@@ -12,32 +12,18 @@ class Footer extends Component {
     return (
       <div className={classes.footercontainer}>
       <Grid container spacing={24}>
-        <Grid item xs={9} sm={9}>
-          <div className={classes.footerbtm}>
-            <span>Copyright &copy; 2019 <a className={classes.footerLink} href="http://techitree.com">Techitree Technologies Pvt. Ltd.</a> All rights reserved.
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+        <Grid item xs={12} sm={12}>
+        <div className={classes.footerbtm}>
             <a className={classes.footerLink} href="http://google.com">About Us</a>
             <a className={classes.footerLink} href="http://google.com">Contact Us</a>
             <a className={classes.footerLink} href="http://google.com">Terms & Conditions</a>
             <a className={classes.footerLink} href="http://google.com">Policy</a>
           </div>
-        </Grid>
-        <Grid item xs={3} sm={3}>
           <div className={classes.copyrightdiv}>
-            <a className={classes.footerSocial} href="http://google.com">
-              <FaFacebook className={classes.icon} />
-            </a>
-            <a className={classes.footerSocial} href="http://google.com">
-              <FaLinkedin className={classes.icon} />
-            </a>
-            
-<a href="https://smallseotools.com/visitor-hit-counter/" rel="nofollow noopener" target="_blank" title="smallseotools.com/visitor-hit-counter/">
-<img src="https://smallseotools.com/counterDisplay?code=f2c60a79a50c295ba790949ef2be079c&style=0001&pad=6&type=page&initCount=9500" alt="smallseotools.com/visitor-hit-counter/" border="0"/>
-</a>
-
-
+            <span>Copyright &copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> <a className={classes.footerLink} href="http://techitree.com">Techitree Technologies Pvt. Ltd.</a> All rights reserved.</span>
           </div>
         </Grid>
+        
         
       </Grid>
       </div>
@@ -47,7 +33,8 @@ class Footer extends Component {
 
 const styles = theme => ({
   footerbtm: {
-    display: "flex"
+    display: "flex",
+    
   },
   copyrightdiv: {
     display: "flex"
@@ -56,12 +43,14 @@ const styles = theme => ({
     padding:"10px",
     backgroundColor:"#fff",
     borderTop:"1px solid #ddd",
+    position:"fixed", width:"100%", bottom:"0" 
   },
-  footerbtm: { color:"#666", fontSize:"13px"},
-  copyrightdiv:{ textAlign:"right", float:"right",},
-  footerLink: { color:"#666", fontSize:"13px", display:"inline-block", margin:" 0 10px"},
-  footerSocial: { color:"#666", fontSize:"13px", display:"inline-block", margin:" 0 10px"},
-  icon:{ fontSize:"16px"}
+  footerbtm: { color:"#666", fontSize:"13px", padding:"0 0 5px 0", borderBottom:"0px solid #ddd", textAlign:"center",},
+  copyrightdiv:{  color:"#666", fontSize:"13px", textAlign:"center",},
+  footerLink: { color:"#666", fontSize:"13px", display:"inline-block", margin:" 0 10px 0 0"},
+  footerSocial: { color:"#666", fontSize:"13px", display:"inline-block", margin:" 0 10px 0 0"},
+  icon:{ fontSize:"16px"},
+  footerright:{textAlign:"right", float:"right",}
 });
 export default withStyles(styles)(Footer);
 

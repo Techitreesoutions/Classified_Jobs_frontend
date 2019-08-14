@@ -48,7 +48,7 @@ class Home extends Component {
                 onChange={this.handleChange}
                 variant="fullWidth"
                 indicatorColor="light"
-                textColor="primary"
+                className="TabLbl"
               >
                 <Tab label="Candidate List" className={classes.TopTabLab} />
                 <Tab label="Job List" className={classes.TopTabLab} />
@@ -86,7 +86,7 @@ class Home extends Component {
 }
 
 const styles = theme => ({
-  HeaderDiv: { padding:"0", backgroundColor:"#fff" },
+  HeaderDiv: { padding:"0", backgroundColor:"#fff", zIndex:"999", position:"fixed", width:"100%", top:"0" },
   TopTabBar: { padding:"10px 0 0 0"},
   LogoImg: { 
     width:"150px",
@@ -104,7 +104,8 @@ TopTabLab:{
   "&:focus": {
     outline:"0"
   }
-}
+},
+TabLbl :{ color:"red",},
   
 
 });

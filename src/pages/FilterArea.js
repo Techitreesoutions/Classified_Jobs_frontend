@@ -200,7 +200,8 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#898a98"
+    backgroundColor: "#898a98",
+    position:"fixed", width:"100%", top:"60px", border:"1px solid red"
   },
   container: {
     width: "85%",
