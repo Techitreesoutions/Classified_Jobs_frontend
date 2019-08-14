@@ -39,7 +39,8 @@ export const getAllSkillsArray = (skillList,jobList,candidateList) => {
       });
     });
   });
-
+if(candidateList !== undefined)
+{
   candidateList.map(jobItem => {
     jobItem.skills.map(skillsItem => {
       skillsArr.push({
@@ -48,6 +49,8 @@ export const getAllSkillsArray = (skillList,jobList,candidateList) => {
       });
     });
   });
+}
+  
   return getUniqueValues(skillsArr);
 };
 
