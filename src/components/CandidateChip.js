@@ -8,13 +8,14 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
 import {
-  FaSuitcase,
-  FaRupeeSign,
-  FaEnvelopeOpen,
-  FaMobile,
-  FaMapMarkerAlt
+  FaRegHourglass,
+  FaRegMoneyBillAlt,
+  FaRegEnvelope,
+  FaMobileAlt,
+  FaRegBuilding,
+  FaRegCommentDots
 } from "react-icons/fa";
-import { Chip, CardActions, Tooltip } from "@material-ui/core";
+import { Chip, CardActions, Tooltip, IconButton } from "@material-ui/core";
 
 const HtmlTooltip = withStyles(theme => ({
   tooltip: {
@@ -29,31 +30,52 @@ const HtmlTooltip = withStyles(theme => ({
 class CandidateChip extends Component {
   renderskillsChips = () => {
     const { candidateItem, classes } = this.props;
-    if(candidateItem.skills === undefined)
-    {
+    if (candidateItem.skills === undefined) {
       candidateItem.skills = [];
     }
     return candidateItem.skills.map(key => {
-      return (
-        <Chip
-          key={key}
-          label={key}
-          className={classes.skillsChip}
-        />
-      );
+      return <Chip key={key} label={key} className={classes.skillsChip} />;
     });
   };
 
   getCandidateNameLabel = () => {
-    const { candidateItem } = this.props;
+    const { candidateItem, classes } = this.props;
     if (candidateItem.hidePersonalInfo === true) {
-      return "Candidate Name - Confidencial";
-    } else if(!candidateItem.lastName) {
-      return `${candidateItem.firstName}`;
+      return <Typography>Confidencial</Typography>;
+    } else if (!candidateItem.lastName) {
+      return <Typography>{candidateItem.firstName}</Typography>;
+    } else {
+      return (
+        <span className={classes.headerText}>
+          <Typography variant="h6">
+            {candidateItem.firstName} {candidateItem.lastName}
+          </Typography>
+        </span>
+      );
     }
-    else
-    {
-      return `${candidateItem.firstName} ${candidateItem.lastName}`;
+  };
+
+  getCandidateSubHeader = () => {
+    const { candidateItem } = this.props;
+
+    return (
+      <span>
+        <Typography variant="body2">{candidateItem.title}</Typography>
+      </span>
+    );
+  };
+
+  getAction = () => {
+    const { candidateItem } = this.props;
+
+    if (candidateItem.hidePersonalInfo === true) {
+      return (
+        <IconButton aria-label="Information">
+          <FaRegCommentDots />
+        </IconButton>
+      );
+    } else {
+      return;
     }
   };
 
@@ -69,52 +91,39 @@ class CandidateChip extends Component {
           className={classes.cardHeader}
           avatar={
             <Avatar aria-label="profilePic" className={classes.avatar}>
-              {/* {candidateItem.firstName} */}
               {candidateItem.firstName.charAt(0)}
             </Avatar>
           }
-          
           title={this.getCandidateNameLabel()}
-          subheader={candidateItem.title}
+          subheader={this.getCandidateSubHeader()}
+          action={this.getAction()}
         />
 
         <CardContent className={classes.cardContent}>
-          <Typography className={classes.cardDesc}>{candidateItem.description}</Typography>
+          <Typography variant="body2">{candidateItem.description}</Typography>
           <div className={classes.skillsArea}>{this.renderskillsChips()}</div>
         </CardContent>
         <CardActions className={classes.actions}>
           <div className={classes.candidateElements}>
-          {candidateItem.experienceYears &&
-            <span className={classes.candidateElementsSpan}>
-              <HtmlTooltip title="Years of Experience">
-                <Chip 
-                  avatar={
-                    <Avatar className={classes.chipAvatar}>
-                      <FaSuitcase />
-                    </Avatar>
-                  }
-                  label={`${candidateItem.experienceYears}.${
-                    candidateItem.experienceMonths
-                  }`}
-                  className={classes.chip}
-                  variant="outlined"
-                />
-              </HtmlTooltip>
-            </span>
-          }
+            {candidateItem.experienceYears && (
+              <span className={classes.candidateElementsSpan}>
+                <HtmlTooltip title="Years of Experience">
+                  <Typography variant="body2" className={classes.chipText}>
+                    <FaRegHourglass className={classes.icon} />
+                    {`${candidateItem.experienceYears}.${
+                      candidateItem.experienceMonths
+                    } Years`}
+                  </Typography>
+                </HtmlTooltip>
+              </span>
+            )}
             {candidateItem.expectedSalary && (
               <span className={classes.candidateElementsSpan}>
                 <HtmlTooltip title="Expected Salary" placement="bottom-start">
-                  <Chip
-                    avatar={
-                      <Avatar className={classes.chipAvatar}>
-                        <FaRupeeSign />
-                      </Avatar>
-                    }
-                    label={`${candidateItem.expectedSalary} PM`}
-                    className={classes.chip}
-                    variant="outlined"
-                  />
+                  <Typography variant="body2" className={classes.chipText}>
+                    <FaRegMoneyBillAlt className={classes.icon} />
+                    {`${candidateItem.expectedSalary} PM`}
+                  </Typography>
                 </HtmlTooltip>
               </span>
             )}
@@ -122,35 +131,23 @@ class CandidateChip extends Component {
             {location && (
               <span className={classes.candidateElementsSpan}>
                 <HtmlTooltip title="Preferred Location">
-                  <Chip
-                    avatar={
-                      <Avatar className={classes.chipAvatar}>
-                        <FaMapMarkerAlt />
-                      </Avatar>
-                    }
-                    label={location}
-                    className={classes.chip}
-                    variant="outlined"
-                  />
+                  <Typography variant="body2" className={classes.chipText}>
+                    <FaRegBuilding className={classes.icon} />
+                    {location}
+                  </Typography>
                 </HtmlTooltip>
               </span>
             )}
-            
+
             {candidateItem.hidePersonalInfo !== true && (
               <span>
                 {candidateItem.phone && (
                   <span className={classes.candidateElementsSpan}>
                     <HtmlTooltip title="Contact Number">
-                      <Chip
-                        avatar={
-                          <Avatar className={classes.chipAvatar}>
-                            <FaMobile />
-                          </Avatar>
-                        }
-                        label={candidateItem.phone}
-                        className={classes.chip}
-                        variant="outlined"
-                      />
+                      <Typography variant="body2" className={classes.chipText}>
+                        <FaMobileAlt className={classes.icon} />
+                        {candidateItem.phone}
+                      </Typography>
                     </HtmlTooltip>
                   </span>
                 )}
@@ -160,16 +157,10 @@ class CandidateChip extends Component {
                       title="Email"
                       className={`${classes.tooltip} ${classes.expand}`}
                     >
-                      <Chip
-                        avatar={
-                          <Avatar className={classes.chipAvatar}>
-                            <FaEnvelopeOpen />
-                          </Avatar>
-                        }
-                        label={candidateItem.email}
-                        className={classes.chip}
-                        variant="outlined"
-                      />
+                      <Typography variant="body2" className={classes.chipText}>
+                        <FaRegEnvelope className={classes.icon} />
+                        {candidateItem.email}
+                      </Typography>
                     </HtmlTooltip>
                   </span>
                 )}
@@ -186,18 +177,16 @@ const styles = theme => ({
   card: {
     maxWidth: 400,
     minHeight: 100,
-    margin: 10,
-    padding:0,
     boxShadow: "none",
     height: "fit-content",
-    border:"1px solid #efefef",
+    border: "1px solid #9d2e6a",
     "&:hover": {
-      boxShadow:"0px 4px 5px -1px rgba(158,158,158,0.8)"
-    },
+      boxShadow: "0px 4px 5px -1px rgba(158,158,158,0.8)"
+    }
   },
-  actions:{
-    margin:0,
-    padding:0
+  actions: {
+    margin: 0,
+    padding: 0
   },
   cardHeader: {
     padding: "10px"
@@ -212,46 +201,54 @@ const styles = theme => ({
   },
   skillsChip: {
     marginRight: 5,
-    backgroundColor:"#898a98",
-    color:"#fff", height:"auto",
-    padding:"2px"
+    backgroundColor: "#898a98",
+    color: "#666",
+    height: "auto",
+    padding: "2px",
+    color:"#fff",
   },
 
   avatar: {
-    backgroundColor: "#EE3672",
+    backgroundColor: "#EE3672",color:'#fff', textTransform:"uppercase",
   },
-  chipAvatar:{
-    backgroundColor: "transparent",
-    width:"auto",
-    height:"auto",
-    margin:"0",
-    color:"#666"
-  },
+
   candidateElements: {
     padding: "0 10px",
     margin: "5px 0 0 0",
     flexDirection: "row",
     flexWrap: "wrap",
-    backgroundColor:"#fafafa",
-    borderTop:"1px solid #ececec",
-    width:"100%"
+    backgroundColor: "#fafafa",
+    borderTop: "1px solid #ececec",
+    width: "100%"
   },
   candidateElementsSpan: {
     flexDirection: "row",
     justifyContent: "left",
     alignItems: "left",
     display: "inline-block",
-    paddingRight: 5,
-    
+    padding: 5
   },
 
   chip: {
-    justifyContent: "left", border:"0", margin:0, padding:0
+    justifyContent: "left",
+    border: "0",
+    margin: 0,
+    padding: 0
   },
-  cardDesc:{
-    color:"#666",
-    fontSize:"11px"
+
+  icon: {
+    margin: 5,
+    fontSize: 16
   },
+  chipText: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize:"13px",
+  },
+  headerText: {
+    display: "flex"
+  }
 });
 
 export default withStyles(styles)(CandidateChip);

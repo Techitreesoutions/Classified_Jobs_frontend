@@ -78,10 +78,10 @@ const styles = theme => ({
   container: {
     width: "100%"
   },
-  jobItemArea: {
-    position: "relative",
-    transition: "height 480ms ease-out 0s",
-    top:"120px"
+  jobItemArea: {    
+    /*transition: "height 480ms ease-out 0s",*/
+    padding:"0 0 100px 0",
+    margin:"20px 0 0 0",
   }
 });
 

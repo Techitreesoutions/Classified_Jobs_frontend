@@ -41,9 +41,9 @@ const styles = theme => ({
   },
   footercontainer: {
     padding:"10px",
+    margin:"50px 0 0 0",
     backgroundColor:"#fff",
     borderTop:"1px solid #ddd",
-    position:"fixed", width:"100%", bottom:"0" 
   },
   footerbtm: { color:"#666", fontSize:"13px", padding:"0 0 5px 0", borderBottom:"0px solid #ddd", textAlign:"center",},
   copyrightdiv:{  color:"#666", fontSize:"13px", textAlign:"center",},

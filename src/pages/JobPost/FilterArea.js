@@ -192,7 +192,6 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#DDFFCC"
   },
   container: {
     width: "85%",
@@ -213,10 +212,10 @@ const styles = theme => ({
     flexWrap: "wrap",
     flex: 1,
     alignItems: "center",
-    overflow: "hidden"
+    overflow: "hidden",
   },
   chip: {
-    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
+    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
   },
   chipFocused: {
     backgroundColor: emphasize(

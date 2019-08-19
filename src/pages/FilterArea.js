@@ -7,37 +7,36 @@ import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import { Grid, Typography } from "@material-ui/core";
 import Slider from "@material-ui/lab/Slider";
 import Select from "react-select";
-import {getSkillsArray, getLocationArray } from "../util/utilityFunctions";
+import { getSkillsArray, getLocationArray } from "../util/utilityFunctions";
 
 const RangeSlider = withStyles({
   root: {
-    color: '#fff',
-    height: 4,
-    
+    color: "#fff",
+    height: 4
   },
   thumb: {
     height: 12,
     width: 12,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginTop: -4,
     marginLeft: -8,
-    '&:focus,&:hover,&$active': {
-      boxShadow: 'inherit',
-    },
+    "&:focus,&:hover,&$active": {
+      boxShadow: "inherit"
+    }
   },
   active: {},
   valueLabel: {
-    left: 'calc(-50% + 0px)',
-    color:"#EE3672",
+    left: "calc(-50% + 0px)",
+    color: "#EE3672"
   },
   track: {
     height: 4,
-    borderRadius: 2,
+    borderRadius: 2
   },
   rail: {
     height: 4,
-    borderRadius: 2,
-  },
+    borderRadius: 2
+  }
 })(Slider);
 
 class FilterArea extends Component {
@@ -119,8 +118,6 @@ class FilterArea extends Component {
     });
   };
 
-  
-
   updateRangeValues(name, value) {}
 
   render() {
@@ -149,12 +146,16 @@ class FilterArea extends Component {
                 onChange={this.handleSelectChange}
                 placeholder={"Select Skills"}
                 className={classes.Slt}
-               // maxMenuHeight={200}
-               // styles={customStyles}
+                // maxMenuHeight={200}
+                // styles={customStyles}
               />
             </Grid>
             <Grid item xs={2}>
-              <Typography id="range-slider" gutterBottom className={classes.rangSlidertxt}>
+              <Typography
+                id="range-slider"
+                gutterBottom
+                className={classes.rangSlidertxt}
+              >
                 Expected Salary
               </Typography>
               <RangeSlider
@@ -163,7 +164,9 @@ class FilterArea extends Component {
                 value={this.state.expectedSalary}
                 onChange={this.handleSalaryRangeChange}
                 valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
+                aria-labelledby="range-slider"                
+                //ValueLabelComponent={this.state.expectedSalary}
+               // aria-label="custom thumb label"
                 valueLabelFormat={value => {
                   return `${value} K`;
                 }}
@@ -171,7 +174,11 @@ class FilterArea extends Component {
               />
             </Grid>
             <Grid item xs={2}>
-              <Typography id="range-slider" gutterBottom className={classes.rangSlidertxt}>
+              <Typography
+                id="range-slider"
+                gutterBottom
+                className={classes.rangSlidertxt}
+              >
                 Experience (Years)
               </Typography>
               <RangeSlider
@@ -199,9 +206,8 @@ const styles = theme => ({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#898a98",
-    position:"fixed", width:"100%", top:"60px", border:"1px solid red"
+    justifyContent: "center", position:"relative", margin:"60px 0 0 0", padding:"12px 0",
+    background: "linear-gradient(40deg,#c53364,#622774)!important" //"linear-gradient(40deg,#1bcdef,#5b2478 )!important" //
   },
   container: {
     width: "85%",
@@ -256,19 +262,19 @@ const styles = theme => ({
   divider: {
     height: theme.spacing.unit * 2
   },
-  Slt:{
-    fontSize:"12px",   
+  Slt: {
+    fontSize: "11px"
   },
-  rangSlidertxt:{
-    color:"#fff",
-    padding:"5px 0 0 0", fontSize:"11px"
+  rangSlidertxt: {
+    color: "#fff",
+    padding: "5px 0 0 0",
+    fontSize: "11px",
   }
 });
 
-
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
-  return jobList ;
+  return jobList;
 };
 
 export default connect(

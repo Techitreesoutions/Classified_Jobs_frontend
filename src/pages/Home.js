@@ -46,9 +46,9 @@ class Home extends Component {
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
-                variant="fullWidth"
-                indicatorColor="light"
-                className="TabLbl"
+                textColor="primary"
+                indicatorColor="primary"
+                className="TopTabLab"
               >
                 <Tab label="Candidate List" className={classes.TopTabLab} />
                 <Tab label="Job List" className={classes.TopTabLab} />
@@ -86,7 +86,8 @@ class Home extends Component {
 }
 
 const styles = theme => ({
-  HeaderDiv: { padding:"0", backgroundColor:"#fff", zIndex:"999", position:"fixed", width:"100%", top:"0" },
+  HeaderDiv: { padding:"0", backgroundColor:"#fff", 
+  position:"fixed", width:"100%", top:"0",zIndex:"999" },
   TopTabBar: { padding:"10px 0 0 0"},
   LogoImg: { 
     width:"150px",
@@ -103,9 +104,13 @@ TopTabLab:{
   borderBottom:"0",
   "&:focus": {
     outline:"0"
-  }
+  },
+  "&:select": {
+    background: "linear-gradient(40deg,#c53364,#622774)!important",  
+  },
+  MuiSelected:{ background: "linear-gradient(40deg,#c53364,#622774)!important",  }
+  
 },
-TabLbl :{ color:"red",},
   
 
 });
