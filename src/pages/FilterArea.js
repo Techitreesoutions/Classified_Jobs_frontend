@@ -153,7 +153,7 @@ class FilterArea extends Component {
             <Grid item xs={2}>
               <Typography
                 id="range-slider"
-                gutterBottom
+                variant="body2"
                 className={classes.rangSlidertxt}
               >
                 Expected Salary
@@ -174,7 +174,7 @@ class FilterArea extends Component {
             <Grid item xs={2}>
               <Typography
                 id="range-slider"
-                gutterBottom
+                variant="body2"
                 className={classes.rangSlidertxt}
               >
                 Experience (Years)
@@ -265,8 +265,7 @@ const styles = theme => ({
   },
   rangSlidertxt: {
     color: "#fff",
-    padding: "5px 0 0 0",
-    fontSize: "11px"
+    padding: "5px 0 0 0"
   }
 });
 
