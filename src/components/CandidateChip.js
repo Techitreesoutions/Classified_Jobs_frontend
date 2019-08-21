@@ -204,12 +204,13 @@ const styles = theme => ({
     backgroundColor: "#898a98",
     color: "#666",
     height: "auto",
-    padding: "2px",
-    color:"#fff",
+    padding: "2px"
   },
 
   avatar: {
-    backgroundColor: "#EE3672",color:'#fff', textTransform:"uppercase",
+    backgroundColor: "#EE3672",
+    color: "#fff",
+    textTransform: "uppercase"
   },
 
   candidateElements: {
@@ -244,7 +245,7 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize:"13px",
+    fontSize: "13px"
   },
   headerText: {
     display: "flex"

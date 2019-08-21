@@ -76,7 +76,6 @@ class Header extends Component {
                   variant="contained"
                   component="span"
                   className={classes.SbtnPro}
-                  color="SbtnPro"
                   onClick={this.handleOpenSubmitProfile}
                 >
                   SUBMIT YOUR PROFILE
@@ -87,7 +86,6 @@ class Header extends Component {
                   variant="contained"
                   component="span"
                   className={classes.SbtnJob}
-                  color="SbtnJob"
                   onClick={this.handleOpenJobPost}
                 >
                   SUBMIT A JOB
@@ -119,7 +117,7 @@ const styles = theme => ({
     boxShadow: "none",
     minHeight: "32px",
     padding: "10px 0 0 0",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   grow: {
     flexGrow: 1

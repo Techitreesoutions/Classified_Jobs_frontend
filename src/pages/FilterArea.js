@@ -164,9 +164,9 @@ class FilterArea extends Component {
                 value={this.state.expectedSalary}
                 onChange={this.handleSalaryRangeChange}
                 valueLabelDisplay="auto"
-                aria-labelledby="range-slider"                
+                aria-labelledby="range-slider"
                 //ValueLabelComponent={this.state.expectedSalary}
-               // aria-label="custom thumb label"
+                // aria-label="custom thumb label"
                 valueLabelFormat={value => {
                   return `${value} K`;
                 }}
@@ -206,7 +206,10 @@ const styles = theme => ({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center", position:"relative", margin:"60px 0 0 0", padding:"12px 0",
+    justifyContent: "center",
+    position: "relative",
+    margin: "60px 0 0 0",
+    padding: "12px 0",
     background: "linear-gradient(40deg,#c53364,#622774)!important" //"linear-gradient(40deg,#1bcdef,#5b2478 )!important" //
   },
   container: {

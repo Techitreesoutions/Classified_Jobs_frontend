@@ -9,6 +9,7 @@ import JobDetailForm from "./JobDetailForm";
 import CompoanyDetailForm from "./CompanyDetailForm";
 import DescriptionForJobPostForm from "./DescriptionForJobPostForm";
 import JobPostPreview from "./JobPostPreview";
+import { deleteEmptyFromObject } from "../../../util/utilityFunctions";
 
 import CreateThePost from "../Candidate/CreateThePost";
 
@@ -16,8 +17,8 @@ let formObj = {};
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    margin:"10px 0 0 0",
-    fontSize:"14px"
+    margin: "10px 0 0 0",
+    fontSize: "14px"
   },
   backButton: {
     marginRight: theme.spacing.unit
@@ -25,18 +26,24 @@ const useStyles = makeStyles(theme => ({
   instructions: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
-    textAlign:"center"
+    textAlign: "center"
   },
-  StepLbl:{},
-  ResetBtn: { backgroundColor:"#f2f2f2"},
-  ResetBtnBdr :{ borderTop:"1px solid #ddd", padding:"10px 0"}
+  StepLbl: {},
+  ResetBtn: { backgroundColor: "#f2f2f2" },
+  ResetBtnBdr: { borderTop: "1px solid #ddd", padding: "10px 0" }
 }));
 
 function getSteps() {
-  return ["Job Details", "Company details", "Summary", "Preview","Create the post"];
+  return [
+    "Job Details",
+    "Company details",
+    "Summary",
+    "Preview",
+    "Create the post"
+  ];
 }
 
-function getStepContent(stepIndex, handleNext, handleJobBack,handleComplete) {
+function getStepContent(stepIndex, handleNext, handleJobBack, handleComplete) {
   const steps = getSteps();
 
   switch (stepIndex) {
@@ -80,28 +87,30 @@ function getStepContent(stepIndex, handleNext, handleJobBack,handleComplete) {
           steps={steps}
         />
       );
-      case 4:
-        return (
-          <CreateThePost
-            dataObject={formObj}
-            activeStep={4}
-            handleNext={handleComplete}
-            handleBack={handleJobBack}
-            steps={steps}
-          />
-        );
+    case 4:
+      return (
+        <CreateThePost
+          dataObject={formObj}
+          activeStep={4}
+          handleNext={handleComplete}
+          handleBack={handleJobBack}
+          steps={steps}
+        />
+      );
     default:
       return "Preview";
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper({handleClose,handleSave}) {
+export default function HorizontalLabelPositionBelowStepper({
+  handleClose,
+  handleSave
+}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
   const steps = getSteps();
 
-  
   function totalSteps() {
     return steps.length;
   }
@@ -122,26 +131,16 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
-    console.log("old form object",formObj);
-    
-      delete formObj.skillsOptionList;
-       var valueArray = Object.values(formObj);
-       var keyAaray = Object.keys(formObj);
-       console.log("form object",formObj);
-      valueArray.map((item,index) => {
-        let temp = keyAaray[index]
-        if(item === undefined || item === "" || item === null)
-        {
-          delete formObj[temp];
-        }
-      });
-      
-      console.log("new form object",formObj);
-      handleSave(formObj)
-     //we need to close the pop up
-     handleClose();
-     //reset the form
-     handleReset();
+
+    delete formObj.skillsOptionList;
+    // Removing all values which is undefined/null/empty
+    formObj = deleteEmptyFromObject(formObj);
+
+    handleSave(formObj);
+    //we need to close the pop up
+    handleClose();
+    //reset the form
+    handleReset();
   }
 
   function handleNext(objParam) {
@@ -169,34 +168,54 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
-          <Step key={label} className={classes.step} classes={{ completed: classes.completed }}>
+          <Step
+            key={label}
+            className={classes.step}
+            classes={{ completed: classes.completed }}
+          >
             <StepLabel className={classes.StepLbl}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       <div>
-        {activeStep+1 === steps.length ? (
+        {activeStep + 1 === steps.length ? (
           <div className={classes.StepperBottom}>
             <Typography className={classes.instructions}>
-              All steps completed.<br/>
+              All steps completed.
+              <br />
               Note:
               <br />
-              The post you previewed will not be allowed to delete or update by you.
+              The post you previewed will not be allowed to delete or update by
+              you.
               <br />
-              If you want to delete or update the post; 
+              If you want to delete or update the post;
               <br />
               please mail us the details at hello@techitree.com.
             </Typography>
-            {getStepContent(activeStep, handleNext, handleJobBack,handleComplete)}
+            {getStepContent(
+              activeStep,
+              handleNext,
+              handleJobBack,
+              handleComplete
+            )}
             <div className={classes.ResetBtnBdr}>
-            <Button onClick={handleReset} className={classes.ResetBtn}>Reset</Button>
+              <Button onClick={handleReset} className={classes.ResetBtn}>
+                Reset
+              </Button>
             </div>
           </div>
         ) : (
           <div>
-            {getStepContent(activeStep, handleNext, handleJobBack,handleComplete)}
+            {getStepContent(
+              activeStep,
+              handleNext,
+              handleJobBack,
+              handleComplete
+            )}
             <div className={classes.ResetBtnBdr}>
-            <Button onClick={handleReset} className={classes.ResetBtn}>Reset</Button>
+              <Button onClick={handleReset} className={classes.ResetBtn}>
+                Reset
+              </Button>
             </div>
             <div />
           </div>

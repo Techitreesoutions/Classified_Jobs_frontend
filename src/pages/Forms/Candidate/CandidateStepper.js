@@ -10,11 +10,13 @@ import ProfessionalDetailsForm from "./ProfessionalDetailsForm";
 import DescriptionForm from "./DescriptionForm";
 import Preview from "./Preview";
 import CreateThePost from "./CreateThePost";
+import { deleteEmptyFromObject } from "../../../util/utilityFunctions";
 
 let formObj = {};
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",fontSize:"14px",
+    width: "100%",
+    fontSize: "14px"
   },
   backButton: {
     marginRight: theme.spacing.unit
@@ -26,17 +28,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ["Personal details", "Professional details", "Summary", "Preview","Create the post"];
+  return [
+    "Personal details",
+    "Professional details",
+    "Summary",
+    "Preview",
+    "Create the post"
+  ];
 }
 
-function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
+function getStepContent(stepIndex, handleNext, handleBack, handleComplete) {
   const steps = getSteps();
   //stepIndex = 2;
   switch (stepIndex) {
     case 0:
       return (
         <PersonalDetailsForm
-        dataObject={formObj}
+          dataObject={formObj}
           activeStep={0}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -46,7 +54,7 @@ function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
     case 1:
       return (
         <ProfessionalDetailsForm
-        dataObject={formObj}
+          dataObject={formObj}
           activeStep={1}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -56,7 +64,7 @@ function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
     case 2:
       return (
         <DescriptionForm
-        dataObject={formObj}
+          dataObject={formObj}
           activeStep={2}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -73,22 +81,25 @@ function getStepContent(stepIndex, handleNext, handleBack,handleComplete) {
           steps={steps}
         />
       );
-      case 4:
-        return (
-          <CreateThePost
-            dataObject={formObj}
-            activeStep={4}
-            handleNext={handleComplete}
-            handleBack={handleBack}
-            steps={steps}
-          />
-        );
+    case 4:
+      return (
+        <CreateThePost
+          dataObject={formObj}
+          activeStep={4}
+          handleNext={handleComplete}
+          handleBack={handleBack}
+          steps={steps}
+        />
+      );
     default:
       return "Preview";
   }
 }
 
-export default function HorizontalLabelPositionBelowStepper({handleClose,handleSave}) {
+export default function HorizontalLabelPositionBelowStepper({
+  handleClose,
+  handleSave
+}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
@@ -114,23 +125,14 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
-    console.log("old form object",formObj);
-    
-      delete formObj.skillsOptionList;
-       var valueArray = Object.values(formObj);
-       var keyAaray = Object.keys(formObj);
-       console.log("form object",formObj);
-      valueArray.map((item,index) => {
-        let temp = keyAaray[index]
-        if(item === undefined || item === "" || item === null)
-        {
-          delete formObj[temp];
-        }
-      });
-      console.log("new form object",formObj);
-      handleSave(formObj);
-      handleClose();
-      
+
+    // Remoiving SkillOptionList because we do not want to save it
+    delete formObj.skillsOptionList;
+    // Removing all values which is undefined/null/empty
+    formObj = deleteEmptyFromObject(formObj);
+
+    handleSave(formObj);
+    handleClose();
   }
 
   function handleNext(objParam) {
@@ -163,20 +165,20 @@ export default function HorizontalLabelPositionBelowStepper({handleClose,handleS
         ))}
       </Stepper>
       <div>
-        {activeStep+1 === steps.length ? (
+        {activeStep + 1 === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
-              All steps completed.
-              Note:
-              The post you previewed will not be allowed to delete or update by you.
-              If you want to delete or update the post; please mail us the details at hello@techitree.com.
+              All steps completed. Note: The post you previewed will not be
+              allowed to delete or update by you. If you want to delete or
+              update the post; please mail us the details at
+              hello@techitree.com.
             </Typography>
-            {getStepContent(activeStep, handleNext, handleBack,handleComplete)}
-            <Button onClick={handleReset}>Reset</Button>            
+            {getStepContent(activeStep, handleNext, handleBack, handleComplete)}
+            <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
           <div>
-            {getStepContent(activeStep, handleNext, handleBack,handleComplete)}
+            {getStepContent(activeStep, handleNext, handleBack, handleComplete)}
             <div />
           </div>
         )}

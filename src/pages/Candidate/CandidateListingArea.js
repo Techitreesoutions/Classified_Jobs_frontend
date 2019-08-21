@@ -16,7 +16,7 @@ class CandidateListingArea extends Component {
         Object.keys(o).some(k =>
           typeof o[k] === "string"
             ? o[k].toLowerCase().includes(filterObj.searchTerm.toLowerCase())
-            : typeof o[k] === "array"
+            : Object.prototype.toString.call(o[k]) === "[object Array]"
             ? o[k].find(
                 j => j.toLowerCase() === filterObj.searchTerm.toLowerCase()
               )
@@ -70,8 +70,8 @@ class CandidateListingArea extends Component {
     return (
       <StackGrid className={classes.candidateItemArea} columnWidth={400}>
         {filteredCandidateList &&
-          filteredCandidateList.map(data => {
-            return <CandidateChip key={data.id} candidateItem={data} />;
+          filteredCandidateList.map((data, index) => {
+            return <CandidateChip key={index} candidateItem={data} />;
           })}
       </StackGrid>
     );
@@ -84,8 +84,8 @@ const styles = theme => ({
   },
   candidateItemArea: {
     /*transition: "height 480ms ease-out 0s",*/
-    padding:"0 0 100px 0",
-    margin:"20px 0 0 0",
+    padding: "0 0 100px 0",
+    margin: "20px 0 0 0"
   }
 });
 
