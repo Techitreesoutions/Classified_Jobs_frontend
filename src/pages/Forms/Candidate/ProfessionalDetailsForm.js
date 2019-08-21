@@ -17,7 +17,7 @@ import {
   InputLabel,
   InputAdornment,
   Input,
-  Grid,
+  Grid
 } from "@material-ui/core";
 // Icons
 import Title from "@material-ui/icons/Title";
@@ -52,6 +52,7 @@ const customStyles = {
 };
 class PersonalDetailsForm extends Component {
   componentWillMount = () => {
+<<<<<<< HEAD
     const { dataObject,locationList } = this.props;
     if(dataObject.locationsOptionList === undefined)
     {
@@ -59,33 +60,44 @@ class PersonalDetailsForm extends Component {
     }
 
     if(dataObject.location !== undefined){
+=======
+    const { dataObject } = this.props;
+    if (dataObject.location !== undefined) {
+>>>>>>> e44373a43e4f00382e0243e2f34495bd5b568c2e
       dataObject.defaultLocation = dataObject.location.map(item => {
-        return {value:item,label:this.getCityList().find(o=>o.value === item).label};
+        return {
+          value: item,
+          label: this.getCityList().find(o => o.value === item).label
+        };
       });
     }
 
-if(dataObject.experienceYears !== undefined){
-  var item = dataObject.experienceYears;
-      dataObject.defaultExperienceYears =  {value:item,label:this.getNumberList(20).find(o=>o.value === item).label};
-    } 
+    if (dataObject.experienceYears !== undefined) {
+      var item = dataObject.experienceYears;
+      dataObject.defaultExperienceYears = {
+        value: item,
+        label: this.getNumberList(20).find(o => o.value === item).label
+      };
+    }
 
-    if(dataObject.experienceMonths !== undefined){
+    if (dataObject.experienceMonths !== undefined) {
       var monthItem = dataObject.experienceMonths;
-          dataObject.defaultExperienceMonths =  {value:monthItem,label:this.getNumberList(12).find(o=>o.value === monthItem).label};
-        } 
-    
-    
+      dataObject.defaultExperienceMonths = {
+        value: monthItem,
+        label: this.getNumberList(12).find(o => o.value === monthItem).label
+      };
+    }
+
     this.setState({
       title: dataObject.title,
-      experienceYears:dataObject.experienceYears,
-      experienceMonths:dataObject.experienceMonths,
+      experienceYears: dataObject.experienceYears,
+      experienceMonths: dataObject.experienceMonths,
       location: dataObject.location,
       locationsOptionList:dataObject.locationsOptionList,
       expectedSalary: dataObject.expectedSalary,
-      defaultLocation:dataObject.defaultLocation,
-      defaultExperienceYears:dataObject.defaultExperienceYears,
-      defaultExperienceMonths:dataObject.defaultExperienceMonths
-      
+      defaultLocation: dataObject.defaultLocation,
+      defaultExperienceYears: dataObject.defaultExperienceYears,
+      defaultExperienceMonths: dataObject.defaultExperienceMonths
     });
   };
 
@@ -144,7 +156,12 @@ if(dataObject.experienceYears !== undefined){
     this.setState({ [name]: value });
   }
   render() {
+<<<<<<< HEAD
     const { classes, activeStep, handleBack, steps} = this.props;
+=======
+    const { classes, activeStep, handleBack, steps } = this.props;
+    const cityList = this.getCityList();
+>>>>>>> e44373a43e4f00382e0243e2f34495bd5b568c2e
     return (
       <form>
         <div className={classes.margin}>
@@ -174,7 +191,7 @@ if(dataObject.experienceYears !== undefined){
             <Grid item xs={4}>
               <Select
                 name="experienceYears"
-                defaultValue = {this.state.defaultExperienceYears}
+                defaultValue={this.state.defaultExperienceYears}
                 closeMenuOnSelect={true}
                 options={this.getNumberList(20)}
                 selectedValue={this.state.experienceYears}
@@ -188,7 +205,7 @@ if(dataObject.experienceYears !== undefined){
               <Select
                 name="experienceMonths"
                 closeMenuOnSelect={true}
-                defaultValue = {this.state.defaultExperienceMonths}
+                defaultValue={this.state.defaultExperienceMonths}
                 options={this.getNumberList(12)}
                 selectedValue={this.state.experienceMonths}
                 onChange={this.handleSelectChange}
@@ -205,7 +222,7 @@ if(dataObject.experienceYears !== undefined){
             <Grid item xs={12}>
               <Select
                 name="location"
-                defaultValue = {this.state.defaultLocation}
+                defaultValue={this.state.defaultLocation}
                 closeMenuOnSelect={true}
                 options={this.state.locationsOptionList}
                 selectedValue={this.state.location}

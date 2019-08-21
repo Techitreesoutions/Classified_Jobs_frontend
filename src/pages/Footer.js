@@ -45,12 +45,6 @@ class Footer extends Component {
 }
 
 const styles = theme => ({
-  footerbtm: {
-    display: "flex"
-  },
-  copyrightdiv: {
-    display: "flex"
-  },
   footercontainer: {
     padding: "10px",
     margin: "50px 0 0 0",

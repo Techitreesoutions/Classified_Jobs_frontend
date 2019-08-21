@@ -43,30 +43,35 @@ const customStyles = {
   })
 };
 class JobDetailForm extends Component {
-
   componentWillMount = () => {
     const { dataObject } = this.props;
-    
-    if(Object.entries(dataObject).length === 0 && dataObject.constructor === Object){
-      dataObject.experienceMin= 0;
+
+    if (
+      Object.entries(dataObject).length === 0 &&
+      dataObject.constructor === Object
+    ) {
+      dataObject.experienceMin = 0;
       dataObject.experienceMax = 2;
       dataObject.salaryOfferMin = 0;
       dataObject.salaryOfferMax = 10;
     }
 
-    if(dataObject.location !== undefined){
+    if (dataObject.location !== undefined) {
       dataObject.defaultLocation = dataObject.location.map(item => {
-        return {value:item,label:this.getCityList().find(o=>o.value === item).label};
+        return {
+          value: item,
+          label: this.getCityList().find(o => o.value === item).label
+        };
       });
     }
     this.setState({
       title: dataObject.title,
-      experience: [dataObject.experienceMin,dataObject.experienceMax],
-      location:dataObject.location,
-      salaryOffer: [dataObject.salaryOfferMin,dataObject.salaryOfferMax],
+      experience: [dataObject.experienceMin, dataObject.experienceMax],
+      location: dataObject.location,
+      salaryOffer: [dataObject.salaryOfferMin, dataObject.salaryOfferMax],
       showExperience: dataObject.showExperience,
       showSalary: dataObject.showSalary,
-      defaultLocation:dataObject.defaultLocation
+      defaultLocation: dataObject.defaultLocation
     });
   };
   validateUserInput = () => {
@@ -80,7 +85,7 @@ class JobDetailForm extends Component {
   getCityList = () => {
     let cityListForSelect = [];
     CityList.push({ label: "Anywhere", value: "Anywhere" });
-    CityList.map(item => {
+    CityList.forEach(item => {
       cityListForSelect.push({
         label: item.name + ", " + item.state,
         value: item.name
@@ -125,7 +130,7 @@ class JobDetailForm extends Component {
   };
 
   handleNext = event => {
-    const {handleNext } = this.props;
+    const { handleNext } = this.props;
     const formValidated = this.validateUserInput();
     console.log(this.state.location);
 
@@ -150,23 +155,22 @@ class JobDetailForm extends Component {
   handleSalaryRangeChange = (event, value) => {
     this.setState({
       salaryOffer: value,
-      salaryOfferMax:value[1],
-      salaryOfferMin:value[0]
+      salaryOfferMax: value[1],
+      salaryOfferMin: value[0]
     });
     console.log("Salary", value[0], value[1]);
-    
   };
   handleExperienceRangeChange = (event, value) => {
     this.setState({
       experience: value,
-      experienceMax:value[1],
-      experienceMin:value[0]
+      experienceMax: value[1],
+      experienceMin: value[0]
     });
     console.log("Experience", value[0], value[1]);
   };
 
   render() {
-    const { classes, activeStep,  steps } = this.props;
+    const { classes, activeStep, steps } = this.props;
     const cityList = this.getCityList();
     return (
       <form>
