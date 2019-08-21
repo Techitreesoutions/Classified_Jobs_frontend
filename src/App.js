@@ -11,6 +11,7 @@ import { loadJobList } from "./actions/JobListAction";
 import { loadCandidateList } from "./actions/CandidateListAction";
 import { loadSkillList } from "./actions/SkillListAction.js";
 import './assets/scss/index.scss';
+import { loadLocationList } from "./actions/LocationListAction";
 
 class App extends Component {
   state = {
@@ -20,14 +21,12 @@ class App extends Component {
     const { loadJobList, loadCandidateList, loadSkillList } = this.props;
     console.log("HC componentWillMount");
     this.setState({ loading: true });
-    loadJobList(() => {
-      this.setState({ loading: false });
-    });
-    loadCandidateList(() => {
-      this.setState({ loading: false });
-    });
-    loadSkillList(() => {
-      this.setState({ loading: false });
+
+    Promise.all([ loadJobList(), loadCandidateList(),loadSkillList(),loadLocationList() ])
+    .then((responses) => {
+      this.setState({
+          loading: false
+      });
     });
   };
 
@@ -72,12 +71,13 @@ const mapStateToProps = () => {
 
 export default connect(
   mapStateToProps,
-  { loadJobList, loadCandidateList,loadSkillList }
+  { loadJobList, loadCandidateList,loadSkillList ,loadLocationList}
 )(withStyles(styles)(App));
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   loadJobList: PropTypes.func.isRequired,
   loadSkillList: PropTypes.func.isRequired,
+  loadLocationList: PropTypes.func.isRequired,
   loadCandidateList: PropTypes.func.isRequired
 };

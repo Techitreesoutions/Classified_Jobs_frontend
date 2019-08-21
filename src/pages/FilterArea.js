@@ -7,7 +7,7 @@ import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import { Grid, Typography } from "@material-ui/core";
 import Slider from "@material-ui/lab/Slider";
 import Select from "react-select";
-import { getSkillsArray, getLocationArray } from "../util/utilityFunctions";
+import { getAllSkillsArray, getLocationArray } from "../util/utilityFunctions";
 
 const RangeSlider = withStyles({
   root: {
@@ -41,9 +41,9 @@ const RangeSlider = withStyles({
 
 class FilterArea extends Component {
   componentDidMount = () => {
-    const { jobList } = this.props;
+    const { jobList,skillList } = this.props;
     this.setState({
-      skillsList: getSkillsArray(jobList),
+      skillsList: getAllSkillsArray(skillList),
       locationList: getLocationArray(jobList)
     });
   };
@@ -287,5 +287,6 @@ export default connect(
 FilterArea.propTypes = {
   classes: PropTypes.object.isRequired,
   jobList: PropTypes.array.isRequired,
+  skillList: PropTypes.array.isRequired,
   updateFilter: PropTypes.func.isRequired
 };
