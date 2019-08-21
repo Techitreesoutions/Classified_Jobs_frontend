@@ -51,7 +51,6 @@ class DescriptionForm extends Component {
     this.setState({ [name]: value });
   }
   handleChange = (value, actionMeta) => {
-    debugger;
     console.log(value);
     let list = "";
     list = value.map(item => {
@@ -166,7 +165,8 @@ DescriptionForm = reduxForm({
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
   const skillList = state.skillList.skillList;
-  return { jobList,skillList };
+  const locationList = state.skillList.skillList;
+  return { jobList,skillList,locationList };
 };
 
 export default connect(
@@ -183,5 +183,6 @@ DescriptionForm.propTypes = {
   jobList: PropTypes.array.isRequired,
   candidateList: PropTypes.array.isRequired,
   skillList: PropTypes.array.isRequired,
+  locationList: PropTypes.array.isRequired,
   dataObject: PropTypes.object.isRequired
 };

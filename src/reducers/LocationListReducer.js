@@ -4,7 +4,7 @@ import { GET_LOCATION_LIST } from "../actions/LocationListAction";
 
 export const CATAGORY_INITIAL_STATE = {
   loading: false,
-  skillList: []
+  locationList: []
 };
 
 export default (state = CATAGORY_INITIAL_STATE, action) => {

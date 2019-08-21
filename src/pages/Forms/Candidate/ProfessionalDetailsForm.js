@@ -16,6 +16,7 @@ import Title from "@material-ui/icons/Title";
 import Slider from "@material-ui/lab/Slider";
 
 import CityList from "../../../data/cityList.json";
+import {  getLocationArray } from "../../../util/utilityFunctions";
 
 const customStyles = {
   control: (base, state) => ({
@@ -80,13 +81,18 @@ if(dataObject.experienceYears !== undefined){
 
   getCityList = () => {
     let cityListForSelect = [];
-    CityList.push({ label: "Anywhere", value: "Anywhere" });
-    CityList.map(item => {
-      cityListForSelect.push({
-        label: item.name + ", " + item.state,
-        value: item.name
+    const { locationList } = this.props;
+    if(locationList === undefined)
+    {
+      CityList.push({ label: "Anywhere", value: "Anywhere" });
+      CityList.map(item => {
+        cityListForSelect.push({
+          label: item.name + ", " + item.state,
+          value: item.name
+        });
       });
-    });
+    }
+    cityListForSelect = getLocationArray(locationList);
     return cityListForSelect;
   };
 

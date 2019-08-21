@@ -158,7 +158,8 @@ const styles = theme => ({
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
   const skillList = state.skillList.skillList;
-  return { jobList,skillList };
+  const locationList = state.skillList.skillList;
+  return { jobList,skillList,locationList };
 };
 
 export default connect(
@@ -175,5 +176,6 @@ DescriptionForJobPostForm.propTypes = {
   jobList: PropTypes.array.isRequired,
   candidateList: PropTypes.array.isRequired,
   skillList: PropTypes.array.isRequired,
+  locationList: PropTypes.array.isRequired,
   dataObject: PropTypes.object.isRequired
 };
