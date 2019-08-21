@@ -19,8 +19,7 @@ import { getAllSkillsArray } from "../../../util/utilityFunctions";
 
 class DescriptionForm extends Component {
   componentWillMount = () => {
-    const { dataObject,skillList} = this.props;
-    
+    const { dataObject,skillList,locationList} = this.props;
     if(dataObject.skillsOptionList === undefined)
     {
       dataObject.skillsOptionList = getAllSkillsArray(skillList);
@@ -165,7 +164,7 @@ DescriptionForm = reduxForm({
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
   const skillList = state.skillList.skillList;
-  const locationList = state.skillList.skillList;
+  const locationList = state.locationList.locationList;
   return { jobList,skillList,locationList };
 };
 

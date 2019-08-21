@@ -13,7 +13,7 @@ export const GET_LOCATION_LIST = "get-location-list";
  * Load Service List
  */
 export const loadLocationList = callback => {
-  const url = createPlatformURL("config/locations");
+  const url = createPlatformURL("config/location");
   return dispatch => {
     //dispatch(startLoading());
     axios

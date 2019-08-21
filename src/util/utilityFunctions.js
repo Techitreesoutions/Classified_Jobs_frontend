@@ -1,9 +1,9 @@
 export const getSkillsArray = jobList => {
   let skillsArr = [];
   if (jobList !== undefined) {
-    jobList.map(jobItem => {
+    jobList.forEach(jobItem => {
       if (jobItem !== undefined && jobItem.skills !== undefined) {
-        jobItem.skills.map(skillsItem => {
+        jobItem.skills.forEach(skillsItem => {
           skillsArr.push({
             label: skillsItem,
             value: skillsItem
@@ -20,7 +20,7 @@ export const getAllSkillsArray = skillList => {
   let skillsArr = [];
   if(skillList !== undefined)
   {
-    skillList.map(skillsItem => {
+    skillList.forEach(skillsItem => {
       skillsArr.push({
         label: skillsItem,
         value: skillsItem
@@ -34,15 +34,31 @@ export const getAllSkillsArray = skillList => {
 export const getLocationArray = jobList => {
   let localArr = [];
   if (jobList !== undefined) {
-    jobList.map(jobItem => {
+    jobList.forEach(jobItem => {
       if (jobItem.location !== undefined) {
-        jobItem.location.map(locationItem => {
+        jobItem.location.forEach(locationItem => {
           localArr.push({
             label: locationItem,
             value: locationItem
           });
         });
       }
+    });
+  }
+  console.log("getLocationArray", getUniqueValues(localArr));
+  return getUniqueValues(localArr);
+};
+
+export const getAllLocationArray = locationList => {
+  let localArr = [];
+  localArr.push({ label: "Anywhere", value: "Anywhere" });
+  if(locationList !== undefined)
+  {
+    locationList.forEach(item => {
+      localArr.push({
+        label: item,
+        value: item
+      });
     });
   }
   console.log("getLocationArray", getUniqueValues(localArr));

@@ -18,7 +18,7 @@ class App extends Component {
     loading: true
   };
   componentWillMount = () => {
-    const { loadJobList, loadCandidateList, loadSkillList } = this.props;
+    const { loadJobList, loadCandidateList, loadSkillList,loadLocationList } = this.props;
     console.log("HC componentWillMount");
     this.setState({ loading: true });
 

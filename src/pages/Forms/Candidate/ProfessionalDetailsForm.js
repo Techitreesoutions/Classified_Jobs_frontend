@@ -1,7 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Select from "react-select";
+
+// import React, { Component } from "react";
+// import { reduxForm } from "redux-form";
+// import { connect } from "react-redux";
+// import { PropTypes } from "prop-types";
+// import { withStyles } from "@material-ui/core/styles";
+// import CreatableSelect from "react-select/creatable";
 
 import {
   FormControl,
@@ -16,7 +24,7 @@ import Title from "@material-ui/icons/Title";
 import Slider from "@material-ui/lab/Slider";
 
 import CityList from "../../../data/cityList.json";
-import {  getLocationArray } from "../../../util/utilityFunctions";
+import {  getAllLocationArray } from "../../../util/utilityFunctions";
 
 const customStyles = {
   control: (base, state) => ({
@@ -44,7 +52,12 @@ const customStyles = {
 };
 class PersonalDetailsForm extends Component {
   componentWillMount = () => {
-    const { dataObject } = this.props;
+    const { dataObject,locationList } = this.props;
+    if(dataObject.locationsOptionList === undefined)
+    {
+      dataObject.locationsOptionList = getAllLocationArray(locationList);
+    }
+
     if(dataObject.location !== undefined){
       dataObject.defaultLocation = dataObject.location.map(item => {
         return {value:item,label:this.getCityList().find(o=>o.value === item).label};
@@ -67,6 +80,7 @@ if(dataObject.experienceYears !== undefined){
       experienceYears:dataObject.experienceYears,
       experienceMonths:dataObject.experienceMonths,
       location: dataObject.location,
+      locationsOptionList:dataObject.locationsOptionList,
       expectedSalary: dataObject.expectedSalary,
       defaultLocation:dataObject.defaultLocation,
       defaultExperienceYears:dataObject.defaultExperienceYears,
@@ -77,23 +91,6 @@ if(dataObject.experienceYears !== undefined){
 
   validateUserInput = () => {
     return true;
-  };
-
-  getCityList = () => {
-    let cityListForSelect = [];
-    const { locationList } = this.props;
-    if(locationList === undefined)
-    {
-      CityList.push({ label: "Anywhere", value: "Anywhere" });
-      CityList.map(item => {
-        cityListForSelect.push({
-          label: item.name + ", " + item.state,
-          value: item.name
-        });
-      });
-    }
-    cityListForSelect = getLocationArray(locationList);
-    return cityListForSelect;
   };
 
   getNumberList = maxValue => {
@@ -148,7 +145,6 @@ if(dataObject.experienceYears !== undefined){
   }
   render() {
     const { classes, activeStep, handleBack, steps} = this.props;
-    const cityList = this.getCityList();
     return (
       <form>
         <div className={classes.margin}>
@@ -211,7 +207,7 @@ if(dataObject.experienceYears !== undefined){
                 name="location"
                 defaultValue = {this.state.defaultLocation}
                 closeMenuOnSelect={true}
-                options={cityList}
+                options={this.state.locationsOptionList}
                 selectedValue={this.state.location}
                 onChange={this.handleSelectChange}
                 placeholder={"Select Prferred Location"}
@@ -357,7 +353,16 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(PersonalDetailsForm);
+const mapStateToProps = state => {
+  const locationList = state.locationList.locationList;
+  return { locationList };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(withStyles(styles, { withTheme: true })(PersonalDetailsForm));
+
 
 PersonalDetailsForm.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -158,7 +158,7 @@ const styles = theme => ({
 const mapStateToProps = state => {
   const jobList = state.jobList.jobList;
   const skillList = state.skillList.skillList;
-  const locationList = state.skillList.skillList;
+  const locationList = state.locationList.locationList;
   return { jobList,skillList,locationList };
 };
 

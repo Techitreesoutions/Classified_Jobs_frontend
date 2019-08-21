@@ -12,6 +12,5 @@ export const reducers = combineReducers({
   filterObj: FilterReducer,
   skillList:SkillListReducer,
   locationList:LocationListReducer,
-
   form: formReducer
 });
