@@ -16,29 +16,14 @@ export const getSkillsArray = jobList => {
   return getUniqueValues(skillsArr);
 };
 
-export const getAllSkillsArray = (skillList, jobList, candidateList) => {
+export const getAllSkillsArray = skillList => {
   let skillsArr = [];
-  skillList.map(skillsItem => {
-    skillsArr.push({
-      label: skillsItem,
-      value: skillsItem
-    });
-  });
-  jobList.map(jobItem => {
-    jobItem.skills.map(skillsItem => {
+  if(skillList !== undefined)
+  {
+    skillList.map(skillsItem => {
       skillsArr.push({
         label: skillsItem,
         value: skillsItem
-      });
-    });
-  });
-  if (candidateList !== undefined) {
-    candidateList.map(jobItem => {
-      jobItem.skills.map(skillsItem => {
-        skillsArr.push({
-          label: skillsItem,
-          value: skillsItem
-        });
       });
     });
   }

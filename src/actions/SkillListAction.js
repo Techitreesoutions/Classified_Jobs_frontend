@@ -13,16 +13,15 @@ export const GET_SKILL_LIST = "get-skill-list";
  * Load Service List
  */
 export const loadSkillList = callback => {
-  const url = createPlatformURL("skilllist");
+  const url = createPlatformURL("config/skills");
   return dispatch => {
     //dispatch(startLoading());
     axios
       .get(url)
       .then(res => {
         callback && callback();
-        console.log("Hello world from succes");
         //dispatch(getServiceList(res.data));
-        dispatch(getSkillList(skillList));
+        dispatch(getSkillList(res.data));
       })
       .catch(error => {
         console.log("Hello world from failure");

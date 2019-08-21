@@ -19,11 +19,11 @@ import { getAllSkillsArray } from "../../../util/utilityFunctions";
 class DescriptionForJobPostForm extends Component {
   
   componentWillMount = () => {
-    const { dataObject,skillList,jobList,candidateList } = this.props;
+    const { dataObject,skillList } = this.props;
    
     if(dataObject.skillsOptionList === undefined)
     {
-      dataObject.skillsOptionList = getAllSkillsArray(skillList,jobList,candidateList);
+      dataObject.skillsOptionList = getAllSkillsArray(skillList);
     }
    
     if(dataObject.skills !== undefined){

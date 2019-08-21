@@ -13,14 +13,13 @@ export const GET_LOCATION_LIST = "get-location-list";
  * Load Service List
  */
 export const loadLocationList = callback => {
-  const url = createPlatformURL("config/locations ");
+  const url = createPlatformURL("config/locations");
   return dispatch => {
     //dispatch(startLoading());
     axios
       .get(url)
       .then(res => {
         callback && callback();
-        console.log("Hello world from succes");
         dispatch(getLocationList(res.data));
       })
       .catch(error => {
