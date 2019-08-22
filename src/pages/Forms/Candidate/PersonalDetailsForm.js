@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -21,7 +21,6 @@ import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 
 class PersonalDetailsForm extends Component {
-
   validateUserInput = () => {
     if (!this.state.firstName) {
       this.setState({ errorMessage: "First Name - Required" });
@@ -48,7 +47,10 @@ class PersonalDetailsForm extends Component {
       return;
     }
 
-    if ((this.state.phone === "" && this.state.email === "") ||  (this.state.phone === undefined && this.state.email === undefined)) {
+    if (
+      (this.state.phone === "" && this.state.email === "") ||
+      (this.state.phone === undefined && this.state.email === undefined)
+    ) {
       this.setState({
         errorMessage: "Email or Contact Number, one of them is required"
       });
@@ -56,7 +58,8 @@ class PersonalDetailsForm extends Component {
     }
 
     if (
-      this.state.email !== "" && this.state.email !== undefined &&
+      this.state.email !== "" &&
+      this.state.email !== undefined &&
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)
     ) {
       this.setState({
@@ -71,9 +74,9 @@ class PersonalDetailsForm extends Component {
   componentWillMount = () => {
     const { dataObject } = this.props;
     this.setState({
-      firstName:dataObject.firstName,
-      lastName:dataObject.lastName,
-      gender:dataObject.gender,
+      firstName: dataObject.firstName,
+      lastName: dataObject.lastName,
+      gender: dataObject.gender,
       email: dataObject.email,
       phone: dataObject.phone,
       hidePersonalInfo: dataObject.hidePersonalInfo,
@@ -194,7 +197,7 @@ class PersonalDetailsForm extends Component {
             <InputLabel>Email</InputLabel>
             <Input
               name="email"
-             value={this.state.email}
+              value={this.state.email}
               endAdornment={
                 <InputAdornment position="end">
                   <Email />
@@ -213,7 +216,8 @@ class PersonalDetailsForm extends Component {
             <InputLabel>Contact Number</InputLabel>
             <Input
               name="phone"
-             value={this.state.phone}
+              value={this.state.phone}
+              type="number"
               endAdornment={
                 <InputAdornment position="end">
                   <Phone />
@@ -228,7 +232,7 @@ class PersonalDetailsForm extends Component {
           <Switch
             name="hidePersonalInfo"
             value={this.state.hidePersonalInfo}
-           checekd={this.state.hidePersonalInfo}
+            checekd={this.state.hidePersonalInfo}
             onChange={this.handleSwitch}
             inputProps={{ "aria-label": "secondary checkbox" }}
           />

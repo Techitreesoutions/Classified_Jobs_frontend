@@ -66,8 +66,8 @@ class JobListingArea extends Component {
     return (
       <StackGrid className={classes.jobItemArea} columnWidth={400}>
         {filteredJobList &&
-          filteredJobList.map(data => {
-            return <JobPostingChip key={data.id} jobItem={data} />;
+          filteredJobList.map((data, index) => {
+            return <JobPostingChip key={index} jobItem={data} />;
           })}
       </StackGrid>
     );
@@ -78,10 +78,10 @@ const styles = theme => ({
   container: {
     width: "100%"
   },
-  jobItemArea: {    
+  jobItemArea: {
     /*transition: "height 480ms ease-out 0s",*/
-    padding:"0 0 100px 0",
-    margin:"20px 0 0 0",
+    padding: "0 0 100px 0",
+    margin: "20px 0 0 0"
   }
 });
 

@@ -10,7 +10,7 @@ import LoadingScreen from "./pages/LoadingScreen";
 import { loadJobList } from "./actions/JobListAction";
 import { loadCandidateList } from "./actions/CandidateListAction";
 import { loadSkillList } from "./actions/SkillListAction.js";
-import './assets/scss/index.scss';
+import "./assets/scss/index.scss";
 import { loadLocationList } from "./actions/LocationListAction";
 
 class App extends Component {
@@ -18,14 +18,22 @@ class App extends Component {
     loading: true
   };
   componentWillMount = () => {
-    const { loadJobList, loadCandidateList, loadSkillList,loadLocationList } = this.props;
-    console.log("HC componentWillMount");
+    const {
+      loadJobList,
+      loadCandidateList,
+      loadSkillList,
+      loadLocationList
+    } = this.props;
     this.setState({ loading: true });
 
-    Promise.all([ loadJobList(), loadCandidateList(),loadSkillList(),loadLocationList() ])
-    .then((responses) => {
+    Promise.all([
+      loadJobList(),
+      loadCandidateList(),
+      loadSkillList(),
+      loadLocationList()
+    ]).then(responses => {
       this.setState({
-          loading: false
+        loading: false
       });
     });
   };
@@ -61,7 +69,7 @@ class App extends Component {
 const styles = theme => ({
   appRoot: {
     width: "100%",
-    backgroundColor:"#f2f2f2",
+    backgroundColor: "#f2f2f2"
   }
 });
 
@@ -71,7 +79,7 @@ const mapStateToProps = () => {
 
 export default connect(
   mapStateToProps,
-  { loadJobList, loadCandidateList,loadSkillList ,loadLocationList}
+  { loadJobList, loadCandidateList, loadSkillList, loadLocationList }
 )(withStyles(styles)(App));
 
 App.propTypes = {

@@ -64,7 +64,7 @@ class Home extends Component {
             </Grid>
           </Grid>
         </div>
-        <FilterArea />
+        <FilterArea skillList={[]} jobList={[]} />
 
         <SwipeableViews
           axis={"x"}

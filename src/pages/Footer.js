@@ -9,7 +9,7 @@ class Footer extends Component {
 
     return (
       <div className={classes.footercontainer}>
-        <Grid container spacing={24}>
+        <Grid container spacing={10}>
           <Grid item xs={12} sm={12}>
             <div className={classes.footerbtm}>
               <a className={classes.footerLink} href="http://google.com">

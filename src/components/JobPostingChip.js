@@ -33,6 +33,9 @@ class JobPostingChip extends Component {
       jobItem.skills = [];
     }
     return jobItem.skills.map(key => {
+      var Filter = require("bad-words"),
+        filter = new Filter();
+      key = filter.clean(key);
       return <Chip key={key} label={key} className={classes.skillsChip} />;
     });
   };
@@ -112,7 +115,7 @@ class JobPostingChip extends Component {
 
             <span className={classes.candidateElementsSpan}>
               <HtmlTooltip title="Offered Salary" placement="bottom-start">
-                <Typography variant="body3" className={classes.chipText}>
+                <Typography variant="body2" className={classes.chipText}>
                   <FaRegMoneyBillAlt className={classes.icon} />
                   {this.getSalaryLabel()}
                 </Typography>
@@ -122,7 +125,7 @@ class JobPostingChip extends Component {
             {location && (
               <span className={classes.candidateElementsSpan}>
                 <HtmlTooltip title="Preferred Location">
-                  <Typography variant="body4" className={classes.chipText}>
+                  <Typography variant="body2" className={classes.chipText}>
                     <FaRegBuilding className={classes.icon} />
                     {location}
                   </Typography>
@@ -134,7 +137,7 @@ class JobPostingChip extends Component {
                 {jobItem.phone && (
                   <span className={classes.candidateElementsSpan}>
                     <HtmlTooltip title="Contact Number">
-                      <Typography variant="body5" className={classes.chipText}>
+                      <Typography variant="body2" className={classes.chipText}>
                         <FaMobileAlt className={classes.icon} />
                         {jobItem.phone}
                       </Typography>
@@ -147,7 +150,7 @@ class JobPostingChip extends Component {
                       title="Email"
                       className={`${classes.tooltip} ${classes.expand}`}
                     >
-                      <Typography variant="body5" className={classes.chipText}>
+                      <Typography variant="body2" className={classes.chipText}>
                         <FaRegEnvelope className={classes.icon} />
                         {jobItem.email}
                       </Typography>

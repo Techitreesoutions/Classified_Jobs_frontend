@@ -19,17 +19,17 @@ class DialogueForForms extends Component {
     this.setState({
       description: "",
       skills: [],
-      firstName:"",
-      lastName:"",
-      gender:"",
+      firstName: "",
+      lastName: "",
+      gender: "",
       email: "",
       phone: "",
       hidePersonalInfo: "",
       showInfoPopup: "",
       setAnchorEl: "",
       title: "",
-      experienceYears:"",
-      experienceMonths:"",
+      experienceYears: "",
+      experienceMonths: "",
       location: "",
       expectedSalary: ""
     });
@@ -39,12 +39,12 @@ class DialogueForForms extends Component {
     root: {
       borderBottom: `1px solid ${theme.palette.divider}`,
       margin: 0,
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing(2)
     },
     closeButton: {
       position: "absolute",
-      right: theme.spacing.unit,
-      top: theme.spacing.unit,
+      right: theme.spacing(1),
+      top: theme.spacing(1),
       color: theme.palette.grey[500]
     }
   }))(props => {
@@ -66,7 +66,7 @@ class DialogueForForms extends Component {
   });
 
   render() {
-    const { isOpenDialogue, handleClose,handleSave } = this.props;
+    const { isOpenDialogue, handleClose, handleSave } = this.props;
 
     return (
       <Dialog
@@ -80,7 +80,7 @@ class DialogueForForms extends Component {
           I am looking for a change.
         </DialogTitle>
         <DialogContent>
-          <CandidateStepper  handleClose={handleClose} handleSave={handleSave}/>
+          <CandidateStepper handleClose={handleClose} handleSave={handleSave} />
         </DialogContent>
       </Dialog>
     );

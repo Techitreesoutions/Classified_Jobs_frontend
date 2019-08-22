@@ -11,7 +11,8 @@ import {
   Input,
   Grid,
   Switch,
-  Popover
+  Popover,
+  Typography
 } from "@material-ui/core";
 // Icons
 import Person from "@material-ui/icons/Person";
@@ -20,16 +21,15 @@ import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 
 class CompanyDetailForm extends Component {
- 
   componentWillMount = () => {
     const { dataObject } = this.props;
     this.setState({
       companyName: dataObject.companyName,
-    email: dataObject.email,
-    phone: dataObject.phone,
-    hidePersonalInfo: dataObject.hidePersonalInfo,
-    showInfoPopup: dataObject.showInfoPopup,
-    setAnchorEl: ""
+      email: dataObject.email,
+      phone: dataObject.phone,
+      hidePersonalInfo: dataObject.hidePersonalInfo,
+      showInfoPopup: dataObject.showInfoPopup,
+      setAnchorEl: ""
     });
   };
 
@@ -45,7 +45,10 @@ class CompanyDetailForm extends Component {
       return;
     }
 
-    if ((this.state.phone === "" && this.state.email === "") || (this.state.phone === undefined && this.state.email === undefined)) {
+    if (
+      (this.state.phone === "" && this.state.email === "") ||
+      (this.state.phone === undefined && this.state.email === undefined)
+    ) {
       this.setState({
         errorMessage: "Email or Contact Number, one of them is required"
       });
@@ -53,7 +56,8 @@ class CompanyDetailForm extends Component {
     }
 
     if (
-      this.state.email !== "" && this.state.email !== undefined &&
+      this.state.email !== "" &&
+      this.state.email !== undefined &&
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)
     ) {
       this.setState({
@@ -86,6 +90,18 @@ class CompanyDetailForm extends Component {
     console.log(name, checekd);
 
     this.setState({ [name]: checekd });
+  };
+
+  handleReset = event => {
+    const { dataObject } = this.props;
+    this.setState({
+      companyName: dataObject.companyName,
+      email: dataObject.email,
+      phone: dataObject.phone,
+      hidePersonalInfo: dataObject.hidePersonalInfo,
+      showInfoPopup: dataObject.showInfoPopup,
+      setAnchorEl: ""
+    });
   };
 
   handleInfoClick = event => {
@@ -128,6 +144,7 @@ class CompanyDetailForm extends Component {
             <Input
               name="email"
               value={this.state.email}
+              type="email"
               endAdornment={
                 <InputAdornment position="end">
                   <Email />
@@ -147,6 +164,7 @@ class CompanyDetailForm extends Component {
             <Input
               name="phone"
               value={this.state.phone}
+              type="number"
               endAdornment={
                 <InputAdornment position="end">
                   <Phone />
@@ -155,6 +173,9 @@ class CompanyDetailForm extends Component {
               autoComplete={true}
               onChange={event => this.handleUserInput(event)}
             />
+            <Typography variant="caption">
+              Add Country code if you are outside of India
+            </Typography>
           </FormControl>
         </div>
         <div className={classes.margin}>
@@ -194,16 +215,18 @@ class CompanyDetailForm extends Component {
         </div>
         <div className={classes.margin}>
           <Grid container spacing={2}>
-            <Grid item xs={8} className={classes.lblArea}>
+            <Grid item xs={6} className={classes.lblArea}>
               <span className={classes.errorMessage}>
                 {this.state.errorMessage}
               </span>
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
-              <Button
-                onClick={handleJobBack}
-                className={classes.backButton}
-              >
+              <Button onClick={this.handleReset} className={classes.ResetBtn}>
+                Reset
+              </Button>
+            </Grid>
+            <Grid item xs={2} className={classes.lblArea}>
+              <Button onClick={handleJobBack} className={classes.backButton}>
                 Back
               </Button>
             </Grid>

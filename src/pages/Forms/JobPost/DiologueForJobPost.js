@@ -20,12 +20,12 @@ class DiologueForJobPost extends Component {
     root: {
       borderBottom: `1px solid ${theme.palette.divider}`,
       margin: 0,
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing(2)
     },
     closeButton: {
       position: "absolute",
-      right: theme.spacing.unit,
-      top: theme.spacing.unit,
+      right: theme.spacing(1),
+      top: theme.spacing(1),
       color: theme.palette.grey[500]
     }
   }))(props => {
@@ -47,7 +47,7 @@ class DiologueForJobPost extends Component {
   });
 
   render() {
-    const { isOpenDialogue, handleClose,handleSave,classes } = this.props;
+    const { isOpenDialogue, handleClose, handleSave, classes } = this.props;
     return (
       <Dialog
         open={isOpenDialogue}
@@ -56,11 +56,18 @@ class DiologueForJobPost extends Component {
         maxWidth={"sm"}
         handleClose={handleClose}
       >
-        <DialogTitle id="simple-dialog-title" onClose={handleClose} className={classes.PopTitle}>
+        <DialogTitle
+          id="simple-dialog-title"
+          onClose={handleClose}
+          className={classes.PopTitle}
+        >
           We are Hiring
         </DialogTitle>
         <DialogContent>
-          <JobPostingStepper handleClose={handleClose} handleSave={handleSave} />
+          <JobPostingStepper
+            handleClose={handleClose}
+            handleSave={handleSave}
+          />
         </DialogContent>
       </Dialog>
     );
@@ -68,7 +75,11 @@ class DiologueForJobPost extends Component {
 }
 
 const styles = theme => ({
-  PopTitle:{ backgroundColor:"#6E389B", color:"#fff", textTransform:"uppercase"},
+  PopTitle: {
+    backgroundColor: "#6E389B",
+    color: "#fff",
+    textTransform: "uppercase"
+  }
 });
 
 export default withStyles(styles)(DiologueForJobPost);

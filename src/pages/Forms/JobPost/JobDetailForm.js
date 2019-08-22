@@ -75,10 +75,10 @@ class JobDetailForm extends Component {
     });
   };
   validateUserInput = () => {
-    console.log(this.state.title);
-    console.log(this.state.experience);
-    console.log(this.state.location);
-    console.log(this.state.salaryOffer);
+    // console.log(this.state.title);
+    // console.log(this.state.experience);
+    // console.log(this.state.location);
+    // console.log(this.state.salaryOffer);
     return true;
   };
 
@@ -113,7 +113,6 @@ class JobDetailForm extends Component {
   };
 
   handleSelectChange = (value, event) => {
-    console.log(value, event.name, Array.isArray(value));
     if (!Array.isArray(value)) {
       this.setState({
         [event.name]: value.value
@@ -139,6 +138,18 @@ class JobDetailForm extends Component {
     }
   };
 
+  handleReset = event => {
+    this.setState({
+      title: "",
+      experience: [0, 100],
+      location: [],
+      salaryOffer: [0, 100],
+      showExperience: false,
+      showSalary: false,
+      defaultLocation: ""
+    });
+  };
+
   handleUserInput(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -147,7 +158,7 @@ class JobDetailForm extends Component {
 
   handleSwitch = (event, checekd) => {
     const name = event.target.name;
-    console.log(name, checekd);
+    //console.log(name, checekd);
 
     this.setState({ [name]: checekd });
   };
@@ -158,7 +169,7 @@ class JobDetailForm extends Component {
       salaryOfferMax: value[1],
       salaryOfferMin: value[0]
     });
-    console.log("Salary", value[0], value[1]);
+    //console.log("Salary", value[0], value[1]);
   };
   handleExperienceRangeChange = (event, value) => {
     this.setState({
@@ -166,7 +177,7 @@ class JobDetailForm extends Component {
       experienceMax: value[1],
       experienceMin: value[0]
     });
-    console.log("Experience", value[0], value[1]);
+    //console.log("Experience", value[0], value[1]);
   };
 
   render() {
@@ -284,10 +295,15 @@ class JobDetailForm extends Component {
 
         <div className={classes.margin}>
           <Grid container spacing={2}>
-            <Grid item xs={8} className={classes.lblArea}>
+            <Grid item xs={6} className={classes.lblArea}>
               <span className={classes.errorMessage}>
                 {this.state.errorMessage}
               </span>
+            </Grid>
+            <Grid item xs={2} className={classes.lblArea}>
+              <Button onClick={this.handleReset} className={classes.ResetBtn}>
+                Reset
+              </Button>
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
               <Button

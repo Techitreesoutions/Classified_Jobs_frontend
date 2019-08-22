@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import JobDetailForm from "./JobDetailForm";
 import CompoanyDetailForm from "./CompanyDetailForm";
@@ -21,11 +20,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: "14px"
   },
   backButton: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     textAlign: "center"
   },
   StepLbl: {},
@@ -198,11 +197,6 @@ export default function HorizontalLabelPositionBelowStepper({
               handleJobBack,
               handleComplete
             )}
-            <div className={classes.ResetBtnBdr}>
-              <Button onClick={handleReset} className={classes.ResetBtn}>
-                Reset
-              </Button>
-            </div>
           </div>
         ) : (
           <div>
@@ -212,11 +206,7 @@ export default function HorizontalLabelPositionBelowStepper({
               handleJobBack,
               handleComplete
             )}
-            <div className={classes.ResetBtnBdr}>
-              <Button onClick={handleReset} className={classes.ResetBtn}>
-                Reset
-              </Button>
-            </div>
+
             <div />
           </div>
         )}

@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: "14px"
   },
   backButton: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing
   },
   instructions: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
+    marginTop: theme.spacing,
+    marginBottom: theme.spacing
   }
 }));
 

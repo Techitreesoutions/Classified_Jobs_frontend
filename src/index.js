@@ -9,6 +9,8 @@ import { createTheme } from "./theme/Theme";
 
 import { configureStore } from "./store/Store";
 
+//https://www.npmjs.com/package/bad-words
+
 // Get the redux store
 const { store } = configureStore();
 

@@ -151,7 +151,7 @@ const styles = theme => ({
     }
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
     width: "17px"
   },
   multilineRoot: {

@@ -21,11 +21,26 @@ class JobPostPreview extends Component {
     const { handleComplete } = this.props;
     handleComplete(this.state);
   };
-  
+
   render() {
-    const { classes, activeStep, handleJobBack, steps, dataObject } = this.props;
+    const {
+      classes,
+      activeStep,
+      handleJobBack,
+      steps,
+      dataObject
+    } = this.props;
     this.dataObj = Object.assign(dataObj, dataObject);
+
+    var Filter = require("bad-words"),
+      filter = new Filter();
+    dataObj.email = filter.clean(dataObj.email);
+    dataObj.description = filter.clean(dataObj.description);
+    dataObj.title = filter.clean(dataObj.title);
+    dataObj.companyName = filter.clean(dataObj.companyName);
+
     console.log("DataObject Preview", dataObj);
+    debugger;
     return (
       <div>
         <div className={classes.margin}>Your Post will look like below</div>
@@ -38,10 +53,7 @@ class JobPostPreview extends Component {
               </span>
             </Grid>
             <Grid item xs={2} className={classes.lblArea}>
-              <Button
-                onClick={handleJobBack}
-                className={classes.backButton}
-              >
+              <Button onClick={handleJobBack} className={classes.backButton}>
                 Back
               </Button>
             </Grid>
