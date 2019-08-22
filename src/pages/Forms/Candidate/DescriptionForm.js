@@ -19,7 +19,7 @@ import { getAllSkillsArray } from "../../../util/utilityFunctions";
 
 class DescriptionForm extends Component {
   componentWillMount = () => {
-    const { dataObject,skillList,locationList} = this.props;
+    const { dataObject,skillList} = this.props;
     if(dataObject.skillsOptionList === undefined)
     {
       dataObject.skillsOptionList = getAllSkillsArray(skillList);

@@ -51,7 +51,6 @@ export const getLocationArray = jobList => {
 
 export const getAllLocationArray = locationList => {
   let localArr = [];
-  localArr.push({ label: "Anywhere", value: "Anywhere" });
   if(locationList !== undefined)
   {
     locationList.forEach(item => {
@@ -61,6 +60,7 @@ export const getAllLocationArray = locationList => {
       });
     });
   }
+  localArr.push({ label: "Anywhere", value: "Anywhere" });
   console.log("getLocationArray", getUniqueValues(localArr));
   return getUniqueValues(localArr);
 };
@@ -80,7 +80,7 @@ export const getUniqueValues = arrayParam => {
 export const deleteEmptyFromObject = obj => {
   Object.keys(obj).forEach(
     key =>
-      (obj[key] == null || obj[key] == undefined || obj[key] == "") &&
+      (obj[key] === null || obj[key] === undefined || obj[key] === "") &&
       delete obj[key]
   );
   return obj;

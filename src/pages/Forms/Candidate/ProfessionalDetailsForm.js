@@ -4,13 +4,6 @@ import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Select from "react-select";
 
-// import React, { Component } from "react";
-// import { reduxForm } from "redux-form";
-// import { connect } from "react-redux";
-// import { PropTypes } from "prop-types";
-// import { withStyles } from "@material-ui/core/styles";
-// import CreatableSelect from "react-select/creatable";
-
 import {
   FormControl,
   Button,
@@ -23,7 +16,6 @@ import {
 import Title from "@material-ui/icons/Title";
 import Slider from "@material-ui/lab/Slider";
 
-import CityList from "../../../data/cityList.json";
 import {  getAllLocationArray } from "../../../util/utilityFunctions";
 
 const customStyles = {
@@ -52,7 +44,6 @@ const customStyles = {
 };
 class PersonalDetailsForm extends Component {
   componentWillMount = () => {
-<<<<<<< HEAD
     const { dataObject,locationList } = this.props;
     if(dataObject.locationsOptionList === undefined)
     {
@@ -60,14 +51,10 @@ class PersonalDetailsForm extends Component {
     }
 
     if(dataObject.location !== undefined){
-=======
-    const { dataObject } = this.props;
-    if (dataObject.location !== undefined) {
->>>>>>> e44373a43e4f00382e0243e2f34495bd5b568c2e
       dataObject.defaultLocation = dataObject.location.map(item => {
         return {
           value: item,
-          label: this.getCityList().find(o => o.value === item).label
+          label: dataObject.locationsOptionList.find(o => o.value === item).label
         };
       });
     }
@@ -156,12 +143,7 @@ class PersonalDetailsForm extends Component {
     this.setState({ [name]: value });
   }
   render() {
-<<<<<<< HEAD
     const { classes, activeStep, handleBack, steps} = this.props;
-=======
-    const { classes, activeStep, handleBack, steps } = this.props;
-    const cityList = this.getCityList();
->>>>>>> e44373a43e4f00382e0243e2f34495bd5b568c2e
     return (
       <form>
         <div className={classes.margin}>
