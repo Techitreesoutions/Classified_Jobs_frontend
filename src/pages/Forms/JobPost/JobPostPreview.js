@@ -30,14 +30,13 @@ class JobPostPreview extends Component {
       steps,
       dataObject
     } = this.props;
-    this.dataObj = Object.assign(dataObj, dataObject);
 
     var Filter = require("bad-words"),
       filter = new Filter();
-    dataObj.email = filter.clean(dataObj.email);
-    dataObj.description = filter.clean(dataObj.description);
-    dataObj.title = filter.clean(dataObj.title);
-    dataObj.companyName = filter.clean(dataObj.companyName);
+    dataObj.email = (dataObj.email !==undefined && dataObj.email !== null &&  dataObj.email !== "") ?filter.clean(dataObj.email) : dataObj.email;
+    dataObj.description = (dataObj.description !==undefined && dataObj.description !== null &&  dataObj.description !== "") ?filter.clean(dataObj.description) : dataObj.description;
+    dataObj.title = (dataObj.title !==undefined && dataObj.title !== null && dataObj.title !== "") ?filter.clean(dataObj.title) : dataObj.title;
+    dataObj.companyName = (dataObj.companyName !==undefined && dataObj.companyName !== null && dataObj.companyName !== "") ?filter.clean(dataObj.companyName) : dataObj.companyName;
 
     console.log("DataObject Preview", dataObj);
     return (
