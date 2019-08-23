@@ -31,24 +31,6 @@ export const getAllSkillsArray = skillList => {
   return getUniqueValues(skillsArr);
 };
 
-export const getLocationArray = jobList => {
-  let localArr = [];
-  if (jobList !== undefined) {
-    jobList.forEach(jobItem => {
-      if (jobItem.location !== undefined) {
-        jobItem.location.forEach(locationItem => {
-          localArr.push({
-            label: locationItem,
-            value: locationItem
-          });
-        });
-      }
-    });
-  }
-  console.log("getLocationArray", getUniqueValues(localArr));
-  return getUniqueValues(localArr);
-};
-
 export const getAllLocationArray = locationList => {
   let localArr = [];
   if(locationList !== undefined)
@@ -61,7 +43,6 @@ export const getAllLocationArray = locationList => {
     });
   }
   localArr.push({ label: "Anywhere", value: "Anywhere" });
-  console.log("getLocationArray", getUniqueValues(localArr));
   return getUniqueValues(localArr);
 };
 

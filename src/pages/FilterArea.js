@@ -7,7 +7,7 @@ import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import { Grid, Typography } from "@material-ui/core";
 import Slider from "@material-ui/lab/Slider";
 import Select from "react-select";
-import { getAllSkillsArray, getLocationArray } from "../util/utilityFunctions";
+import { getAllSkillsArray, getAllLocationArray } from "../util/utilityFunctions";
 
 const RangeSlider = withStyles({
   root: {
@@ -41,11 +41,7 @@ const RangeSlider = withStyles({
 
 class FilterArea extends Component {
   componentDidMount = () => {
-    const { jobList, skillList } = this.props;
-    this.setState({
-      skillsList: getAllSkillsArray(skillList),
-      locationList: getLocationArray(jobList)
-    });
+   
   };
 
   getExperienceArray = () => {
@@ -64,9 +60,7 @@ class FilterArea extends Component {
     minsalary: null,
     maxsalary: null,
     experience: [0, 20],
-    expectedSalary: [0, 100],
-    skillsList: [],
-    locationList: []
+    expectedSalary: [0, 100]
   };
 
   handleSelectChange = (value, event) => {
@@ -122,6 +116,11 @@ class FilterArea extends Component {
 
   render() {
     const { classes } = this.props;
+    let { locationList, skillList } = this.props;
+   
+     skillList = getAllSkillsArray(skillList)
+       locationList =  getAllLocationArray(locationList)
+    
     return (
       <div className={classes.root}>
         <div className={classes.container}>
@@ -130,7 +129,7 @@ class FilterArea extends Component {
               <Select
                 name="location"
                 closeMenuOnSelect={true}
-                options={this.state.locationList}
+                options={locationList}
                 selectedValue={this.state.location}
                 onChange={this.handleSelectChange}
                 placeholder={"Select Location"}
@@ -141,7 +140,7 @@ class FilterArea extends Component {
               <Select
                 name="skills"
                 closeMenuOnSelect={true}
-                options={this.state.skillsList}
+                options={skillList}
                 selectedValue={this.state.skills}
                 onChange={this.handleSelectChange}
                 placeholder={"Select Skills"}
@@ -274,9 +273,11 @@ const styles = theme => ({
   }
 });
 
-const mapStateToProps = state => {
-  const jobList = state.jobList.jobList;
-  return jobList;
+const mapStateToProps = reducerObj => {
+  console.log("reducer",reducerObj);
+  const skillList = reducerObj.skillList.skillList;
+  const locationList = reducerObj.locationList.locationList;
+  return { skillList,locationList };
 };
 
 export default connect(
@@ -286,7 +287,7 @@ export default connect(
 
 FilterArea.propTypes = {
   classes: PropTypes.object.isRequired,
-  jobList: PropTypes.array.isRequired,
+  locationList: PropTypes.array.isRequired,
   skillList: PropTypes.array.isRequired,
   updateFilter: PropTypes.func.isRequired
 };

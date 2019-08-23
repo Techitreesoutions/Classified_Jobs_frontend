@@ -28,6 +28,22 @@ class Home extends Component {
     this.setState({ value: index });
   };
 
+getRequiredList =(type) =>{
+  if(type === 'skill')
+  {
+    if(this.state.reducerObj !== undefined){
+      return this.state.reducerObj.skillList;
+    }
+    
+  }
+  else if(type === 'location'){
+
+    if(this.state.reducerObj !== undefined){
+      return this.state.reducerObj.locationList;
+    }
+  }
+}
+  
   render() {
     const { classes } = this.props;
 
@@ -64,7 +80,7 @@ class Home extends Component {
             </Grid>
           </Grid>
         </div>
-        <FilterArea skillList={[]} jobList={[]} />
+        <FilterArea />
 
         <SwipeableViews
           axis={"x"}

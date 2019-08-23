@@ -40,7 +40,6 @@ class JobPostPreview extends Component {
     dataObj.companyName = filter.clean(dataObj.companyName);
 
     console.log("DataObject Preview", dataObj);
-    debugger;
     return (
       <div>
         <div className={classes.margin}>Your Post will look like below</div>
