@@ -162,10 +162,8 @@ DescriptionForm = reduxForm({
 })(DescriptionForm);
 
 const mapStateToProps = state => {
-  const jobList = state.jobList.jobList;
   const skillList = state.skillList.skillList;
-  const locationList = state.locationList.locationList;
-  return { jobList,skillList,locationList };
+  return { skillList };
 };
 
 export default connect(
@@ -179,9 +177,6 @@ DescriptionForm.propTypes = {
   handleBack: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
   steps: PropTypes.array.isRequired,
-  jobList: PropTypes.array.isRequired,
-  candidateList: PropTypes.array.isRequired,
   skillList: PropTypes.array.isRequired,
-  locationList: PropTypes.array.isRequired,
   dataObject: PropTypes.object.isRequired
 };

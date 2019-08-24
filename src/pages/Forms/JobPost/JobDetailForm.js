@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Select from "react-select";
+import { connect } from "react-redux";
+import {  getAllLocationArray } from "../../../util/utilityFunctions";
 
 import {
   FormControl,
@@ -15,8 +17,6 @@ import {
 // Icons
 import Title from "@material-ui/icons/Title";
 import Slider from "@material-ui/lab/Slider";
-
-import CityList from "../../../data/cityList.json";
 
 const customStyles = {
   control: (base, state) => ({
@@ -44,23 +44,27 @@ const customStyles = {
 };
 class JobDetailForm extends Component {
   componentWillMount = () => {
-    const { dataObject } = this.props;
+    const { dataObject,locationList } = this.props;
+    if(dataObject.locationsOptionList === undefined)
+    {
+      dataObject.locationsOptionList = getAllLocationArray(locationList);
+    }
 
     if (
       Object.entries(dataObject).length === 0 &&
       dataObject.constructor === Object
     ) {
       dataObject.experienceMin = 0;
-      dataObject.experienceMax = 2;
+      dataObject.experienceMax = 0;
       dataObject.salaryOfferMin = 0;
-      dataObject.salaryOfferMax = 10;
+      dataObject.salaryOfferMax = 0;
     }
 
     if (dataObject.location !== undefined) {
       dataObject.defaultLocation = dataObject.location.map(item => {
         return {
           value: item,
-          label: this.getCityList().find(o => o.value === item).label
+          label: dataObject.locationsOptionList.find(o => o.value === item).label
         };
       });
     }
@@ -75,23 +79,7 @@ class JobDetailForm extends Component {
     });
   };
   validateUserInput = () => {
-    // console.log(this.state.title);
-    // console.log(this.state.experience);
-    // console.log(this.state.location);
-    // console.log(this.state.salaryOffer);
     return true;
-  };
-
-  getCityList = () => {
-    let cityListForSelect = [];
-    CityList.push({ label: "Anywhere", value: "Anywhere" });
-    CityList.forEach(item => {
-      cityListForSelect.push({
-        label: item.name + ", " + item.state,
-        value: item.name
-      });
-    });
-    return cityListForSelect;
   };
 
   getNumberList = maxValue => {
@@ -181,8 +169,8 @@ class JobDetailForm extends Component {
   };
 
   render() {
-    const { classes, activeStep, steps } = this.props;
-    const cityList = this.getCityList();
+    let { classes, activeStep, steps ,locationList} = this.props;
+    locationList = getAllLocationArray(locationList);
     return (
       <form>
         <div className={classes.margin}>
@@ -211,7 +199,7 @@ class JobDetailForm extends Component {
               <Select
                 name="location"
                 closeMenuOnSelect={true}
-                options={cityList}
+                options={locationList}
                 selectedValue={this.state.location}
                 defaultValue={this.state.defaultLocation}
                 onChange={this.handleSelectChange}
@@ -351,7 +339,15 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(JobDetailForm);
+const mapStateToProps = state => {
+  const locationList = state.locationList.locationList;
+  return { locationList };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(withStyles(styles, { withTheme: true })(JobDetailForm));
 
 JobDetailForm.propTypes = {
   classes: PropTypes.object.isRequired,
